@@ -1,0 +1,105 @@
+
+.hor{
+    display:flex;
+}
+
+
+.container
+{
+    height: 100vh;
+    width: 100vw;
+    background-color:#242333;
+} 
+
+.total-seats
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.left-portion
+{
+    margin-right: 30px;
+}
+
+.middle-portion
+{
+    margin-right: 30px;
+}
+
+.screen-location
+{
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;  
+    margin-top: -150px;
+}
+
+.screen
+{
+    height: 100px;
+    width: 400px;
+    text-align: center;
+    transform: rotateX(-35deg);
+    box-shadow: 0 3px 10px rgba(255, 255, 255, 0.7);
+    background-color: white;
+}
+
+.screen p
+{
+    margin-top: 40px;
+}
+
+.movie-picker
+{
+    height: 300px;
+    width: 800px;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.movie-selector
+{
+    height: 50px;
+    text-align: center;
+    margin-left: 290px;
+}
+
+select
+{
+    color: black;
+}
+
+.seat
+{
+    background-color: transparent;
+    height: 15px;
+    width: 18px;
+    margin: 3px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.selectedSeat
+{
+    background-color: greenyellow;
+}
+
+.submit
+{
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+
+
+button[disabled=disabled], button:disabled {
+    background-color: red;
+}
