@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { SeatsComponent } from './seats/seats.component';
 import { HttpClientModule} from '@angular/common/http';
 
+
 @NgModule({
   declarations: [
     AppComponent,

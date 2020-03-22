@@ -5,11 +5,10 @@
         <div class="movie-selector">
             <button class="btn btn-link" (click)="DisplayMovieSelector(true)">Pick a Movie:</button>  
             <ng-container *ngIf = "displayMovieSelector">
-                <select (change)="movieTitle=true">
-                    <option value="None">--None--</option>
-                    <option value="Bigil">{{movies[0].name}} -INR {{movies[0].ticket_price}}</option>
-                    <option value="Viswasam"> {{movies[1].name}} -INR {{movies[1].ticket_price}}</option>
-                    <option value="Nayagi">{{movies[2].name}} -INR {{movies[2].ticket_price}}</option>
+                <select (change)="movieTitle=true" >
+                    <option *ngFor="let movielist of movies" [value]="movielist.name">
+                        {{movielist.name}}<br> INR-{{movielist.ticket_price}}
+                    </option>
                 </select>
 
             </ng-container>
@@ -22,35 +21,34 @@
     <div class="screen-location">
 
         <div class="screen">
-            <p>SCREEN</p>
+            <p>HALL 1</p>
         </div>    
     </div><br><br>
-    <div class="showtime">
-        <button>{{shows[0].name | uppercase}}<br>{{shows[0].show_time}}</button>
+    
+    <div class="shows">
+        <div class="showtime" *ngFor="let showDetails  of shows">
+            <button (click)="bookSeats()">{{showDetails.name | uppercase}}<br>{{showDetails.show_time}}</button>
+        </div>
+        
     </div>
     </ng-container>
 
-     <!--  <div class="total-seats">
-
-
-        <div class="left-portion" *ngFor = "let seats of totalSeats; index as i" >
-            <button class="seat" value="seats" (click)="seatSelected(seats)"
-             [ngClass]="{'selectedSeat': markedSeats.indexOf(seats)>=0}"
-             [disabled] = "bookedSeats.indexOf(seats)>=0">
-            </button>
-        </div>
-
-        <div class="hor" *ngFor = "let rowSeat of rows; index as i" >
-            <div  *ngFor = "let columnSeat of columns; index as j" >
-                <button>
-                Seat: {{(i*10)+(j+1)}}
-                </button>
+    <ng-container *ngIf="isHallSelected">
+        <div class="total-seats">
+            <div class="hor" *ngFor = "let rowSeat of rows; index as i" >
+                <div  *ngFor = "let columnSeat of columns; index as j" >
+                    <button (click)="seatSelected(i,j)"
+                    [disabled] = "isSeatAvailable(i,j)"> 
+                    Seat: {{(i*columns.length)+(j+1)}}
+                    </button>
+                </div>
             </div>
         </div>
-        
-    </div> -->
+    </ng-container>
 
-    <div class="submit">
+
+
+    <div class="submit" *ngIf="isHallSelected">
 
         <div class="submit-button">
             <input type="submit" class="btn btn-primary" value="Book Seats" (click)="submit()">
@@ -68,3 +66,11 @@
 
 
 <!-- <button class="seat" value="s1" (click)="seatSelected($event)" [ngClass]="{'selectedSeat': markedSeats.indexOf('s1')>=0}" [disabled] = "bookedSeats.indexOf('s1')>=0"></button> -->
+
+
+ <!-- <div class="left-portion" *ngFor = "let seats of totalSeats; index as i" >
+            <button class="seat" value="seats" (click)="seatSelected(seats)"
+             [ngClass]="{'selectedSeat': markedSeats.indexOf(seats)>=0}"
+             [disabled] = "bookedSeats.indexOf(seats)>=0">
+            </button>
+        </div> -->

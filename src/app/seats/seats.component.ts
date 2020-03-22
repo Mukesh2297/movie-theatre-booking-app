@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MainService } from '../main.service';
-import { HttpClient} from '@angular/common/http';
+import { HttpClient,HttpParams} from '@angular/common/http';
 
 @Component({
   selector: 'app-seats',
@@ -13,34 +13,27 @@ export class SeatsComponent implements OnInit {
 
   movieTitle:boolean = false;
 
-  movies:any[]=[{name:'Bigil',ticket_price:120,movie_id:2},
-  {name:'Viswasam',ticket_price:150,movie_id:3},
-  {name:'Nayagi',ticket_price:180,movie_id:1}]
+  movies;
 
-  shows:any[] = [{name:'hall1',show_time:"23:30:00",show_id:4},
-  {name:'hall1',show_time:"20:30:00",show_id:3},
-  {name:'hall1',show_time:"11:30:00",show_id:2},
-  {name:'hall1',show_time:"15:30:00",show_id:1}]
+  shows;
+
+  hallAvailability;
 
   showStatus;
 
-
+  isHallSelected:boolean = false;
 
   markedSeats:any[] = [];
 
   bookedSeats:any[] = [];
 
-  totalSeats:any[] = ["s1","s2","s3","s4","s5","s6","s7","s8","s9","s10"];
+  totalRowsCount: number;
 
-  totalRowsCount: number = 10
+  rows:number[] = [];
 
-  rows:number[] = Array(this.totalRowsCount).fill(0)
+  totalColumnsCount:number;
 
-  
-
-  totalColumnsCount:number = 10;
-
-  columns: number[] = Array(this.totalColumnsCount).fill(0)
+  columns: number[] = [];
 
   
 
@@ -50,28 +43,27 @@ export class SeatsComponent implements OnInit {
   
   ngOnInit(): void 
   {
-  //   this.movies =  this.http.get("https://53211877.ngrok.io/movies").subscribe(post=>{
-  //   this.movies  = post;
-  //   console.log(this.movies);
+  
+    this.http.get("http://theatreapi.saileshkumar.com/movies").subscribe(post=>{
+    this.movies = post})
 
-  //  })
+    this.http.get("http://theatreapi.saileshkumar.com/showstatus/2").subscribe(availability=>{
+    this.hallAvailability =  availability})
+
+    this.http.get("http://theatreapi.saileshkumar.com/movies/showtime",
+    {
+      params: new HttpParams().set('id','2')
+    }).subscribe(showtime=>{
+    this.shows =  showtime})
 
 
-  //  this.shows= this.http.get("https://53211877.ngrok.io/movies/showtime?id=2")
-  //  .subscribe(post=>
-  //   {
-  //     this.shows =  post;
-  //     console.log(this.shows);
-  //   })
   }
   
 
-  seatSelected(seatNumber)
+  seatSelected(row,column)
   {
     
-    this.markedSeats.push(seatNumber);
-
-    console.log(this.markedSeats);
+    console.log(row,column);
     
 
     // let seatnum = seatNumber.target.value;
@@ -97,7 +89,13 @@ export class SeatsComponent implements OnInit {
 
   DisplayMovieSelector(request:boolean)
   {
-   this.displayMovieSelector = request;
+    this.movies= this.movies.movies.map(movieslist=>{return movieslist});
+    this.shows = this.shows.movies.map(showTime=>{return showTime});
+    this.totalRowsCount =   this.hallAvailability.hallDetail.total_rows;
+    this.totalColumnsCount = this.hallAvailability.hallDetail.total_columns;
+    this.columns = Array(this.totalColumnsCount).fill(0);
+    this.rows = Array(this.totalRowsCount).fill(0);
+    this.displayMovieSelector = request;
    
 
   //  this.http.get("https://53211877.ngrok.io/movies/showtimes/2").subscribe(post=>
@@ -114,6 +112,16 @@ export class SeatsComponent implements OnInit {
   //    console.log(this.shows);
   //  })
     
+  }
+
+  bookSeats()
+  {
+    this.isHallSelected = true;
+    console.log(this.totalColumnsCount , this.totalRowsCount);
+  }
+
+  isSeatAvailable (i,j) {
+    return this.hallAvailability.availability.filter(e=>e.sequence_number===(i*this.columns.length)+(j+1)).length > 0
   }
 
   submit()
