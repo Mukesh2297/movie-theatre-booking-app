@@ -35,7 +35,7 @@ export class SeatsComponent implements OnInit {
 
   columns: number[] = [];
 
-  
+
 
 
   constructor(public SeatBooking:MainService, public http:HttpClient)
@@ -44,13 +44,13 @@ export class SeatsComponent implements OnInit {
   ngOnInit(): void 
   {
   
-    this.http.get("http://theatreapi.saileshkumar.com/movies").subscribe(post=>{
+    this.http.get("https://theatreapi.saileshkumar.com/movies").subscribe(post=>{
     this.movies = post})
 
-    this.http.get("http://theatreapi.saileshkumar.com/showstatus/2").subscribe(availability=>{
+    this.http.get("https://theatreapi.saileshkumar.com/showstatus/2").subscribe(availability=>{
     this.hallAvailability =  availability})
 
-    this.http.get("http://theatreapi.saileshkumar.com/movies/showtime",
+    this.http.get("https://theatreapi.saileshkumar.com/movies/showtime",
     {
       params: new HttpParams().set('id','2')
     }).subscribe(showtime=>{
