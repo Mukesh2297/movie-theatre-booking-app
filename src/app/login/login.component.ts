@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MainService } from '../main.service';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +17,7 @@ export class LoginComponent implements OnInit {
 
   credentialsValid:boolean = false;
 
-  constructor() { }
+  constructor(public Mainservice:MainService) { }
 
   ngOnInit(): void {
   }
@@ -54,31 +55,9 @@ export class LoginComponent implements OnInit {
   SignIn(regUname,regPasswrd)
   {
 
-    let LoginUname = regUname.value;
-    let LoginPassWord = regPasswrd.value;
-
-    let LoginDetails = LoginUname.concat(","+LoginPassWord);
-
-    this.ExistingUsers= localStorage.getItem("Users");
-    this.ExistingUsers = JSON.parse(this.ExistingUsers);
     
-    let NewUsers = this.ExistingUsers.map((ListItem,index)=>{return `${ListItem.UserName},${ListItem.Password}`})
-
-    if(NewUsers.indexOf(LoginDetails) >=0)
-    {
-      sessionStorage.setItem("LoggedIn_Users",(JSON.stringify(LoginDetails)));
-
-      this.credentialsValid = true;
-        
-    }
-
-    else
-    {
-      this.credentialsValid = false;
-      alert("Login Credentials does not match");
-
-    }
-    
+    this.Mainservice.SignIn(regUname,regPasswrd);
+    this.credentialsValid = this.Mainservice.credentialsValid;
 
     
   }

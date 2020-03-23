@@ -41,54 +41,16 @@ export class SeatsComponent implements OnInit {
   constructor(public SeatBooking:MainService, public http:HttpClient)
   {}
   
-  ngOnInit(): void 
-  {
-  
-    this.http.get("https://theatreapi.saileshkumar.com/movies").subscribe(post=>{
-    this.movies = post})
-
-    this.http.get("https://theatreapi.saileshkumar.com/showstatus/2").subscribe(availability=>{
-    this.hallAvailability =  availability})
-
-    this.http.get("https://theatreapi.saileshkumar.com/movies/showtime",
-    {
-      params: new HttpParams().set('id','2')
-    }).subscribe(showtime=>{
-    this.shows =  showtime})
-
-
-  }
+  ngOnInit(): void {}
   
 
-  seatSelected(row,column)
-  {
-    
-    console.log(row,column);
-    
-
-    // let seatnum = seatNumber.target.value;
-
-    
-    // if(this.markedSeats.indexOf(seatnum)!= -1)
-    // {
-    //   let indexVal = this.markedSeats.indexOf(seatnum);
-
-    //   this.markedSeats.splice(indexVal,1);
-
-    // }
-  
-    // else
-    // {
-    
-    //   this.markedSeats.push(seatnum);
-
-    // }
-
-   
-  }
+  seatSelected(row,column){}
 
   DisplayMovieSelector(request:boolean)
   {
+    this.movies = this.SeatBooking.movies;
+    this.shows = this.SeatBooking.shows;
+    this.hallAvailability = this.SeatBooking.hallAvailability;
     this.movies= this.movies.movies.map(movieslist=>{return movieslist});
     this.shows = this.shows.movies.map(showTime=>{return showTime});
     this.totalRowsCount =   this.hallAvailability.hallDetail.total_rows;
@@ -96,22 +58,7 @@ export class SeatsComponent implements OnInit {
     this.columns = Array(this.totalColumnsCount).fill(0);
     this.rows = Array(this.totalRowsCount).fill(0);
     this.displayMovieSelector = request;
-   
-
-  //  this.http.get("https://53211877.ngrok.io/movies/showtimes/2").subscribe(post=>
-  //  {
-  //    this.shows =  post;
-
-  //    console.log(this.shows);
-  //  })
-
-  //  this.http.get("https://53211877.ngrok.io/showstatus/2").subscribe(post=>
-  //  {
-  //    this.showStatus =  post;
-
-  //    console.log(this.shows);
-  //  })
-    
+  
   }
 
   bookSeats()
