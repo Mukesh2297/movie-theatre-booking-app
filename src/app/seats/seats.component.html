@@ -5,8 +5,8 @@
         <div class="movie-selector">
             <button class="btn btn-link" (click)="DisplayMovieSelector(true)">Pick a Movie:</button>  
             <ng-container *ngIf = "displayMovieSelector">
-                <select (change)="movieTitle=true" >
-                    <option *ngFor="let movielist of movies" [value]="movielist.name">
+                <select (change)="selectedMovie($event)" >
+                    <option *ngFor="let movielist of movies" [value]="movielist.id">
                         {{movielist.name}}<br> INR-{{movielist.ticket_price}}
                     </option>
                 </select>
@@ -18,22 +18,25 @@
     </div>
 
     <ng-container *ngIf="movieTitle">
-    <div class="screen-location">
-
-        <div class="screen">
-            <p>HALL 1</p>
-        </div>    
-    </div><br><br>
     
     <div class="shows">
         <div class="showtime" *ngFor="let showDetails  of shows">
-            <button (click)="bookSeats()">{{showDetails.name | uppercase}}<br>{{showDetails.show_time}}</button>
+            <button (click)="bookSeats(showDetails.show_id)">{{showDetails.name | uppercase}}<br>{{showDetails.show_time}}</button>
         </div>
         
     </div>
     </ng-container>
 
     <ng-container *ngIf="isHallSelected">
+
+        <div class="screen-location">
+
+            <div class="screen">
+                <p>SCREEN</p>
+            </div>   
+        
+        </div>
+
         <div class="total-seats">
             <div class="hor" *ngFor = "let rowSeat of rows; index as i" >
                 <div  *ngFor = "let columnSeat of columns; index as j" >

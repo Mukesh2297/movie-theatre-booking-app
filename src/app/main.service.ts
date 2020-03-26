@@ -46,17 +46,8 @@ export class MainService {
 
       this.credentialsValid = true;
 
-      this.http.get("https://theatreapi.saileshkumar.com/movies").subscribe(post=>{
-      this.movies = post})
-
-      this.http.get("https://theatreapi.saileshkumar.com/showstatus/2").subscribe(availability=>{
-      this.hallAvailability =  availability})
-
-      this.http.get("https://theatreapi.saileshkumar.com/movies/showtime",
-      {
-      params: new HttpParams().set('id','2')
-      }).subscribe(showtime=>{
-      this.shows =  showtime})
+      
+      
         
     }
 

@@ -43,7 +43,6 @@
     display: flex;
     justify-content: center;
     align-items: center;  
-    margin-top: -150px;
 }
 
 .screen
@@ -63,7 +62,7 @@
 
 .movie-picker
 {
-    height: 300px;
+    height: 100px;
     width: 800px;
     color: white;
     display: flex;

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MainService } from '../main.service';
 import { HttpClient,HttpParams} from '@angular/common/http';
+import { stringify } from '@angular/compiler/src/util';
 
 @Component({
   selector: 'app-seats',
@@ -21,6 +22,10 @@ export class SeatsComponent implements OnInit {
 
   showStatus;
 
+  movieId;
+
+  hallId;
+
   isHallSelected:boolean = false;
 
   markedSeats:any[] = [];
@@ -38,6 +43,7 @@ export class SeatsComponent implements OnInit {
 
 
 
+
   constructor(public SeatBooking:MainService, public http:HttpClient)
   {}
   
@@ -48,27 +54,63 @@ export class SeatsComponent implements OnInit {
 
   DisplayMovieSelector(request:boolean)
   {
-    this.movies = this.SeatBooking.movies;
-    this.shows = this.SeatBooking.shows;
-    this.hallAvailability = this.SeatBooking.hallAvailability;
-    this.movies= this.movies.movies.map(movieslist=>{return movieslist});
-    this.shows = this.shows.movies.map(showTime=>{return showTime});
+    this.http.get("https://theatreapi.saileshkumar.com/movies").subscribe(post=>{
+    this.movies = post;
+    this.movies= this.movies.movies.map(movieslist=>{return movieslist})})
+    //this.shows = this.SeatBooking.shows;
+  
+    this.displayMovieSelector = request;
+
+    
+  }
+
+  bookSeats(showId)
+  {
+    this.isHallSelected = true;
+    
+    this.http.get(`https://theatreapi.saileshkumar.com/showstatus/${showId}`).subscribe(hallDetails=>{
+    this.hallAvailability = hallDetails;
     this.totalRowsCount =   this.hallAvailability.hallDetail.total_rows;
     this.totalColumnsCount = this.hallAvailability.hallDetail.total_columns;
     this.columns = Array(this.totalColumnsCount).fill(0);
     this.rows = Array(this.totalRowsCount).fill(0);
-    this.displayMovieSelector = request;
-  
-  }
+    })
+    
 
-  bookSeats()
-  {
-    this.isHallSelected = true;
-    console.log(this.totalColumnsCount , this.totalRowsCount);
   }
 
   isSeatAvailable (i,j) {
     return this.hallAvailability.availability.filter(e=>e.sequence_number===(i*this.columns.length)+(j+1)).length > 0
+  }
+
+  selectedMovie(moviename)
+  {
+    this.movieId = moviename.target.value;
+
+    this.http.get("https://theatreapi.saileshkumar.com/movies/showtime",
+      {
+      params: new HttpParams().set('id',this.movieId)
+      }).subscribe(showtime=>
+        {this.shows =  showtime;
+        this.shows = this.shows.movies.map((showDetails)=>{return showDetails})
+        })
+
+    this.movieTitle = true;
+
+    // this.hallId = this.hallAvailability.hallDetail.hall_id;
+
+    // console.log('Hall id', this.hallId);
+
+    
+    
+  }
+
+  showsAvailable()
+  {
+    let hallId = this.hallId;
+    
+
+      this.shows = this.shows.movies.map(showTime=>{return showTime});
   }
 
   submit()
