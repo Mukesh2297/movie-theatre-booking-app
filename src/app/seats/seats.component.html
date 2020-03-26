@@ -37,7 +37,8 @@
         
         </div>
 
-        <div class="total-seats">
+
+        <div class="total-seats" *ngIf='showSeats'>
             <div class="hor" *ngFor = "let rowSeat of rows; index as i" >
                 <div  *ngFor = "let columnSeat of columns; index as j" >
                     <button (click)="seatSelected(i,j)"

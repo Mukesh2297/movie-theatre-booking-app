@@ -40,9 +40,7 @@ export class SeatsComponent implements OnInit {
 
   columns: number[] = [];
 
-
-
-
+  showSeats:boolean = false;
 
   constructor(public SeatBooking:MainService, public http:HttpClient)
   {}
@@ -76,6 +74,7 @@ export class SeatsComponent implements OnInit {
     this.rows = Array(this.totalRowsCount).fill(0);
     })
     
+    this.showSeats = true;
 
   }
 
@@ -85,6 +84,8 @@ export class SeatsComponent implements OnInit {
 
   selectedMovie(moviename)
   {
+    this.showSeats = false;
+
     this.movieId = moviename.target.value;
 
     this.http.get("https://theatreapi.saileshkumar.com/movies/showtime",
