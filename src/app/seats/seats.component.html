@@ -3,9 +3,10 @@
     <div class="movie-picker">
         
         <div class="movie-selector">
-            <button class="btn btn-link" (click)="DisplayMovieSelector(true)">Pick a Movie:</button>  
+            <button class="btn btn-success" (click)="DisplayMovieSelector(true)">Pick a Movie:</button>  
             <ng-container *ngIf = "displayMovieSelector">
                 <select (change)="selectedMovie($event)" >
+                    <option value="none">--None--</option>
                     <option *ngFor="let movielist of movies" [value]="movielist.id">
                         {{movielist.name}}<br> INR-{{movielist.ticket_price}}
                     </option>
@@ -29,7 +30,7 @@
 
     <ng-container *ngIf="isHallSelected">
 
-        <div class="screen-location">
+        <div class="screen-location" *ngIf='showSeats'>
 
             <div class="screen">
                 <p>SCREEN</p>
@@ -47,18 +48,20 @@
                     </button>
                 </div>
             </div>
+            <br><br>
+            <div class="submit" *ngIf="isHallSelected">
+
+                <div class="submit-button">
+                    <input type="submit" class="btn btn-primary" value="Book Seats" (click)="submit()">
+                </div>
+            
+            </div>
         </div>
     </ng-container>
 
 
 
-    <div class="submit" *ngIf="isHallSelected">
-
-        <div class="submit-button">
-            <input type="submit" class="btn btn-primary" value="Book Seats" (click)="submit()">
-        </div>
     
-    </div>
 </div>
 
 

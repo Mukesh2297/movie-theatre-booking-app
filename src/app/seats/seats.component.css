@@ -63,7 +63,7 @@
 .movie-picker
 {
     height: 100px;
-    width: 800px;
+    width: 100%;
     color: white;
     display: flex;
     justify-content: center;
@@ -72,14 +72,15 @@
 
 .movie-selector
 {
-    height: 50px;
-    text-align: center;
-    margin-left: 290px;
+    height: 30px;
 }
 
 select
 {
     color: black;
+    height: 34.5px;
+    border-radius: 4px;
+    margin-top: 0.7px;
 }
 
 .seat
