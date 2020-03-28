@@ -48,14 +48,12 @@ export class SeatsComponent implements OnInit {
   seatSelected(row, column) {}
 
   DisplayMovieSelector(request: boolean) {
-    this.http
-      .get("https://theatreapi.saileshkumar.com/movies")
-      .subscribe(post => {
-        this.movies = post;
-        this.movies = this.movies.movies.map(movieslist => {
-          return movieslist;
-        });
+    this.http.get("/shows", { withCredentials: true }).subscribe(post => {
+      this.movies = post;
+      this.movies = this.movies.shows.map(movieslist => {
+        return movieslist;
       });
+    });
     //this.shows = this.SeatBooking.shows;
 
     this.displayMovieSelector = request;
@@ -65,7 +63,7 @@ export class SeatsComponent implements OnInit {
     this.isHallSelected = true;
 
     this.http
-      .get(`https://theatreapi.saileshkumar.com/showstatus/${showId}`)
+      .get(`/showstatus/${showId}`, { withCredentials: true })
       .subscribe(hallDetails => {
         this.hallAvailability = hallDetails;
         this.totalRowsCount = this.hallAvailability.hallDetail.total_rows;
@@ -88,16 +86,16 @@ export class SeatsComponent implements OnInit {
   selectedMovie(moviename) {
     if (moviename.target.value == "none") {
       this.shows = null;
-      this.showSeats=false;
-    } 
-    else {
+      this.showSeats = false;
+    } else {
       this.showSeats = false;
 
       this.movieId = moviename.target.value;
 
       this.http
-        .get("https://theatreapi.saileshkumar.com/movies/showtime", {
-          params: new HttpParams().set("id", this.movieId)
+        .get("/movies/showtime", {
+          params: new HttpParams().set("id", this.movieId),
+          withCredentials: true
         })
         .subscribe(showtime => {
           this.shows = showtime;

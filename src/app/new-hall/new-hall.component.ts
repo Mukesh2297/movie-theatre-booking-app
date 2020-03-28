@@ -7,7 +7,6 @@ import { HttpClient, HttpParams, HttpHeaders } from "@angular/common/http";
   styleUrls: ["./new-hall.component.css"]
 })
 export class NewHallComponent implements OnInit {
-
   constructor(public http: HttpClient) {}
 
   ngOnInit(): void {}
@@ -23,17 +22,13 @@ export class NewHallComponent implements OnInit {
       .set("total_columns", `${total_columns}`);
 
     this.http
-      .post(
-        "https://theatreapi.saileshkumar.com/halls",
-        newhallDetails.toString(),
-        {
-          headers: new HttpHeaders().set(
-            "Content-Type",
-            "application/x-www-form-urlencoded"
-          ),
-          withCredentials:true
-        }
-      )
+      .post("/halls", newhallDetails.toString(), {
+        headers: new HttpHeaders().set(
+          "Content-Type",
+          "application/x-www-form-urlencoded"
+        ),
+        withCredentials: true
+      })
       .subscribe(response => {
         console.log(response);
       });

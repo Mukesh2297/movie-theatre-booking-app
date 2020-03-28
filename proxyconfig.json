@@ -1,7 +1,9 @@
 {
-    "/":{
-        "target": "https://theatreapi.saileshkumar.com",
-        "secure": true,
-        "changeOrigin": true
-    }
+  "/": {
+    "target": "https://theatreapi.saileshkumar.com",
+    "changeOrigin": true,
+    "secure": false,
+    "cookieDomainRewrite": "localhost",
+    "debug": true
+  }
 }

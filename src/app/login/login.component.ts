@@ -49,17 +49,13 @@ export class LoginComponent implements OnInit {
     //const userDetails = {name: username,password:password,email: email}
 
     this.http
-      .post(
-        "https://theatreapi.saileshkumar.com/auth/signup",
-        body.toString(),
-        {
-          headers: new HttpHeaders().set(
-            "Content-Type",
-            "application/x-www-form-urlencoded"
-          ),
-          withCredentials:true
-        }
-      )
+      .post("/auth/signup", body.toString(), {
+        headers: new HttpHeaders().set(
+          "Content-Type",
+          "application/x-www-form-urlencoded"
+        ),
+        withCredentials: true
+      })
       .subscribe(response => {
         console.log(response);
         signupResponse = response;
@@ -85,17 +81,16 @@ export class LoginComponent implements OnInit {
       .set("password", loginPassword);
 
     this.http
-      .post("https://theatreapi.saileshkumar.com/auth/login", body.toString(), {
+      .post("/auth/login", body.toString(), {
         headers: new HttpHeaders().set(
           "Content-Type",
           "application/x-www-form-urlencoded"
         ),
-        withCredentials:true
+        withCredentials: true
       })
       .subscribe(response => {
         loginResponse = response;
-        if(loginResponse.status=='OK')
-        {
+        if (loginResponse.status == "OK") {
           this.credentialsValid = true;
         }
       });
