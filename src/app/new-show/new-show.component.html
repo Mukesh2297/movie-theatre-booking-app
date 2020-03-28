@@ -1,0 +1,28 @@
+<div class="container">
+    <div class="newShows">
+        <h2>UPDATE SHOWS</h2><br><br>
+        Select a Movie:
+        <select (change)='movieSelected($event)'>
+            <option value='none'>--None--</option>
+            <option [value]='movieslist.id' *ngFor="let movieslist of movies">
+                {{movieslist.name}}
+            </option>
+        </select>
+        <br><br>
+
+        Select a Hall:
+        <select (change)='hallSelected($event)'>
+            <option value='none'>--None--</option>
+            <option [value]='hallList.id' *ngFor="let hallList of halls">
+                {{hallList.name}}
+            </option>
+        </select>
+        <br><br>
+
+        Enter a Show Time: <input type="time" #time>
+
+        <br><br>
+
+        <button class="btn btn-success" (click)='update(time)'>UPDATE</button>
+    </div>
+</div>

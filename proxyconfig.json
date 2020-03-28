@@ -1,0 +1,7 @@
+{
+    "/":{
+        "target": "https://theatreapi.saileshkumar.com",
+        "secure": true,
+        "changeOrigin": true
+    }
+}

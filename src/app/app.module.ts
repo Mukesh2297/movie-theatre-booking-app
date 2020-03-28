@@ -6,13 +6,19 @@ import { AppComponent } from './app.component';
 import { SeatsComponent } from './seats/seats.component';
 import { HttpClientModule} from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
+import { NewHallComponent } from './new-hall/new-hall.component';
+import { NewMovieComponent } from './new-movie/new-movie.component';
+import { NewShowComponent } from './new-show/new-show.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     SeatsComponent,
-    LoginComponent
+    LoginComponent,
+    NewHallComponent,
+    NewMovieComponent,
+    NewShowComponent
   ],
   imports: [
     BrowserModule,
