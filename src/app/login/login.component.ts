@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { MainService } from "../main.service";
 import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
+import { ApiService } from "../services/api.service";
 
 @Component({
   selector: "app-login",
@@ -17,9 +18,13 @@ export class LoginComponent implements OnInit {
 
   credentialsValid: boolean = false;
 
-  routeLink:string;
+  routeLink: string;
 
-  constructor(public Mainservice: MainService, public http: HttpClient) {}
+  constructor(
+    public Mainservice: MainService,
+    public http: HttpClient,
+    private apiService: ApiService
+  ) {}
 
   ngOnInit(): void {}
 
@@ -78,31 +83,51 @@ export class LoginComponent implements OnInit {
     let loginEmail = regEmail.value;
     let loginPassword = regPasswrd.value;
 
-    let body = new HttpParams()
-      .set("email", loginEmail)
-      .set("password", loginPassword);
+    // let body = new HttpParams()
+    //   .set("email", loginEmail)
+    //   .set("password", loginPassword);
 
-    this.http
-      .post("/auth/login", body.toString(), {
-        headers: new HttpHeaders().set(
-          "Content-Type",
-          "application/x-www-form-urlencoded"
-        ),
-        withCredentials: true
-      })
-      .subscribe(response => {
-        loginResponse = response;
-        console.log(response);
-        if (loginResponse.status == "OK" && loginResponse.role=='USER') {
-          this.credentialsValid = true;
-          this.routeLink = '/home'
-        }
-        else if(loginResponse.status=='OK' && loginResponse.role=='ADMIN')
-        {
-          this.credentialsValid = true;
-          this.routeLink = '/admin';
-        }
+    // this.http
+    //   .post("/auth/login", body.toString(), {
+    //     headers: new HttpHeaders().set(
+    //       "Content-Type",
+    //       "application/x-www-form-urlencoded"
+    //     ),
+    //     withCredentials: true
+    //   })
+    //   .subscribe(response => {
+    //     loginResponse = response;
+    //     console.log(response);
+    //     if (loginResponse.status == "OK" && loginResponse.role == "USER") {
+    //       this.credentialsValid = true;
+    //       this.routeLink = "/home";
+    //     } else if (
+    //       loginResponse.status == "OK" &&
+    //       loginResponse.role == "ADMIN"
+    //     ) {
+    //       this.credentialsValid = true;
+    //       this.routeLink = "/admin";
+    //     }
+    //   });
 
-      });
+    const params = {
+      email: loginEmail,
+      password: loginPassword
+    };
+
+    this.apiService.post("auth/login", params).subscribe(response => {
+      loginResponse = response;
+      console.log(response);
+      if (loginResponse.status == "OK" && loginResponse.role == "USER") {
+        this.credentialsValid = true;
+        this.routeLink = "/home";
+      } else if (
+        loginResponse.status == "OK" &&
+        loginResponse.role == "ADMIN"
+      ) {
+        this.credentialsValid = true;
+        this.routeLink = "/admin";
+      }
+    });
   }
 }

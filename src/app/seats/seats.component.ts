@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { MainService } from "../main.service";
 import { HttpClient, HttpParams, HttpHeaders } from "@angular/common/http";
 import { stringify } from "@angular/compiler/src/util";
+import { ApiService } from "../services/api.service";
 
 @Component({
   selector: "app-seats",
@@ -43,14 +44,18 @@ export class SeatsComponent implements OnInit {
 
   signOut: string;
 
-  constructor(public SeatBooking: MainService, public http: HttpClient) {}
+  constructor(
+    public SeatBooking: MainService,
+    public http: HttpClient,
+    private apiService: ApiService
+  ) {}
 
   ngOnInit(): void {}
 
   seatSelected(row, column) {}
 
   DisplayMovieSelector(request: boolean) {
-    this.http.get("/shows", { withCredentials: true }).subscribe(post => {
+    this.apiService.get("/shows").subscribe(post => {
       this.movies = post;
       this.movies = this.movies.shows.map(movieslist => {
         return movieslist;
