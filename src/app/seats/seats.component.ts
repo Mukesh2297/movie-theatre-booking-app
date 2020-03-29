@@ -67,15 +67,13 @@ export class SeatsComponent implements OnInit {
   bookSeats(showId) {
     this.isHallSelected = true;
 
-    this.apiService
-      .get(`showstatus/${showId}`, { withCredentials: true })
-      .subscribe(hallDetails => {
-        this.hallAvailability = hallDetails;
-        this.totalRowsCount = this.hallAvailability.hallDetail.total_rows;
-        this.totalColumnsCount = this.hallAvailability.hallDetail.total_columns;
-        this.columns = Array(this.totalColumnsCount).fill(0);
-        this.rows = Array(this.totalRowsCount).fill(0);
-      });
+    this.apiService.get(`showstatus/${showId}`).subscribe(hallDetails => {
+      this.hallAvailability = hallDetails;
+      this.totalRowsCount = this.hallAvailability.hallDetail.total_rows;
+      this.totalColumnsCount = this.hallAvailability.hallDetail.total_columns;
+      this.columns = Array(this.totalColumnsCount).fill(0);
+      this.rows = Array(this.totalRowsCount).fill(0);
+    });
 
     this.showSeats = true;
   }

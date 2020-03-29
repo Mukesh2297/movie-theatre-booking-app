@@ -19,21 +19,17 @@ export class NewShowComponent implements OnInit {
   constructor(public http: HttpClient, private apiService: ApiService) {}
 
   ngOnInit(): void {
-    this.apiService
-      .get("movies", { withCredentials: true })
-      .subscribe(response => {
-        this.movies = response;
-        this.movies = this.movies.movies;
-        console.log(this.movies);
-      });
+    this.apiService.get("movies").subscribe(response => {
+      this.movies = response;
+      this.movies = this.movies.movies;
+      console.log(this.movies);
+    });
 
-    this.apiService
-      .get("halls", { withCredentials: true })
-      .subscribe(response => {
-        this.halls = response;
-        this.halls = this.halls.halls;
-        console.log(this.halls);
-      });
+    this.apiService.get("halls").subscribe(response => {
+      this.halls = response;
+      this.halls = this.halls.halls;
+      console.log(this.halls);
+    });
   }
 
   movieSelected(movie_id) {
