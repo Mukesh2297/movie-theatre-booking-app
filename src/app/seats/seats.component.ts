@@ -42,8 +42,6 @@ export class SeatsComponent implements OnInit {
 
   showSeats: boolean = false;
 
-  signOut: string;
-
   constructor(
     public SeatBooking: MainService,
     public http: HttpClient,
@@ -55,7 +53,7 @@ export class SeatsComponent implements OnInit {
   seatSelected(row, column) {}
 
   DisplayMovieSelector(request: boolean) {
-    this.apiService.get("/shows").subscribe(post => {
+    this.apiService.get("shows").subscribe(post => {
       this.movies = post;
       this.movies = this.movies.shows.map(movieslist => {
         return movieslist;
@@ -69,8 +67,8 @@ export class SeatsComponent implements OnInit {
   bookSeats(showId) {
     this.isHallSelected = true;
 
-    this.http
-      .get(`/showstatus/${showId}`, { withCredentials: true })
+    this.apiService
+      .get(`showstatus/${showId}`, { withCredentials: true })
       .subscribe(hallDetails => {
         this.hallAvailability = hallDetails;
         this.totalRowsCount = this.hallAvailability.hallDetail.total_rows;
@@ -99,17 +97,14 @@ export class SeatsComponent implements OnInit {
 
       this.movieId = moviename.target.value;
 
-      this.http
-        .get("/movies/showtime", {
-          params: new HttpParams().set("id", this.movieId),
-          withCredentials: true
-        })
-        .subscribe(showtime => {
-          this.shows = showtime;
-          this.shows = this.shows.movies.map(showDetails => {
-            return showDetails;
-          });
+      const params = { id: this.movieId };
+
+      this.apiService.get("movies/showtime", params).subscribe(showtime => {
+        this.shows = showtime;
+        this.shows = this.shows.movies.map(showDetails => {
+          return showDetails;
         });
+      });
 
       this.movieTitle = true;
     }
@@ -130,14 +125,10 @@ export class SeatsComponent implements OnInit {
   logout() {
     let logOutResponse;
 
-    this.http
-      .post("https://theatreapi.saileshkumar.com/auth/logout", {})
-      .subscribe(logout => {
-        logOutResponse = logout;
-        if ((logOutResponse.status = "OK")) {
-          this.signOut = "/home";
-        }
-      });
+    this.apiService.post("auth/logout", {}).subscribe(logout => {
+      logOutResponse = logout;
+      alert(logOutResponse.message);
+    });
   }
 
   submit() {

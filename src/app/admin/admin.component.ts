@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { MainService } from "../main.service";
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { stringify } from "@angular/compiler/src/util";
+import { ApiService } from "../services/api.service";
 
 @Component({
   selector: "app-admin",
@@ -43,7 +44,11 @@ export class AdminComponent implements OnInit {
 
   showSeats: boolean = false;
 
-  constructor(public SeatBooking: MainService, public http: HttpClient) {}
+  constructor(
+    public SeatBooking: MainService,
+    public http: HttpClient,
+    private apiService: ApiService
+  ) {}
 
   ngOnInit(): void {}
 
@@ -60,7 +65,7 @@ export class AdminComponent implements OnInit {
   }
 
   DisplayMovieSelector(request: boolean) {
-    this.http.get("/shows", { withCredentials: true }).subscribe(post => {
+    this.apiService.get("shows", { withCredentials: true }).subscribe(post => {
       this.movies = post;
       this.movies = this.movies.shows.map(movieslist => {
         return movieslist;
@@ -73,8 +78,8 @@ export class AdminComponent implements OnInit {
   bookSeats(showId) {
     this.isHallSelected = true;
 
-    this.http
-      .get(`/showstatus/${showId}`, { withCredentials: true })
+    this.apiService
+      .get(`showstatus/${showId}`, { withCredentials: true })
       .subscribe(hallDetails => {
         this.hallAvailability = hallDetails;
         this.totalRowsCount = this.hallAvailability.hallDetail.total_rows;
@@ -103,17 +108,14 @@ export class AdminComponent implements OnInit {
 
       this.movieId = moviename.target.value;
 
-      this.http
-        .get("/movies/showtime", {
-          params: new HttpParams().set("id", this.movieId),
-          withCredentials: true
-        })
-        .subscribe(showtime => {
-          this.shows = showtime;
-          this.shows = this.shows.movies.map(showDetails => {
-            return showDetails;
-          });
+      const params = { id: this.movieId };
+
+      this.apiService.get("movies/showtime", params).subscribe(showtime => {
+        this.shows = showtime;
+        this.shows = this.shows.movies.map(showDetails => {
+          return showDetails;
         });
+      });
 
       this.movieTitle = true;
     }
@@ -128,6 +130,15 @@ export class AdminComponent implements OnInit {
 
     this.shows = this.shows.movies.map(showTime => {
       return showTime;
+    });
+  }
+
+  logout() {
+    let logOutResponse;
+
+    this.apiService.post("auth/logout", {}).subscribe(logout => {
+      logOutResponse = logout;
+      alert(logOutResponse.message);
     });
   }
 

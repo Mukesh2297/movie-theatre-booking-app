@@ -44,10 +44,12 @@ export class LoginComponent implements OnInit {
     let password = upassword.value;
     let email = uemail.value;
 
-    let body = new HttpParams()
-      .set("name", username)
-      .set("password", password)
-      .set("email", email);
+    // let body = new HttpParams()
+    //   .set("name", username)
+    //   .set("password", password)
+    //   .set("email", email);
+
+    const body = { name: username, password: password, email: email };
 
     // formData.append('name',username);
     // formData.append('password',password);
@@ -55,21 +57,21 @@ export class LoginComponent implements OnInit {
 
     //const userDetails = {name: username,password:password,email: email}
 
-    this.http
-      .post("/auth/signup", body.toString(), {
-        headers: new HttpHeaders().set(
-          "Content-Type",
-          "application/x-www-form-urlencoded"
-        ),
-        withCredentials: true
-      })
-      .subscribe(response => {
-        console.log(response);
-        signupResponse = response;
-        if (signupResponse.status == "OK") {
-          alert("Registeration Successful");
-        }
-      });
+    // const headers = {
+    //   headers: new HttpHeaders().set(
+    //     "Content-Type",
+    //     "application/x-www-form-urlencoded"
+    //   ),
+    //   withCredentials: true
+    // };
+
+    this.apiService.post("auth/signup", body).subscribe(response => {
+      console.log(response);
+      signupResponse = response;
+      if (signupResponse.status == "OK") {
+        alert("Registeration Successful");
+      }
+    });
 
     // this.userDetails[this.userDetails.length]= UserDetails;
 

@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { HttpClient, HttpParams, HttpHeaders } from "@angular/common/http";
+import { ApiService } from "../services/api.service";
 
 @Component({
   selector: "app-new-hall",
@@ -7,7 +8,7 @@ import { HttpClient, HttpParams, HttpHeaders } from "@angular/common/http";
   styleUrls: ["./new-hall.component.css"]
 })
 export class NewHallComponent implements OnInit {
-  constructor(public http: HttpClient) {}
+  constructor(public http: HttpClient, private apiService: ApiService) {}
 
   ngOnInit(): void {}
 
@@ -16,21 +17,14 @@ export class NewHallComponent implements OnInit {
     let total_rows = seatRows.value;
     let total_columns = seatColumns.value;
 
-    let newhallDetails = new HttpParams()
-      .set("name", hall_name)
-      .set("total_rows", `${total_rows}`)
-      .set("total_columns", `${total_columns}`);
+    const newHallDetails = {
+      name: hall_name,
+      total_rows: `${total_rows}`,
+      total_columns: `${total_columns}`
+    };
 
-    this.http
-      .post("/halls", newhallDetails.toString(), {
-        headers: new HttpHeaders().set(
-          "Content-Type",
-          "application/x-www-form-urlencoded"
-        ),
-        withCredentials: true
-      })
-      .subscribe(response => {
-        console.log(response);
-      });
+    this.apiService.post("halls", newHallDetails).subscribe(response => {
+      console.log(response);
+    });
   }
 }

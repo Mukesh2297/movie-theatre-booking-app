@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
+import { ApiService } from "../services/api.service";
 
 @Component({
   selector: "app-new-show",
@@ -15,20 +16,24 @@ export class NewShowComponent implements OnInit {
 
   hallId: number;
 
-  constructor(public http: HttpClient) {}
+  constructor(public http: HttpClient, private apiService: ApiService) {}
 
   ngOnInit(): void {
-    this.http.get("/movies", { withCredentials: true }).subscribe(response => {
-      this.movies = response;
-      this.movies = this.movies.movies;
-      console.log(this.movies);
-    });
+    this.apiService
+      .get("movies", { withCredentials: true })
+      .subscribe(response => {
+        this.movies = response;
+        this.movies = this.movies.movies;
+        console.log(this.movies);
+      });
 
-    this.http.get("/halls", { withCredentials: true }).subscribe(response => {
-      this.halls = response;
-      this.halls = this.halls.halls;
-      console.log(this.halls);
-    });
+    this.apiService
+      .get("halls", { withCredentials: true })
+      .subscribe(response => {
+        this.halls = response;
+        this.halls = this.halls.halls;
+        console.log(this.halls);
+      });
   }
 
   movieSelected(movie_id) {
@@ -42,21 +47,14 @@ export class NewShowComponent implements OnInit {
   update(time) {
     let showTime = time.value;
 
-    let showDetails = new HttpParams()
-      .set("movie_id", `${this.movieId}`)
-      .set("hall_id", `${this.hallId}`)
-      .set("show_time", `${showTime}`);
+    const showDetails = {
+      movie_id: `${this.movieId}`,
+      hall_id: `${this.hallId}`,
+      show_time: `${showTime}`
+    };
 
-    this.http
-      .post("/shows", showDetails.toString(), {
-        headers: new HttpHeaders().set(
-          "Content-Type",
-          "application/x-www-form-urlencoded"
-        ),
-        withCredentials: true
-      })
-      .subscribe(response => {
-        console.log(response);
-      });
+    this.apiService.post("shows", showDetails).subscribe(response => {
+      console.log(response);
+    });
   }
 }
