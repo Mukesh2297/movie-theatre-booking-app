@@ -1,14 +1,16 @@
 import { Component, OnInit } from "@angular/core";
 import { MainService } from "../main.service";
-import { HttpClient, HttpParams, HttpHeaders } from "@angular/common/http";
+import { HttpClient, HttpParams } from "@angular/common/http";
 import { stringify } from "@angular/compiler/src/util";
 
 @Component({
-  selector: "app-seats",
-  templateUrl: "./seats.component.html",
-  styleUrls: ["./seats.component.css"]
+  selector: "app-admin",
+  templateUrl: "./admin.component.html",
+  styleUrls: ["./admin.component.css"]
 })
-export class SeatsComponent implements OnInit {
+export class AdminComponent implements OnInit {
+  home: boolean = false;
+  manage: boolean = false;
   displayMovieSelector: boolean = false;
 
   movieTitle: boolean = false;
@@ -41,13 +43,21 @@ export class SeatsComponent implements OnInit {
 
   showSeats: boolean = false;
 
-  signOut: string;
-
   constructor(public SeatBooking: MainService, public http: HttpClient) {}
 
   ngOnInit(): void {}
 
   seatSelected(row, column) {}
+
+  navigate(value) {
+    if (value == "home") {
+      this.home = true;
+      this.manage = false;
+    } else {
+      this.manage = true;
+      this.home = false;
+    }
+  }
 
   DisplayMovieSelector(request: boolean) {
     this.http.get("/shows", { withCredentials: true }).subscribe(post => {
@@ -57,7 +67,6 @@ export class SeatsComponent implements OnInit {
       });
     });
     //this.shows = this.SeatBooking.shows;
-
     this.displayMovieSelector = request;
   }
 
@@ -120,19 +129,6 @@ export class SeatsComponent implements OnInit {
     this.shows = this.shows.movies.map(showTime => {
       return showTime;
     });
-  }
-
-  logout() {
-    let logOutResponse;
-
-    this.http
-      .post("https://theatreapi.saileshkumar.com/auth/logout", {})
-      .subscribe(logout => {
-        logOutResponse = logout;
-        if ((logOutResponse.status = "OK")) {
-          this.signOut = "/home";
-        }
-      });
   }
 
   submit() {

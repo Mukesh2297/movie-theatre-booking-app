@@ -1,9 +1,19 @@
 <div class="container">
-  <div class="logout">
-    <div class="logout-btn">
-      <a class="btn btn-link" [routerLink]='signOut' (click)='logout()'>LOGOUT</a>
-    </div>
+  <h2 style="color: white;">Admin</h2>
+  <br>
+    <ul class="nav nav-tabs">
+      <li><button class="btn" (click)="navigate('home')">Home</button></li>
+      <li><button class="btn" (click) = "navigate('manage')" >Manage</button></li>
+    </ul>
+  <br>
+
+  <div class="manage" *ngIf = 'manage'>
+    <div class="add-hall"><app-new-hall></app-new-hall></div>
+    <div class="add-movie"><app-new-movie></app-new-movie></div>
+    <div class="add-show"><app-new-show></app-new-show></div>     
   </div>
+
+  <div class="home" *ngIf = 'home'>
   <div class="movie-picker">
     <div class="movie-selector">
       <button class="btn btn-success" (click)="DisplayMovieSelector(true)">
@@ -41,10 +51,7 @@
     <div class="total-seats" *ngIf="showSeats">
       <div class="hor" *ngFor="let rowSeat of rows; index as i">
         <div *ngFor="let columnSeat of columns; index as j">
-          <button
-            (click)="seatSelected(i, j)"
-            [disabled]="isSeatAvailable(i, j)"
-          >
+          <button (click)="seatSelected(i, j)" [disabled]="isSeatAvailable(i, j)">
             Seat: {{ i * columns.length + (j + 1) }}
           </button>
         </div>
@@ -52,24 +59,23 @@
       <br /><br />
       <div class="submit" *ngIf="isHallSelected">
         <div class="submit-button">
-          <input
-            type="submit"
-            class="btn btn-primary"
-            value="Book Seats"
-            (click)="submit()"
-          />
+          <input type="submit" class="btn btn-primary" value="Book Seats" (click)="submit()" />
         </div>
       </div>
     </div>
   </ng-container>
 </div>
+</div>
+
+<br /><br />
+
 
 
 <!-- <button class="seat" value="s1" (click)="seatSelected($event)" [ngClass]="{'selectedSeat': markedSeats.indexOf('s1')>=0}" [disabled] = "bookedSeats.indexOf('s1')>=0"></button> -->
 
 <!-- <div class="left-portion" *ngFor = "let seats of totalSeats; index as i" >
-            <button class="seat" value="seats" (click)="seatSelected(seats)"
-             [ngClass]="{'selectedSeat': markedSeats.indexOf(seats)>=0}"
-             [disabled] = "bookedSeats.indexOf(seats)>=0">
-            </button>
-        </div> -->
+              <button class="seat" value="seats" (click)="seatSelected(seats)"
+               [ngClass]="{'selectedSeat': markedSeats.indexOf(seats)>=0}"
+               [disabled] = "bookedSeats.indexOf(seats)>=0">
+              </button>
+          </div> -->

@@ -17,6 +17,8 @@ export class LoginComponent implements OnInit {
 
   credentialsValid: boolean = false;
 
+  routeLink:string;
+
   constructor(public Mainservice: MainService, public http: HttpClient) {}
 
   ngOnInit(): void {}
@@ -90,9 +92,17 @@ export class LoginComponent implements OnInit {
       })
       .subscribe(response => {
         loginResponse = response;
-        if (loginResponse.status == "OK") {
+        console.log(response);
+        if (loginResponse.status == "OK" && loginResponse.role=='USER') {
           this.credentialsValid = true;
+          this.routeLink = '/home'
         }
+        else if(loginResponse.status=='OK' && loginResponse.role=='ADMIN')
+        {
+          this.credentialsValid = true;
+          this.routeLink = '/admin';
+        }
+
       });
   }
 }
