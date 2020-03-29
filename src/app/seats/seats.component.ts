@@ -59,7 +59,6 @@ export class SeatsComponent implements OnInit {
         return movieslist;
       });
     });
-    //this.shows = this.SeatBooking.shows;
 
     this.displayMovieSelector = request;
   }
