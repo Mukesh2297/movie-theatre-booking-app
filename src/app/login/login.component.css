@@ -4,4 +4,42 @@
     width: 100%;
     display: flex;
     justify-content: center;
+    align-items: center;
+}
+
+.heading
+{
+    text-align: center;
+    font-family: 'Lato', sans-serif;
+    font-family: 'Pacifico', cursive;
+    color: blanchedalmond;
+}
+
+.body
+{
+    height: 500px;
+    width: 300px;
+    text-align: center;
+    color: azure;
+    font-family: 'Lato', sans-serif;
+}
+
+.btn-primary
+{
+    background-color: transparent;
+    box-shadow: none;
+    border-color: rosybrown;
+    color: blanchedalmond;
+
+}
+
+.btn-primary:hover
+{
+    background-color: rosybrown;
+    color: black;
+}
+
+input,button
+{
+    color: black;
 }

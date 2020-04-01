@@ -1,29 +1,28 @@
+<div class="heading"><h1>Welcome!!</h1></div>
 <div class="container">
-    <div id="Body">
-        <h1>Welcome!!</h1>
-
-        <button class="btn btn-primary" value="Sign Up" (click)="displayLoginForm($event)">Sign Up</button>&nbsp;
-        <button class="btn btn-primary" value="Login" (click)="displayLoginForm($event)">Login</button>
+    <div class="body">
+        <button class="btn btn-primary" value="Sign Up" (click)="displayLoginForm($event)">SIGN UP</button>&nbsp;
+        <button class="btn btn-primary" value="Login" (click)="displayLoginForm($event)">LOGIN</button>
         <br><br>
 
 
         <div *ngIf='signupform'>
 
-            UserName: <input type="text" placeholder="Enter Your Username" #uname><br><br>
-            Password: <input type="password" placeholder="Enter Your Password" #password><br><br>
-            Email Id: <input type="email" placeholder="example@text.com" #email><br><br>
-            <button class="btn btn-success" value="Register" (click)="Register(uname,password,email)">Register</button>
+            User Name: <input type="text" class="form-control" placeholder="Enter Your Username" #uname><br><br>
+            Password: <input type="password" class="form-control" placeholder="Enter Your Password" #password><br><br>
+            Email Id: <input type="email" class="form-control" placeholder="example@address.com" #email><br><br>
+            <button class="btn btn-success" value="Register" (click)="Register(uname,password,email)">REGISTER</button>
 
         </div>
 
         <div *ngIf='loginform'>
-            Email: <input type='text' placeholder="Enter Your Email" #regEmail><br><br>
-            Password: <input type="password" placeholder="Enter Your Password" #regPasswrd><br><br>
+            Email Id: <input type='text' class="form-control" placeholder="Enter Your Email" #regEmail><br><br>
+            Password: <input type="password" class="form-control" placeholder="Enter Your Password" #regPasswrd><br><br>
 
             <button class="btn btn-dark" (click)="SignIn(regEmail,regPasswrd)">Check Login Credentials</button>
             <br><br>
             <ng-container *ngIf="credentialsValid">
-                <a class="btn btn-primary" [routerLink]="routeLink">Login</a>
+                <a class="btn btn-primary" [routerLink]="routeLink">LOGIN</a>
             </ng-container>
 
 
