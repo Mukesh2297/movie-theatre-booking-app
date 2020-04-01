@@ -8,16 +8,16 @@
 
         <div *ngIf='signupform'>
 
-            User Name: <input type="text" class="form-control" placeholder="Enter Your Username" #uname><br><br>
-            Password: <input type="password" class="form-control" placeholder="Enter Your Password" #password><br><br>
-            Email Id: <input type="email" class="form-control" placeholder="example@address.com" #email><br><br>
+            <label>User Name</label><input type="text" class="form-control" placeholder="Enter Your Username" #uname><br><br>
+            <label>Password</label> <input type="password" class="form-control" placeholder="Enter Your Password" #password><br><br>
+            <label>Email Id</label><input type="email" class="form-control" placeholder="example@address.com" #email><br><br>
             <button class="btn btn-success" value="Register" (click)="Register(uname,password,email)">REGISTER</button>
 
         </div>
 
         <div *ngIf='loginform'>
-            Email Id: <input type='text' class="form-control" placeholder="Enter Your Email" #regEmail><br><br>
-            Password: <input type="password" class="form-control" placeholder="Enter Your Password" #regPasswrd><br><br>
+           <label>Email Id</label><input type='text' class="form-control" placeholder="Enter Your Email" #regEmail><br><br>
+            <label>Password</label><input type="password" class="form-control" placeholder="Enter Your Password" #regPasswrd><br><br>
 
             <button class="btn btn-dark" (click)="SignIn(regEmail,regPasswrd)">Check Login Credentials</button>
             <br><br>

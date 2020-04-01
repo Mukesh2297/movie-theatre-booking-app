@@ -24,6 +24,11 @@
     font-family: 'Lato', sans-serif;
 }
 
+label
+{
+    font-size: medium;
+}
+
 .btn-primary
 {
     background-color: transparent;
