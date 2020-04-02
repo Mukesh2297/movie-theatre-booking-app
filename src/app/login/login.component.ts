@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { MainService } from "../main.service";
 import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { ApiService } from "../services/api.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-login",
@@ -23,7 +24,8 @@ export class LoginComponent implements OnInit {
   constructor(
     public Mainservice: MainService,
     public http: HttpClient,
-    private apiService: ApiService
+    private apiService: ApiService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {}
@@ -70,6 +72,8 @@ export class LoginComponent implements OnInit {
       signupResponse = response;
       if (signupResponse.status == "OK") {
         alert("Registeration Successful");
+        this.signupform = false;
+        this.loginform = true;
       }
     });
 
@@ -121,14 +125,12 @@ export class LoginComponent implements OnInit {
       loginResponse = response;
       console.log(response);
       if (loginResponse.status == "OK" && loginResponse.role == "USER") {
-        this.credentialsValid = true;
-        this.routeLink = "/home";
+        this.router.navigate(["/", "home"]);
       } else if (
         loginResponse.status == "OK" &&
         loginResponse.role == "ADMIN"
       ) {
-        this.credentialsValid = true;
-        this.routeLink = "/admin";
+        this.router.navigate(["/", "admin"]);
       }
     });
   }
