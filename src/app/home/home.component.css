@@ -1,0 +1,16 @@
+.container
+{
+    height: 100vh;
+    width: 100%;
+    overflow: auto;
+    background-image: url("../../assets/roll3.png");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+
+} 
+
+.logout
+{
+    display: flex;
+    justify-content: flex-end;
+}

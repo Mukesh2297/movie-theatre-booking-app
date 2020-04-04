@@ -6,13 +6,8 @@
 
 .container
 {
-    height: 100vh;
+    height: 100%;
     width: 100%;
-    overflow: auto;
-    background-image: url("../../assets/roll3.png");
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-
 } 
 
 .btn-primary
@@ -47,16 +42,6 @@
     margin-bottom: 15px;
 }
 
-.left-portion
-{
-    margin-right: 30px;
-}
-
-.middle-portion
-{
-    margin-right: 30px;
-}
-
 .screen-location
 {
     height: 200px;
@@ -79,13 +64,6 @@
 {
     margin-top: 40px;
 }
-
-.logout
-{
-    display: flex;
-    justify-content: flex-end;
-}
-
 
 .movie-picker
 {

@@ -7,10 +7,10 @@ import { ApiService } from "../services/api.service";
 @Component({
   selector: "app-admin",
   templateUrl: "./admin.component.html",
-  styleUrls: ["./admin.component.css"]
+  styleUrls: ["./admin.component.css"],
 })
 export class AdminComponent implements OnInit {
-  home: boolean = false;
+  home: boolean = true;
   manage: boolean = false;
   displayMovieSelector: boolean = false;
 
@@ -65,20 +65,19 @@ export class AdminComponent implements OnInit {
   }
 
   DisplayMovieSelector(request: boolean) {
-    this.apiService.get("shows").subscribe(post => {
+    this.apiService.get("shows").subscribe((post) => {
       this.movies = post;
-      this.movies = this.movies.shows.map(movieslist => {
+      this.movies = this.movies.shows.map((movieslist) => {
         return movieslist;
       });
     });
-    //this.shows = this.SeatBooking.shows;
     this.displayMovieSelector = request;
   }
 
   bookSeats(showId) {
     this.isHallSelected = true;
 
-    this.apiService.get(`showstatus/${showId}`).subscribe(hallDetails => {
+    this.apiService.get(`showstatus/${showId}`).subscribe((hallDetails) => {
       this.hallAvailability = hallDetails;
       this.totalRowsCount = this.hallAvailability.hallDetail.total_rows;
       this.totalColumnsCount = this.hallAvailability.hallDetail.total_columns;
@@ -92,7 +91,7 @@ export class AdminComponent implements OnInit {
   isSeatAvailable(i, j) {
     return (
       this.hallAvailability.availability.filter(
-        e => e.sequence_number === i * this.columns.length + (j + 1)
+        (e) => e.sequence_number === i * this.columns.length + (j + 1)
       ).length > 0
     );
   }
@@ -108,25 +107,21 @@ export class AdminComponent implements OnInit {
 
       const params = { id: this.movieId };
 
-      this.apiService.get("movies/showtime", params).subscribe(showtime => {
+      this.apiService.get("movies/showtime", params).subscribe((showtime) => {
         this.shows = showtime;
-        this.shows = this.shows.movies.map(showDetails => {
+        this.shows = this.shows.movies.map((showDetails) => {
           return showDetails;
         });
       });
 
       this.movieTitle = true;
     }
-
-    // this.hallId = this.hallAvailability.hallDetail.hall_id;
-
-    // console.log('Hall id', this.hallId);
   }
 
   showsAvailable() {
     let hallId = this.hallId;
 
-    this.shows = this.shows.movies.map(showTime => {
+    this.shows = this.shows.movies.map((showTime) => {
       return showTime;
     });
   }
@@ -134,9 +129,8 @@ export class AdminComponent implements OnInit {
   logout() {
     let logOutResponse;
 
-    this.apiService.post("auth/logout", {}).subscribe(logout => {
+    this.apiService.post("auth/logout", {}).subscribe((logout) => {
       logOutResponse = logout;
-      alert(logOutResponse.message);
     });
   }
 

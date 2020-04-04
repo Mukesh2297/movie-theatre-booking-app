@@ -10,6 +10,7 @@ import { NewHallComponent } from './new-hall/new-hall.component';
 import { NewMovieComponent } from './new-movie/new-movie.component';
 import { NewShowComponent } from './new-show/new-show.component';
 import { AdminComponent } from './admin/admin.component';
+import { HomeComponent } from './home/home.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { AdminComponent } from './admin/admin.component';
     NewHallComponent,
     NewMovieComponent,
     NewShowComponent,
-    AdminComponent
+    AdminComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

@@ -5,9 +5,11 @@ import { ApiService } from "../services/api.service";
 @Component({
   selector: "app-new-hall",
   templateUrl: "./new-hall.component.html",
-  styleUrls: ["./new-hall.component.css"]
+  styleUrls: ["./new-hall.component.css"],
 })
 export class NewHallComponent implements OnInit {
+  apiResponse;
+
   constructor(public http: HttpClient, private apiService: ApiService) {}
 
   ngOnInit(): void {}
@@ -20,11 +22,11 @@ export class NewHallComponent implements OnInit {
     const newHallDetails = {
       name: hall_name,
       total_rows: `${total_rows}`,
-      total_columns: `${total_columns}`
+      total_columns: `${total_columns}`,
     };
 
-    this.apiService.post("halls", newHallDetails).subscribe(response => {
-      console.log(response);
+    this.apiService.post("halls", newHallDetails).subscribe((response) => {
+      this.apiResponse = response;
     });
   }
 }

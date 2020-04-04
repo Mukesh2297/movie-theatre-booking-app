@@ -1,3 +1,18 @@
+.container
+{   
+    height: 100vh;
+    width: 100%;
+    overflow: auto;
+    background-image: url("../../assets/roll3.png");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+} 
+
+body
+{
+    overflow-y: hidden;
+}
+
 a
 {
     text-decoration: none;
@@ -30,117 +45,22 @@ li
 
 }
 
-
-
-.hor{
-    display:flex;
+h2
+{
+    color: blanchedalmond;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
-
-.container
+button
 {
-    height: 100vh;
-    width: 100%;
-    background-color:#242333;
-} 
-
-.total-seats
-{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.shows
-{
-    width: 100%;
-    display: flex;
-    justify-content: space-around;
-    margin-bottom: 15px;
-}
-
-.left-portion
-{
-    margin-right: 30px;
-}
-
-.middle-portion
-{
-    margin-right: 30px;
-}
-
-.screen-location
-{
-    height: 200px;
-    display: flex;
-    justify-content: center;
-    align-items: center;  
-}
-
-.screen
-{
-    height: 100px;
-    width: 400px;
-    text-align: center;
-    transform: rotateX(-35deg);
-    box-shadow: 0 3px 10px rgba(255, 255, 255, 0.7);
-    background-color: white;
-}
-
-.screen p
-{
-    margin-top: 40px;
-}
-
-.movie-picker
-{
-    height: 100px;
-    width: 100%;
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.movie-selector
-{
-    height: 30px;
-}
-
-select
-{
-    color: black;
-    height: 34.5px;
+    background-color: whitesmoke;
+    height: 40px;
+    width: 80px;
     border-radius: 4px;
-    margin-top: 0.7px;
+    color: black;
 }
 
-.seat
+.btnactive
 {
-    background-color: transparent;
-    height: 15px;
-    width: 18px;
-    margin: 3px;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-}
-
-.selectedSeat
-{
-    background-color: greenyellow;
-}
-
-.submit
-{
-    height: 100px;
-    display: flex;
-    justify-content: center;
-    margin-top: 50px;
-}
-
-
-
-button[disabled=disabled], button:disabled {
-    background-color: red;
+    background-color: rosybrown;
 }

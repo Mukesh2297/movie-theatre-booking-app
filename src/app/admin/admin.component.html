@@ -1,86 +1,40 @@
 <div class="container">
   <div class="logout">
     <div class="logout-btn">
-      <a class="btn btn-link" routerLink="/" (click)='logout()'>LOGOUT</a>
+      <a class="btn btn-link" routerLink="/" (click)="logout()">LOGOUT</a>
     </div>
   </div>
-  <h2 style="color: white;">Admin</h2>
-  <br>
-    <ul class="nav nav-tabs">
-      <li><button class="btn" (click)="navigate('home')">Home</button></li>
-      <li><button class="btn" (click) = "navigate('manage')" >Manage</button></li>
-    </ul>
-  <br>
+  <h2>ADMIN</h2>
+  <br />
+  <ul class="nav nav-tabs">
+    <li class="nav-item">
+      <button
+        class="btn"
+        [ngClass]="{ 'btnactive': home}"
+        (click)="navigate('home')"
+      >
+        Home
+      </button>
+    </li>
+    <li class="nav-item">
+      <button
+        class="btn"
+        [ngClass]="{ 'btnactive': manage}"
+        (click)="navigate('manage')"
+      >
+        Manage
+      </button>
+    </li>
+  </ul>
+  <br />
 
-  <div class="manage" *ngIf = 'manage'>
+  <div class="manage" *ngIf="manage">
     <div class="add-hall"><app-new-hall></app-new-hall></div>
     <div class="add-movie"><app-new-movie></app-new-movie></div>
-    <div class="add-show"><app-new-show></app-new-show></div>     
+    <div class="add-show"><app-new-show></app-new-show></div>
   </div>
 
-  <div class="home" *ngIf = 'home'>
-  <div class="movie-picker">
-    <div class="movie-selector">
-      <button class="btn btn-success" (click)="DisplayMovieSelector(true)">
-        Pick a Movie:
-      </button>
-      <ng-container *ngIf="displayMovieSelector">
-        <select (change)="selectedMovie($event)">
-          <option value="none">--None--</option>
-          <option *ngFor="let movielist of movies" [value]="movielist.movie_id">
-            {{ movielist.name }}<br />
-            INR-{{ movielist.ticket_price }}
-          </option>
-        </select>
-      </ng-container>
-    </div>
+  <div class="home" *ngIf="home">
+    <div class="seats-component"><app-seats></app-seats></div>
   </div>
-
-  <ng-container *ngIf="movieTitle">
-    <div class="shows">
-      <div class="showtime" *ngFor="let showDetails of shows">
-        <button (click)="bookSeats(showDetails.show_id)">
-          {{ showDetails.name | uppercase }}<br />{{ showDetails.show_time }}
-        </button>
-      </div>
-    </div>
-  </ng-container>
-
-  <ng-container *ngIf="isHallSelected">
-    <div class="screen-location" *ngIf="showSeats">
-      <div class="screen">
-        <p>SCREEN</p>
-      </div>
-    </div>
-
-    <div class="total-seats" *ngIf="showSeats">
-      <div class="hor" *ngFor="let rowSeat of rows; index as i">
-        <div *ngFor="let columnSeat of columns; index as j">
-          <button (click)="seatSelected(i, j)" [disabled]="isSeatAvailable(i, j)">
-            Seat: {{ i * columns.length + (j + 1) }}
-          </button>
-        </div>
-      </div>
-      <br /><br />
-      <div class="submit" *ngIf="isHallSelected">
-        <div class="submit-button">
-          <input type="submit" class="btn btn-primary" value="Book Seats" (click)="submit()" />
-        </div>
-      </div>
-    </div>
-  </ng-container>
 </div>
-</div>
-
-<br /><br />
-
-
-
-<!-- <button class="seat" value="s1" (click)="seatSelected($event)" [ngClass]="{'selectedSeat': markedSeats.indexOf('s1')>=0}" [disabled] = "bookedSeats.indexOf('s1')>=0"></button> -->
-
-<!-- <div class="left-portion" *ngFor = "let seats of totalSeats; index as i" >
-              <button class="seat" value="seats" (click)="seatSelected(seats)"
-               [ngClass]="{'selectedSeat': markedSeats.indexOf(seats)>=0}"
-               [disabled] = "bookedSeats.indexOf(seats)>=0">
-              </button>
-          </div> -->

@@ -5,7 +5,7 @@ import { ApiService } from "../services/api.service";
 @Component({
   selector: "app-new-show",
   templateUrl: "./new-show.component.html",
-  styleUrls: ["./new-show.component.css"]
+  styleUrls: ["./new-show.component.css"],
 })
 export class NewShowComponent implements OnInit {
   movies;
@@ -16,19 +16,19 @@ export class NewShowComponent implements OnInit {
 
   hallId: number;
 
+  apiresponse;
+
   constructor(public http: HttpClient, private apiService: ApiService) {}
 
   ngOnInit(): void {
-    this.apiService.get("movies").subscribe(response => {
+    this.apiService.get("movies").subscribe((response) => {
       this.movies = response;
       this.movies = this.movies.movies;
-      console.log(this.movies);
     });
 
-    this.apiService.get("halls").subscribe(response => {
+    this.apiService.get("halls").subscribe((response) => {
       this.halls = response;
       this.halls = this.halls.halls;
-      console.log(this.halls);
     });
   }
 
@@ -46,11 +46,11 @@ export class NewShowComponent implements OnInit {
     const showDetails = {
       movie_id: `${this.movieId}`,
       hall_id: `${this.hallId}`,
-      show_time: `${showTime}`
+      show_time: `${showTime}`,
     };
 
-    this.apiService.post("shows", showDetails).subscribe(response => {
-      console.log(response);
+    this.apiService.post("shows", showDetails).subscribe((response) => {
+      this.apiresponse = response;
     });
   }
 }

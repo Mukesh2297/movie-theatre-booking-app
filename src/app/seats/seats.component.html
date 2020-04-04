@@ -1,9 +1,4 @@
 <div class="container">
-  <div class="logout">
-    <div class="logout-btn">
-      <a class="btn btn-link" routerLink="/" (click)="logout()">LOGOUT</a>
-    </div>
-  </div>
   <div class="movie-picker">
     <div class="movie-selector">
       <button class="btn btn-success" (click)="DisplayMovieSelector(true)">
@@ -61,14 +56,5 @@
     </div>
   </ng-container>
 </div>
-
-<!-- <button class="seat" value="s1" (click)="seatSelected($event)" [ngClass]="{'selectedSeat': markedSeats.indexOf('s1')>=0}" [disabled] = "bookedSeats.indexOf('s1')>=0"></button> -->
-
-<!-- <div class="left-portion" *ngFor = "let seats of totalSeats; index as i" >
-            <button class="seat" value="seats" (click)="seatSelected(seats)"
-             [ngClass]="{'selectedSeat': markedSeats.indexOf(seats)>=0}"
-             [disabled] = "bookedSeats.indexOf(seats)>=0">
-            </button>
-        </div> -->
 
 <!-- Seat: {{ i * columns.length + (j + 1) }} -->

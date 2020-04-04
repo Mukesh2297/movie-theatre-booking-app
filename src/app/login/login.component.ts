@@ -7,7 +7,7 @@ import { Router } from "@angular/router";
 @Component({
   selector: "app-login",
   templateUrl: "./login.component.html",
-  styleUrls: ["./login.component.css"]
+  styleUrls: ["./login.component.css"],
 })
 export class LoginComponent implements OnInit {
   signupform: boolean = false;
@@ -46,42 +46,15 @@ export class LoginComponent implements OnInit {
     let password = upassword.value;
     let email = uemail.value;
 
-    // let body = new HttpParams()
-    //   .set("name", username)
-    //   .set("password", password)
-    //   .set("email", email);
-
     const body = { name: username, password: password, email: email };
 
-    // formData.append('name',username);
-    // formData.append('password',password);
-    // formData.append('email',email)
-
-    //const userDetails = {name: username,password:password,email: email}
-
-    // const headers = {
-    //   headers: new HttpHeaders().set(
-    //     "Content-Type",
-    //     "application/x-www-form-urlencoded"
-    //   ),
-    //   withCredentials: true
-    // };
-
-    this.apiService.post("auth/signup", body).subscribe(response => {
-      console.log(response);
+    this.apiService.post("auth/signup", body).subscribe((response) => {
       signupResponse = response;
       if (signupResponse.status == "OK") {
-        alert("Registeration Successful");
         this.signupform = false;
         this.loginform = true;
       }
     });
-
-    // this.userDetails[this.userDetails.length]= UserDetails;
-
-    // localStorage.setItem("Users", (JSON.stringify(this.userDetails)));
-
-    // alert('Registeration Successful');
   }
 
   SignIn(regEmail, regPasswrd) {
@@ -89,41 +62,13 @@ export class LoginComponent implements OnInit {
     let loginEmail = regEmail.value;
     let loginPassword = regPasswrd.value;
 
-    // let body = new HttpParams()
-    //   .set("email", loginEmail)
-    //   .set("password", loginPassword);
-
-    // this.http
-    //   .post("/auth/login", body.toString(), {
-    //     headers: new HttpHeaders().set(
-    //       "Content-Type",
-    //       "application/x-www-form-urlencoded"
-    //     ),
-    //     withCredentials: true
-    //   })
-    //   .subscribe(response => {
-    //     loginResponse = response;
-    //     console.log(response);
-    //     if (loginResponse.status == "OK" && loginResponse.role == "USER") {
-    //       this.credentialsValid = true;
-    //       this.routeLink = "/home";
-    //     } else if (
-    //       loginResponse.status == "OK" &&
-    //       loginResponse.role == "ADMIN"
-    //     ) {
-    //       this.credentialsValid = true;
-    //       this.routeLink = "/admin";
-    //     }
-    //   });
-
     const params = {
       email: loginEmail,
-      password: loginPassword
+      password: loginPassword,
     };
 
-    this.apiService.post("auth/login", params).subscribe(response => {
+    this.apiService.post("auth/login", params).subscribe((response) => {
       loginResponse = response;
-      console.log(response);
       if (loginResponse.status == "OK" && loginResponse.role == "USER") {
         this.router.navigate(["/", "home"]);
       } else if (

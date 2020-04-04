@@ -5,9 +5,11 @@ import { ApiService } from "../services/api.service";
 @Component({
   selector: "app-new-movie",
   templateUrl: "./new-movie.component.html",
-  styleUrls: ["./new-movie.component.css"]
+  styleUrls: ["./new-movie.component.css"],
 })
 export class NewMovieComponent implements OnInit {
+  apiResponse;
+
   constructor(public http: HttpClient, private apiService: ApiService) {}
 
   ngOnInit(): void {}
@@ -18,11 +20,11 @@ export class NewMovieComponent implements OnInit {
 
     const newMovieDetails = {
       name: movie_name,
-      ticket_price: `${ticket_price}`
+      ticket_price: `${ticket_price}`,
     };
 
-    this.apiService.post("movies", newMovieDetails).subscribe(response => {
-      console.log(response);
+    this.apiService.post("movies", newMovieDetails).subscribe((response) => {
+      this.apiResponse = response;
     });
   }
 }
