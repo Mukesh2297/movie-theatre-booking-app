@@ -1,35 +1,46 @@
-<div class="heading"><h1>Welcome!!</h1></div>
 <div class="container">
-    <div class="body">
-        <button class="btn btn-primary" value="Sign Up" (click)="displayLoginForm($event)">SIGN UP</button>&nbsp;
-        <button class="btn btn-primary" value="Login" (click)="displayLoginForm($event)">LOGIN</button>
-        <br><br>
-
-
-        <div *ngIf='signupform'>
-
-            <label>User Name</label><input type="text" class="form-control" placeholder="Enter Your Username" #uname><br><br>
-            <label>Password</label> <input type="password" class="form-control" placeholder="Enter Your Password" #password><br><br>
-            <label>Email Id</label><input type="email" class="form-control" placeholder="example@address.com" #email><br><br>
-            <button class="btn btn-success" value="Register" (click)="Register(uname,password,email)">REGISTER</button>
-
+    <div class="child-items">
+        <div class="heading">
+            <h1>Welcome!!</h1>
         </div>
+        <div class="form-content">
+            <div class="body">
+                <button class="btn btn-primary" value="Sign Up" (click)="displayLoginForm($event)">SIGN
+                    UP</button>&nbsp;
+                <button class="btn btn-primary" value="Login" (click)="displayLoginForm($event)">LOGIN</button>
+                <br><br>
 
-        <div *ngIf='loginform'>
-           <label>Email Id</label><input type='text' class="form-control" placeholder="Enter Your Email" #regEmail><br><br>
-            <label>Password</label><input type="password" class="form-control" placeholder="Enter Your Password" #regPasswrd><br><br>
 
-            <button class="btn btn-success" (click)="SignIn(regEmail,regPasswrd)">LOGIN</button>
-            <!-- <br><br>
+                <div *ngIf='signupform'>
+
+                    <label>User Name</label><input type="text" class="form-control" placeholder="Enter Your Username"
+                        #uname><br><br>
+                    <label>Password</label> <input type="password" class="form-control"
+                        placeholder="Enter Your Password" #password><br><br>
+                    <label>Email Id</label><input type="email" class="form-control" placeholder="example@address.com"
+                        #email><br><br>
+                    <button class="btn btn-success" value="Register"
+                        (click)="Register(uname,password,email)">REGISTER</button>
+
+                </div>
+
+                <div *ngIf='loginform'>
+                    <label>Email Id</label><input type='text' class="form-control" placeholder="Enter Your Email"
+                        #regEmail><br><br>
+                    <label>Password</label><input type="password" class="form-control" placeholder="Enter Your Password"
+                        #regPasswrd><br><br>
+
+                    <button class="btn btn-success" (click)="SignIn(regEmail,regPasswrd)">LOGIN</button>
+                    <!-- <br><br>
             <ng-container *ngIf="credentialsValid">
                 <a class="btn btn-primary" [routerLink]="routeLink">LOGIN</a>
             </ng-container> -->
 
 
+                </div>
+            </div>
         </div>
     </div>
 </div>
 
 
-
-<br><br>

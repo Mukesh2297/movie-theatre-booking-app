@@ -6,10 +6,30 @@
 
 .container
 {
-    height: 1000px;
+    height: 100vh;
     width: 100%;
-    background-color:#242333;
+    overflow: auto;
+    background-image: url("../../assets/roll3.png");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+
 } 
+
+.btn-primary
+{
+    background-color: transparent;
+    box-shadow: none;
+    border-color: rosybrown;
+    color: blanchedalmond;
+    border-radius: 4px;
+
+}   
+
+.btn-primary:hover
+{
+    background-color: rosybrown;
+    color: black;
+}
 
 .total-seats
 {
@@ -23,7 +43,7 @@
 {
     width: 100%;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-evenly;
     margin-bottom: 15px;
 }
 
@@ -60,6 +80,13 @@
     margin-top: 40px;
 }
 
+.logout
+{
+    display: flex;
+    justify-content: flex-end;
+}
+
+
 .movie-picker
 {
     height: 100px;
@@ -86,11 +113,20 @@ select
 .seat
 {
     background-color: transparent;
-    height: 15px;
+    border-color: white;
+    height: 20px;
     width: 18px;
     margin: 3px;
+    margin-top: 2px;
+    margin-right: 5px;
+    margin-bottom: 5px;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
+}
+
+.seat:hover
+{
+    background-color:rgb(24, 24, 231);
 }
 
 .selectedSeat
@@ -109,5 +145,6 @@ select
 
 
 button[disabled=disabled], button:disabled {
+    border-color: red;
     background-color: red;
 }
