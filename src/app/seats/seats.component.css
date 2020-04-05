@@ -8,6 +8,7 @@
 {
     height: 100%;
     width: 100%;
+    overflow-x: hidden;
 } 
 
 .btn-primary
@@ -19,6 +20,13 @@
     border-radius: 4px;
 
 }   
+
+
+.btn-primary:focus
+{
+    background-color: rosybrown;
+    color: black;
+}
 
 .btn-primary:hover
 {
@@ -36,11 +44,11 @@
 
 .shows
 {
-    width: 100%;
+    width: 100vw;
     display: flex;
     justify-content: space-evenly;
-    margin-bottom: 15px;
 }
+
 
 .screen-location
 {

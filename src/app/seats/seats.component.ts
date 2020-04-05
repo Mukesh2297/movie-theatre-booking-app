@@ -10,8 +10,6 @@ import { ApiService } from "../services/api.service";
   styleUrls: ["./seats.component.css"],
 })
 export class SeatsComponent implements OnInit {
-  displayMovieSelector: boolean = false;
-
   movieTitle: boolean = false;
 
   movies;
@@ -22,11 +20,17 @@ export class SeatsComponent implements OnInit {
 
   showStatus;
 
+  showId: number;
+
   movieId;
 
   hallId;
 
+  markedSeatsArr;
+
   isHallSelected: boolean = false;
+
+  selectedShow: any[] = [];
 
   markedSeats: any[] = [];
 
@@ -46,24 +50,20 @@ export class SeatsComponent implements OnInit {
     public SeatBooking: MainService,
     public http: HttpClient,
     private apiService: ApiService
-  ) {}
-
-  ngOnInit(): void {}
-
-  seatSelected(row, column) {}
-
-  DisplayMovieSelector(request: boolean) {
+  ) {
     this.apiService.get("shows").subscribe((post) => {
       this.movies = post;
       this.movies = this.movies.shows.map((movieslist) => {
         return movieslist;
       });
     });
-
-    this.displayMovieSelector = request;
   }
 
-  bookSeats(showId) {
+  ngOnInit(): void {}
+
+  bookSeats(showId, index) {
+    console.log(index);
+
     this.isHallSelected = true;
 
     this.apiService.get(`showstatus/${showId}`).subscribe((hallDetails) => {
@@ -75,6 +75,10 @@ export class SeatsComponent implements OnInit {
     });
 
     this.showSeats = true;
+
+    this.showId = index;
+
+    this.selectedShow.push(this.shows[this.showId]);
   }
 
   isSeatAvailable(i, j) {
@@ -100,6 +104,7 @@ export class SeatsComponent implements OnInit {
         this.shows = showtime;
         this.shows = this.shows.movies.map((showDetails) => {
           return showDetails;
+          console.log(this.shows);
         });
       });
 
@@ -113,6 +118,36 @@ export class SeatsComponent implements OnInit {
     this.shows = this.shows.movies.map((showTime) => {
       return showTime;
     });
+  }
+
+  seatSelected(i, j, event) {
+    let selected = i * this.columns.length + (j + 1);
+
+    let btnValue = event.target.value;
+
+    console.log(typeof selected);
+    console.log(typeof btnValue);
+
+    if (selected == btnValue) {
+      return true;
+    }
+
+    this.markedSeats.push(selected);
+
+    this.markedSeatsArr = this.markedSeats.map((element) => {
+      return element.toString();
+    });
+
+    console.log(this.markedSeats);
+
+    console.log(this.markedSeatsArr);
+  }
+
+  cancel() {
+    this.isHallSelected = false;
+    this.showSeats = false;
+    this.selectedShow.splice(0);
+    console.log(this.selectedShow);
   }
 
   submit() {

@@ -1,29 +1,38 @@
 <div class="container">
   <div class="movie-picker">
     <div class="movie-selector">
-      <button class="btn btn-success" (click)="DisplayMovieSelector(true)">
-        PICK A MOVIE
-      </button>
-      <ng-container *ngIf="displayMovieSelector">
-        <select (change)="selectedMovie($event)">
-          <option value="none">--None--</option>
-          <option *ngFor="let movielist of movies" [value]="movielist.movie_id">
-            {{ movielist.name | uppercase }}<br/>
-            {{ movielist.ticket_price | currency: "INR" }}
-          </option>
-        </select>
-      </ng-container>
+      <label>PICK A MOVIE</label> &nbsp;
+      <select (change)="selectedMovie($event)" [disabled]="isHallSelected">
+        <option value="none">--None--</option>
+        <option *ngFor="let movielist of movies" [value]="movielist.movie_id">
+          {{ movielist.name | uppercase }}<br />
+          {{ movielist.ticket_price | currency: "INR" }}
+        </option>
+      </select>
     </div>
   </div>
 
   <ng-container *ngIf="movieTitle">
     <div class="shows">
-      <div class="showtime" *ngFor="let showDetails of shows">
-        <button class="btn-primary" (click)="bookSeats(showDetails.show_id)">
-          {{ showDetails.name | uppercase }}<br />{{ showDetails.show_time}}
-        </button>
+      <div class="showtime">
+        <div class="all-shows" *ngIf="selectedShow.length > 0; else allShows">
+          <div class="selected-show" *ngFor = "let showSelected of selectedShow">
+            <label style="color: blanchedalmond;">{{showSelected.name | uppercase }}</label><br>
+            <button class="btn btn-primary" style="background-color: rosybrown;">{{showSelected.show_time}}</button>
+          </div>
+        </div>
       </div>
     </div>
+    <ng-template #allShows>
+        <div class="shows">
+          <div class="showtime" *ngFor="let showDetails of shows;index as ind">
+              <label style="color: blanchedalmond;">{{showDetails.name | uppercase }}</label><br>
+              <button class="btn btn-primary" (click)="bookSeats(showDetails.show_id,ind)" [disabled]="showSeats">
+               {{ showDetails.show_time}}
+              </button>
+          </div>
+        </div>
+    </ng-template>
   </ng-container>
 
   <ng-container *ngIf="isHallSelected">
@@ -36,21 +45,18 @@
     <div class="total-seats" *ngIf="showSeats">
       <div class="hor" *ngFor="let rowSeat of rows; index as i">
         <div *ngFor="let columnSeat of columns; index as j">
-          <button class="seat"
-            (click)="seatSelected(i, j)"
-            [disabled]="isSeatAvailable(i, j)"
-          ></button>
+          <button class="seat" [value]="(i * columns.length) + (j + 1)" (click)="seatSelected(i, j,$event)"
+         [disabled]="isSeatAvailable(i, j)">
+            Seat: {{ i * columns.length + (j + 1) }}
+          </button>
         </div>
       </div>
       <br /><br />
       <div class="submit" *ngIf="isHallSelected">
         <div class="submit-button">
-          <input
-            type="submit"
-            class="btn btn-primary"
-            value="Book Seats"
-            (click)="submit()"
-          />
+          <button class="btn btn-danger" value="Cancel" (click)="cancel()">CANCEL</button> &nbsp;
+          <button class="btn btn-success" value="Book Seats" (click)="submit()">BOOK SEATS</button>
+
         </div>
       </div>
     </div>
