@@ -148,7 +148,7 @@ export class SeatsComponent implements OnInit {
       .subscribe((response) => {
         this.apiResponse = response;
       });
-
+    this.markedSeats.splice(0);
     this.isHallSelected = false;
     this.showSeats = false;
   }
