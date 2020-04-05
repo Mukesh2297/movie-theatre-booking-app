@@ -47,7 +47,6 @@
         <div *ngFor="let columnSeat of columns; index as j">
           <button class="seat" [value]="(i * columns.length) + (j + 1)" (click)="seatSelected(i, j,$event)"
          [disabled]="isSeatAvailable(i, j)">
-            Seat: {{ i * columns.length + (j + 1) }}
           </button>
         </div>
       </div>
