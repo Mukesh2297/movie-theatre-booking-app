@@ -13,7 +13,7 @@ export class ApiService {
     const httpParams = this.constructParams(options);
     return this.http.get(`${this.baseUrl}/${url}`, {
       ...this.baseOptions,
-      params: httpParams as HttpParams
+      params: httpParams as HttpParams,
     });
   }
 
@@ -24,7 +24,7 @@ export class ApiService {
       headers: new HttpHeaders().set(
         "Content-Type",
         "application/x-www-form-urlencoded"
-      )
+      ),
     });
   }
 

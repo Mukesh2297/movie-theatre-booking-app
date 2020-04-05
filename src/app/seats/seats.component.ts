@@ -46,6 +46,8 @@ export class SeatsComponent implements OnInit {
 
   showSeats: boolean = false;
 
+  apiResponse;
+
   constructor(
     public SeatBooking: MainService,
     public http: HttpClient,
@@ -61,9 +63,7 @@ export class SeatsComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  bookSeats(showId, index) {
-    console.log(index);
-
+  bookSeats(showId, indexval) {
     this.isHallSelected = true;
 
     this.apiService.get(`showstatus/${showId}`).subscribe((hallDetails) => {
@@ -76,9 +76,9 @@ export class SeatsComponent implements OnInit {
 
     this.showSeats = true;
 
-    this.showId = index;
+    this.showId = showId;
 
-    this.selectedShow.push(this.shows[this.showId]);
+    this.selectedShow.push(this.shows[indexval]);
   }
 
   isSeatAvailable(i, j) {
@@ -104,7 +104,6 @@ export class SeatsComponent implements OnInit {
         this.shows = showtime;
         this.shows = this.shows.movies.map((showDetails) => {
           return showDetails;
-          console.log(this.shows);
         });
       });
 
@@ -120,40 +119,37 @@ export class SeatsComponent implements OnInit {
     });
   }
 
-  seatSelected(i, j, event) {
+  seatSelected(i, j) {
     let selected = i * this.columns.length + (j + 1);
 
-    let btnValue = event.target.value;
-
-    console.log(typeof selected);
-    console.log(typeof btnValue);
-
-    if (selected == btnValue) {
-      return true;
+    if (this.markedSeats.indexOf(selected) != -1) {
+      let indexValue = this.markedSeats.indexOf(selected);
+      this.markedSeats.splice(indexValue, 1);
+    } else {
+      this.markedSeats.push(selected);
     }
-
-    this.markedSeats.push(selected);
-
-    this.markedSeatsArr = this.markedSeats.map((element) => {
-      return element.toString();
-    });
-
-    console.log(this.markedSeats);
-
-    console.log(this.markedSeatsArr);
   }
 
   cancel() {
     this.isHallSelected = false;
     this.showSeats = false;
     this.selectedShow.splice(0);
-    console.log(this.selectedShow);
+    this.markedSeats.splice(0);
   }
 
   submit() {
-    this.bookedSeats = this.markedSeats;
-    console.log(this.movies);
-    console.log(this.shows);
-    console.log(this.showStatus);
+    let bookedSeats = {
+      sequence_numbers: this.markedSeats.join(","),
+      show_id: this.showId,
+    };
+
+    this.apiService
+      .post("showstatus/booktickets", bookedSeats)
+      .subscribe((response) => {
+        this.apiResponse = response;
+      });
+
+    this.isHallSelected = false;
+    this.showSeats = false;
   }
 }

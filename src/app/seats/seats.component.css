@@ -61,7 +61,7 @@
 .screen
 {
     height: 100px;
-    width: 400px;
+    width: 500px;
     text-align: center;
     transform: rotateX(-35deg);
     box-shadow: 0 3px 10px rgba(255, 255, 255, 0.7);
@@ -117,7 +117,7 @@ select
 
 .selectedSeat
 {
-    background-color: greenyellow;
+    background-color: yellow;
 }
 
 .submit

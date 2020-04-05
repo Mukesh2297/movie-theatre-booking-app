@@ -45,8 +45,11 @@
     <div class="total-seats" *ngIf="showSeats">
       <div class="hor" *ngFor="let rowSeat of rows; index as i">
         <div *ngFor="let columnSeat of columns; index as j">
-          <button class="seat" [value]="(i * columns.length) + (j + 1)" (click)="seatSelected(i, j,$event)"
-         [disabled]="isSeatAvailable(i, j)">
+          <button  [value]="(i * columns.length) + (j + 1)" (click)="seatSelected(i, j)"
+         [disabled]="isSeatAvailable(i, j)" 
+         [ngClass]="markedSeats.includes((i * columns.length) + (j + 1)) ? 'seat selectedSeat' : 'seat'">
+         <!-- [ngClass]="{'selectedSeat' : markedSeats.includes((i * columns.length) + (j + 1)) , 'seat' : true}" -->
+         <!-- [ngStyle]="{'background-color': markedSeats.includes((i * columns.length) + (j + 1)) ? 'green' : 'white'}"> -->
           </button>
         </div>
       </div>

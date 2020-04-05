@@ -54,6 +54,12 @@ label
     color: black;
 }
 
+.btn-primary:focus
+{
+    background-color: rosybrown;
+    color: black; 
+}
+
 input,button
 {
     color: black;
