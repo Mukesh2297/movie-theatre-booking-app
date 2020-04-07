@@ -8,6 +8,9 @@ import { ApiService } from "../services/api.service";
   styleUrls: ["./new-show.component.css"],
 })
 export class NewShowComponent implements OnInit {
+
+  dt1;
+
   movies;
 
   movieId: number;
@@ -40,17 +43,20 @@ export class NewShowComponent implements OnInit {
     this.hallId = hall_id.target.value;
   }
 
-  update(time) {
-    let showTime = time.value;
+  update(dateTime) {
 
-    const showDetails = {
+    let showTime = dateTime.value;
+
+     const showDetails = {
       movie_id: `${this.movieId}`,
       hall_id: `${this.hallId}`,
       show_time: `${showTime}`,
     };
 
+
     this.apiService.post("shows", showDetails).subscribe((response) => {
       this.apiresponse = response;
     });
+    
   }
 }

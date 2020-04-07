@@ -11,6 +11,9 @@ import { NewMovieComponent } from './new-movie/new-movie.component';
 import { NewShowComponent } from './new-show/new-show.component';
 import { AdminComponent } from './admin/admin.component';
 import { HomeComponent } from './home/home.component';
+import {OwlDateTimeModule, OwlNativeDateTimeModule} from 'ng-pick-datetime'
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+
 
 
 @NgModule({
@@ -28,7 +31,10 @@ import { HomeComponent } from './home/home.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    OwlDateTimeModule,
+    OwlNativeDateTimeModule,
+    BrowserAnimationsModule
 
   ],
   providers: [],

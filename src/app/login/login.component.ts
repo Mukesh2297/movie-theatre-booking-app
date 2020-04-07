@@ -40,13 +40,14 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  Register(uname, upassword, uemail) {
+  Register(uname, upassword, uemail,umobile) {
     let signupResponse;
     let username = uname.value;
     let password = upassword.value;
     let email = uemail.value;
+    let mobileNo = umobile.value;
 
-    const body = { name: username, password: password, email: email };
+    const body = { name: username, password: password, email: email, mobile:mobileNo };
 
     this.apiService.post("auth/signup", body).subscribe((response) => {
       signupResponse = response;
