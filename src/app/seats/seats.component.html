@@ -12,8 +12,8 @@
     </div>
   </div>
 
-  <ng-container *ngIf="movieTitle">
-    <div class="shows">
+  <ng-container>
+    <div class="shows" *ngIf="selectedShow.length > 0; else allShows">
       <div class="showtime">
         <div class="all-shows" *ngIf="selectedShow.length > 0; else allShows">
           <div class="selected-show" *ngFor = "let showSelected of selectedShow">

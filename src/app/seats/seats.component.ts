@@ -10,8 +10,7 @@ import { ApiService } from "../services/api.service";
   styleUrls: ["./seats.component.css"],
 })
 export class SeatsComponent implements OnInit {
-  movieTitle: boolean = false;
-
+ 
   movies;
 
   shows;
@@ -64,14 +63,14 @@ export class SeatsComponent implements OnInit {
   ngOnInit(): void {}
 
   bookSeats(showId, indexval) {
-    this.isHallSelected = true;
-
+    
     this.apiService.get(`showstatus/${showId}`).subscribe((hallDetails) => {
       this.hallAvailability = hallDetails;
       this.totalRowsCount = this.hallAvailability.hallDetail.total_rows;
       this.totalColumnsCount = this.hallAvailability.hallDetail.total_columns;
       this.columns = Array(this.totalColumnsCount).fill(0);
       this.rows = Array(this.totalRowsCount).fill(0);
+      this.isHallSelected = true;
     });
 
     this.showSeats = true;
@@ -79,6 +78,7 @@ export class SeatsComponent implements OnInit {
     this.showId = showId;
 
     this.selectedShow.push(this.shows[indexval]);
+
   }
 
   isSeatAvailable(i, j) {
@@ -103,11 +103,11 @@ export class SeatsComponent implements OnInit {
       this.apiService.get("movies/showtime", params).subscribe((showtime) => {
         this.shows = showtime;
         this.shows = this.shows.movies.map((showDetails) => {
+          //this.movieTitle = false;
           return showDetails;
         });
       });
 
-      this.movieTitle = true;
     }
   }
 
@@ -147,9 +147,17 @@ export class SeatsComponent implements OnInit {
       .post("showstatus/booktickets", bookedSeats)
       .subscribe((response) => {
         this.apiResponse = response;
+
+        if(this.apiResponse.status = "OK")
+        {
+          this.markedSeats.splice(0);
+          this.selectedShow.splice(0);
+          this.isHallSelected = false;
+          this.showSeats = false;
+        }
+
       });
-    this.markedSeats.splice(0);
-    this.isHallSelected = false;
-    this.showSeats = false;
+    
+    
   }
 }

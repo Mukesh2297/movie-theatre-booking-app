@@ -8,8 +8,12 @@
 {
     height: 100%;
     width: 100%;
-    overflow-x: hidden;
 } 
+
+body::-webkit-scrollbar {
+    display: none;
+  }
+
 
 .btn-primary
 {
@@ -44,11 +48,10 @@
 
 .shows
 {
-    width: 100vw;
+    width: 100%;
     display: flex;
     justify-content: space-evenly;
 }
-
 
 .screen-location
 {
