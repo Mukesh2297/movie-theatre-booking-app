@@ -16,6 +16,8 @@ export class AdminComponent implements OnInit {
 
   movieTitle: boolean = false;
 
+  switch:string = "";
+
   movies;
 
   shows;
@@ -58,6 +60,7 @@ export class AdminComponent implements OnInit {
     if (value == "home") {
       this.home = true;
       this.manage = false;
+      this.switch = "";
     } else {
       this.manage = true;
       this.home = false;

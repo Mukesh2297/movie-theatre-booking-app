@@ -1,12 +1,12 @@
 <div class="container">
     <div class="newMovie">
         <h2>ADD NEW MOVIE</h2><br>
-        Movie Name: <input type="text" class="form-control" placeholder="Enter Movie Name" #movieName>
+        <label>Movie Name</label>
+        <input type="text" class="form-control" placeholder="Enter Movie Name" #movieName>
         <br><br>
-
-        Ticket Price: <input type="number" class="form-control" placeholder="Enter Ticket Price" #ticketPrice>
+        <label>Ticket Price</label>
+        <input type="number" class="form-control" placeholder="Enter Ticket Price" #ticketPrice>
         <br><br>
-
         <button class="btn btn-success" (click)='update(movieName,ticketPrice)'>CREATE</button>
     </div>
 </div>

@@ -8,33 +8,40 @@
   <br />
   <ul class="nav nav-tabs">
     <li class="nav-item">
-      <button
-        class="btn"
-        [ngClass]="{ 'btnactive': home}"
-        (click)="navigate('home')"
-      >
-        Home
+      <button class="btn" [ngClass]="{ 'btnactive': home}" (click)="navigate('home')">
+        HOME
       </button>
     </li>
     <li class="nav-item">
-      <button
-        class="btn"
-        [ngClass]="{ 'btnactive': manage}"
-        (click)="navigate('manage')"
-      >
-        Manage
+      <button class="btn" [ngClass]="{ 'btnactive': manage}" (click)="navigate('manage')">
+        MANAGE
       </button>
     </li>
   </ul>
   <br />
 
+
   <div class="manage" *ngIf="manage">
-    <div class="add-hall"><app-new-hall></app-new-hall></div>
-    <div class="add-movie"><app-new-movie></app-new-movie></div>
-    <div class="add-show"><app-new-show></app-new-show></div>
+    <button class="btn btn-light" (click)="switch='addhall'">Add Hall</button>
+    <button class="btn btn-light" (click)="switch='addmovie'">Add Movie</button>
+    <button class="btn btn-light" (click)="switch='addshow'">Add Show</button>
+  </div>
+
+  <div [ngSwitch]="switch">
+      <div class="add-hall" *ngSwitchCase="'addhall'">
+        <app-new-hall></app-new-hall>
+      </div>
+      <div class="add-movie" *ngSwitchCase="'addmovie'">
+        <app-new-movie></app-new-movie>
+      </div>
+      <div class="add-show" *ngSwitchCase="'addshow'">
+        <app-new-show></app-new-show>
+      </div>
   </div>
 
   <div class="home" *ngIf="home">
-    <div class="seats-component"><app-seats></app-seats></div>
+    <div class="seats-component">
+      <app-seats></app-seats>
+    </div>
   </div>
 </div>

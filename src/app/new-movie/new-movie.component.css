@@ -7,6 +7,17 @@
     align-items: center;
 }
 
+h2
+{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    color: blanchedalmond;
+}
+
+label
+{
+    color: blanchedalmond;
+}
+
 input
 {
     color: black;
