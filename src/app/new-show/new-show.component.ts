@@ -53,7 +53,6 @@ export class NewShowComponent implements OnInit {
       show_time: `${showTime}`,
     };
 
-
     this.apiService.post("shows", showDetails).subscribe((response) => {
       this.apiresponse = response;
     });

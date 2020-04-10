@@ -13,6 +13,7 @@ import { AdminComponent } from './admin/admin.component';
 import { HomeComponent } from './home/home.component';
 import {OwlDateTimeModule, OwlNativeDateTimeModule} from 'ng-pick-datetime'
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { FilterPipe } from './Filter/filter.pipe';
 
 
 
@@ -25,7 +26,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     NewMovieComponent,
     NewShowComponent,
     AdminComponent,
-    HomeComponent
+    HomeComponent,
+    FilterPipe
   ],
   imports: [
     BrowserModule,

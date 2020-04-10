@@ -53,6 +53,21 @@ body::-webkit-scrollbar {
     justify-content: space-evenly;
 }
 
+.selected-show
+{
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.selected-show-position
+{
+    width: 500px;
+    display: column;
+    justify-content: left;
+
+}
+
 .screen-location
 {
     height: 200px;
@@ -89,6 +104,14 @@ body::-webkit-scrollbar {
 .movie-selector
 {
     height: 30px;
+}
+
+.movie-picker-position
+{
+    width: 500px;
+    height: 50px;
+    display: flex;
+    justify-content: left;
 }
 
 select

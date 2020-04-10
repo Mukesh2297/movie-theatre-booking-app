@@ -13,23 +13,23 @@
 
                 <div *ngIf='signupform'>
 
-                    <label>User Name</label><input type="text" class="form-control" placeholder="Enter Your Username"
+                    <input type="text" class="form-control" placeholder="Username"
                         #uname><br><br>
-                    <label>Password</label> <input type="password" class="form-control"
-                        placeholder="Enter Your Password" #password><br><br>
-                    <label>Email Id</label><input type="email" class="form-control" placeholder="example@address.com"
+                    <input type="password" class="form-control"
+                        placeholder="Password" #password><br><br>
+                    <input type="email" class="form-control" placeholder="example@address.com"
                         #email><br><br>
-                    <label>Mobile Number</label><input type="number" class="form-control"
-                        placeholder="Enter Your Mobile Number" #mobile><br><br>
+                    <input type="number" class="form-control"
+                        placeholder="Mobile Number" #mobile><br><br>
                     <button class="btn btn-success" value="Register"
                         (click)="Register(uname,password,email,mobile)">REGISTER</button>
 
                 </div>
 
                 <div *ngIf='loginform'>
-                    <label>Email Id</label><input type='text' class="form-control" placeholder="Enter Your Email"
+                    <input type='text' class="form-control" placeholder="Email"
                         #regEmail><br><br>
-                    <label>Password</label><input type="password" class="form-control" placeholder="Enter Your Password"
+                    <input type="password" class="form-control" placeholder="Password"
                         #regPasswrd><br><br>
 
                     <button class="btn btn-success" (click)="SignIn(regEmail,regPasswrd)">LOGIN</button>

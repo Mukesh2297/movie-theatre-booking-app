@@ -1,35 +1,41 @@
 <div class="container">
   <div class="movie-picker">
-    <div class="movie-selector">
-      <label>PICK A MOVIE</label> &nbsp;
-      <select (change)="selectedMovie($event)" [disabled]="isHallSelected">
-        <option value="none">--None--</option>
-        <option *ngFor="let movielist of movies" [value]="movielist.movie_id">
-          {{ movielist.name | uppercase }}<br />
-          {{ movielist.ticket_price | currency: "INR" }}
-        </option>
-      </select>
+    <div class="movie-picker-position">
+      <div class="movie-selector">
+        <label>PICK A MOVIE</label> &nbsp;
+        <select (change)="selectedMovie($event)" [disabled]="isHallSelected">
+          <option value="none">--None--</option>
+          <option *ngFor="let movielist of movies" [value]="movielist.movie_id">
+            {{ movielist.name | uppercase }}<br />
+            {{ movielist.ticket_price | currency: "INR" }}
+          </option>
+        </select>
+      </div>
     </div>
   </div>
 
   <ng-container>
     <div class="shows" *ngIf="selectedShow.length > 0; else allShows">
       <div class="showtime">
-        <div class="all-shows" *ngIf="selectedShow.length > 0; else allShows">
           <div class="selected-show" *ngFor = "let showSelected of selectedShow">
-            <label style="color: blanchedalmond;">{{showSelected.name | uppercase }}</label><br>
-            <button class="btn btn-primary" style="background-color: rosybrown;">{{showSelected.show_time}}</button>
+            <div class="selected-show-position">
+              <div class="selected-show-label">
+                <label style="color: blanchedalmond;">{{showSelected.name | uppercase }}</label>
+              </div>
+              <div class="selected-show-showTime">
+                <button class="btn btn-primary" style="background-color: rosybrown;">{{showSelected.show_time}}</button>
+              </div>
+            </div>
           </div>
-        </div>
       </div>
     </div>
     <ng-template #allShows>
         <div class="shows">
           <div class="showtime" *ngFor="let showDetails of shows;index as ind">
-              <label style="color: blanchedalmond;">{{showDetails.name | uppercase }}</label><br>
-              <button class="btn btn-primary" (click)="bookSeats(showDetails.show_id,ind)" [disabled]="showSeats">
-               {{ showDetails.show_time}}
-              </button>
+                <label style="color: blanchedalmond;">{{showDetails.name | uppercase }}</label><br>
+                <button class="btn btn-primary" (click)="bookSeats(showDetails.show_id,ind)" [disabled]="showSeats">
+                  {{ showDetails.show_time}}
+                </button>
           </div>
         </div>
     </ng-template>
