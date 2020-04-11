@@ -10,6 +10,8 @@ import { ApiService } from "../services/api.service";
 export class NewHallComponent implements OnInit {
   apiResponse;
 
+  apiResponseMessage:string;
+
   constructor(public http: HttpClient, private apiService: ApiService) {}
 
   ngOnInit(): void {}
@@ -27,6 +29,11 @@ export class NewHallComponent implements OnInit {
 
     this.apiService.post("halls", newHallDetails).subscribe((response) => {
       this.apiResponse = response;
+      if(this.apiResponse.status=="OK")
+      {
+
+        this.apiResponseMessage = "Hall Created";
+      }
     });
   }
 }

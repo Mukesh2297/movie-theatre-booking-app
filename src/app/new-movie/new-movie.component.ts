@@ -9,6 +9,7 @@ import { ApiService } from "../services/api.service";
 })
 export class NewMovieComponent implements OnInit {
   apiResponse;
+  apiResponseMessage:string;
 
   constructor(public http: HttpClient, private apiService: ApiService) {}
 
@@ -25,6 +26,10 @@ export class NewMovieComponent implements OnInit {
 
     this.apiService.post("movies", newMovieDetails).subscribe((response) => {
       this.apiResponse = response;
+      if(this.apiResponse.status="OK")
+      {
+        this.apiResponseMessage="Movie Created";
+      }
     });
   }
 }

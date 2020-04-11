@@ -1,6 +1,6 @@
 module.exports = {
   "/": {
-    target: "https://theatreapi.saileshkumar.com",
+    target: "http://1a5c46d6.ngrok.io",
     // target: "http://localhost:3000",
     changeOrigin: true,
     secure: false,

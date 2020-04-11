@@ -12,6 +12,8 @@ import { Router } from "@angular/router";
 export class LoginComponent implements OnInit {
   signupform: boolean = false;
   loginform: boolean = false;
+  apiLoginResponse:string;
+  apiRegisterResponse:string;
 
   ExistingUsers;
 
@@ -40,20 +42,25 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  Register(uname, upassword, uemail,umobile) {
+  Register(fname,uname, upassword, uemail,umobile) {
     let signupResponse;
+    let fullname = fname.value;
     let username = uname.value;
     let password = upassword.value;
     let email = uemail.value;
     let mobileNo = umobile.value;
 
-    const body = { name: username, password: password, email: email, mobile:mobileNo };
+    const body = {fullname: fullname, username: username, password: password, email: email, mobile:mobileNo };
 
     this.apiService.post("auth/signup", body).subscribe((response) => {
       signupResponse = response;
       if (signupResponse.status == "OK") {
         this.signupform = false;
         this.loginform = true;
+      }
+      else if(signupResponse.status=="Server error")
+      {
+        this.apiRegisterResponse="Something went wrong. Please try again";
       }
     });
   }
@@ -64,19 +71,26 @@ export class LoginComponent implements OnInit {
     let loginPassword = regPasswrd.value;
 
     const params = {
-      email: loginEmail,
+      username: loginEmail,
       password: loginPassword,
     };
 
     this.apiService.post("auth/login", params).subscribe((response) => {
       loginResponse = response;
       if (loginResponse.status == "OK" && loginResponse.role == "USER") {
+        this.apiLoginResponse = "";
         this.router.navigate(["/", "home"]);
       } else if (
         loginResponse.status == "OK" &&
         loginResponse.role == "ADMIN"
       ) {
+        this.apiLoginResponse="";
         this.router.navigate(["/", "admin"]);
+      }
+
+      else if(loginResponse.status=="Server error")
+      {
+        this.apiLoginResponse = "Invalid Username or Password"
       }
     });
   }

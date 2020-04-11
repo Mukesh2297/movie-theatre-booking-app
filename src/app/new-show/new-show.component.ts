@@ -21,6 +21,8 @@ export class NewShowComponent implements OnInit {
 
   apiresponse;
 
+  apiResponseMessage:string;
+
   constructor(public http: HttpClient, private apiService: ApiService) {}
 
   ngOnInit(): void {
@@ -55,6 +57,10 @@ export class NewShowComponent implements OnInit {
 
     this.apiService.post("shows", showDetails).subscribe((response) => {
       this.apiresponse = response;
+      if(this.apiresponse.status=="OK")
+      {
+        this.apiResponseMessage="Show Created"
+      }
     });
     
   }
