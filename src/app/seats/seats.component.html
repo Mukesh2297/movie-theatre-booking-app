@@ -2,7 +2,7 @@
   <div class="movie-picker">
     <div class="movie-picker-position">
       <div class="movie-selector">
-        <label>PICK A MOVIE</label> &nbsp;
+        <label>NOW SHOWING</label> &nbsp;
         <select (change)="selectedMovie($event)" [disabled]="isHallSelected">
           <option value="none">--None--</option>
           <option *ngFor="let movielist of movies" [value]="movielist.movie_id">
@@ -14,6 +14,21 @@
     </div>
   </div>
 
+  <ng-container *ngIf = "movieSelected" >
+    <div class="dayPicker" >
+      <div class="navigation">
+        <ul class="nav nav-pills nav-fill">
+          <li class="nav-item" *ngFor = "let days of dayArr; index as indexVal">
+            <button [ngClass]="btnValue==indexVal ? 'btn btn-active' : 'btn btn-light'"  
+            [value]="indexVal" (click)="DisplayAvailableShows($event)">
+              {{days}}
+            </button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </ng-container>
+  
   <ng-container>
     <div class="shows" *ngIf="selectedShow.length > 0; else allShows">
       <div class="showtime">
@@ -31,7 +46,7 @@
     </div>
     <ng-template #allShows>
         <div class="shows">
-          <div class="showtime" *ngFor="let showDetails of shows;index as ind">
+          <div class="showtime" *ngFor="let showDetails of shows; index as ind">
                 <label style="color: blanchedalmond;">{{showDetails.name | uppercase }}</label><br>
                 <button class="btn btn-primary" (click)="bookSeats(showDetails.show_id,ind)" [disabled]="showSeats">
                   {{ showDetails.show_time}}
@@ -49,16 +64,16 @@
     </div>
 
     <div class="total-seats" *ngIf="showSeats">
-      <div class="hor" *ngFor="let rowSeat of rows; index as i">
-        <div *ngFor="let columnSeat of columns; index as j">
-          <button  [value]="(i * columns.length) + (j + 1)" (click)="seatSelected(i, j)"
-         [disabled]="isSeatAvailable(i, j)" 
-         [ngClass]="markedSeats.includes((i * columns.length) + (j + 1)) ? 'seat selectedSeat' : 'seat'">
-         <!-- [ngClass]="{'selectedSeat' : markedSeats.includes((i * columns.length) + (j + 1)) , 'seat' : true}" -->
-         <!-- [ngStyle]="{'background-color': markedSeats.includes((i * columns.length) + (j + 1)) ? 'green' : 'white'}"> -->
-          </button>
+        <div class="hor" *ngFor="let rowSeat of rows; index as i">
+          <div *ngFor="let columnSeat of columns; index as j">
+            <button  [value]="(i * columns.length) + (j + 1)" (click)="seatSelected(i, j)"
+           [disabled]="isSeatAvailable(i, j)" 
+           [ngClass]="markedSeats.includes((i * columns.length) + (j + 1)) ? 'seat selectedSeat' : 'seat'">
+           <!-- [ngClass]="{'selectedSeat' : markedSeats.includes((i * columns.length) + (j + 1)) , 'seat' : true}" -->
+           <!-- [ngStyle]="{'background-color': markedSeats.includes((i * columns.length) + (j + 1)) ? 'green' : 'white'}"> -->
+            </button>
+          </div>
         </div>
-      </div>
       <br /><br />
       <div class="submit" *ngIf="isHallSelected">
         <div class="submit-button">

@@ -3,6 +3,7 @@ import { MainService } from "../main.service";
 import { HttpClient, HttpParams, HttpHeaders } from "@angular/common/http";
 import { stringify } from "@angular/compiler/src/util";
 import { ApiService } from "../services/api.service";
+import { ThrowStmt } from '@angular/compiler';
 
 @Component({
   selector: "app-seats",
@@ -47,6 +48,14 @@ export class SeatsComponent implements OnInit {
 
   apiResponse;
 
+  dateArr:any[] = [];
+
+  dayArr:any[]=[];
+
+  movieSelected:boolean = false;
+
+  btnValue:number = 0;  
+
   constructor(
     public SeatBooking: MainService,
     public http: HttpClient,
@@ -58,6 +67,9 @@ export class SeatsComponent implements OnInit {
         return movieslist;
       });
     });
+    
+    this.DayValuePicker();
+    this.DayPicker();
   }
 
   ngOnInit(): void {}
@@ -94,11 +106,21 @@ export class SeatsComponent implements OnInit {
       this.shows = null;
       this.showSeats = false;
     } else {
+
+      let ind = 0;
+
+      this.movieSelected = true;
+  
       this.showSeats = false;
 
       this.movieId = moviename.target.value;
 
-      const params = { id: this.movieId };
+      let formattedDate = this.getFormattedDate(ind)
+
+      const params = { id: this.movieId, date:formattedDate};
+
+      console.log(params);
+      
 
       this.apiService.get("movies/showtime", params).subscribe((showtime) => {
         this.shows = showtime;
@@ -109,6 +131,29 @@ export class SeatsComponent implements OnInit {
       });
 
     }
+  }
+
+  DisplayAvailableShows(ind)
+  {
+  
+    this.btnValue = ind.target.value;
+
+    let indexValue = ind.target.value;
+
+    let formattedDate = this.getFormattedDate(indexValue);
+
+    const params = {id:this.movieId, date:formattedDate};
+
+    console.log(params);
+
+    this.apiService.get("movies/showtime", params).subscribe((showtime) => {
+      this.shows = showtime;
+      this.shows = this.shows.movies.map((showDetails) => {
+        //this.movieTitle = false;
+        return showDetails;
+      });
+    });
+    
   }
 
   showsAvailable() {
@@ -160,4 +205,79 @@ export class SeatsComponent implements OnInit {
     
     
   }
+
+
+  DayValuePicker()
+  {
+   
+    let currentDate = new Date();
+
+
+    let currentDay = currentDate.getDay();    
+
+    for(let i=0; i<=4; i++)
+    {
+      let currentDayValue = currentDay+i;
+      if(currentDayValue > 7 )
+      {
+        currentDayValue = currentDayValue - 7;
+        this.dateArr.push(Math.abs(currentDayValue));
+      }
+      else{
+      this.dateArr.push(currentDayValue);
+      }
+    }
+  }
+
+  DayPicker()
+  {
+
+    for(let i = 0; i <= this.dateArr.length; i++ )
+    {
+      let dayValue = this.dateArr[i];
+
+      switch (dayValue) {
+        case 1:
+          this.dayArr.push("Monday");
+          break;
+        case 2:
+          this.dayArr.push("Tuesday");
+          break;
+        case 3:
+          this.dayArr.push("Wednesday");
+          break;
+        case 4:
+          this.dayArr.push("Thursday");
+          break;
+        case 5:
+          this.dayArr.push("Friday");
+          break;
+        case 6:
+          this.dayArr.push("Saturday");
+          break;
+        case 7:
+          this.dayArr.push("Sunday");
+      }
+      
+    }
+
+    this.dayArr.splice(0,1,"Today");
+    this.dayArr.splice(1,1,"Tomorrow");
+    
+  }
+
+
+  getFormattedDate(ind)
+  {
+
+    let indexVal = ind;
+    let currentDate = new Date();
+    let numberOfDaysToAdd = Number(indexVal);
+    let month = currentDate.toLocaleString('default', { month: 'short' });
+    currentDate.setDate(currentDate.getDate() + numberOfDaysToAdd) 
+    return `${currentDate.getDate()}-${month}-${currentDate.getFullYear()}`
+
+  }
+
 }
+

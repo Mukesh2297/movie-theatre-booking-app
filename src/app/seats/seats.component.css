@@ -46,6 +46,21 @@ body::-webkit-scrollbar {
     align-items: center;
 }
 
+.seat-position
+{
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: left;
+    overflow-x: auto;
+    overflow-y: auto;
+}
+
+.seat-position::-webkit-scrollbar {
+    display: none;
+}
+
 .shows
 {
     width: 100%;
@@ -114,6 +129,28 @@ body::-webkit-scrollbar {
     justify-content: left;
 }
 
+.dayPicker
+{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    color: black;
+    margin-bottom: 20px;
+}
+
+.navigation
+{
+    width: 500px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: left;
+}
+
+.nav-item
+{
+    margin-right: 5px;
+}
+
 select
 {
     color: black;
@@ -152,6 +189,25 @@ select
     display: flex;
     justify-content: center;
     margin-top: 50px;
+}
+
+.btn-light:hover
+{
+    background-color: rosybrown;
+    color: black; 
+
+}
+
+.btn-light:focus
+{
+    background-color: rosybrown;
+    color: black; 
+}
+
+.btn-active
+{
+    background-color: rosybrown;
+    color: black;
 }
 
 

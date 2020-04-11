@@ -5,24 +5,25 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class FilterPipe implements PipeTransform {
 
-  transform(value: string) {
+  filterArr:any[]=[];
 
-    let name = value;
+  newArr:any[] = [];
 
-    console.log(name);
+  transform(value) {
+
+    this.filterArr = value;
+   
+    this.newArr = this.filterArr.map((element,index)=>
+    {
+      let obj = {name: element.name}
+
+      return element;
+
+    })
+
+    console.log(this.newArr);
     
-    let nameArr = [];
-
-    nameArr.push(value);
-
-    console.log(nameArr);
     
-    
-    // if(nameArr.indexOf(value) != -1 )
-    // {
-    //   nameArr.push(value);
-    //   console.log(nameArr);
-    // }  
   }
 
 }
