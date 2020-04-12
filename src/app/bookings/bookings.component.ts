@@ -10,10 +10,19 @@ export class BookingsComponent implements OnInit {
 
   apiResponse;
 
+  bookingsAvailable:boolean = false;
+
   constructor(public apiService:ApiService){
     this.apiService.get("bookings").subscribe((response)=>
     {
       this.apiResponse = response;
+      this.apiResponse = this.apiResponse.bookings;
+      if(this.apiResponse.length > 0)
+      {
+        this.bookingsAvailable = true;
+      }
+      console.log(this.apiResponse);
+      
     })
    }
 

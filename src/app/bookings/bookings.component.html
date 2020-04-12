@@ -1,1 +1,13 @@
-{{apiResponse}}
+<div class="container">
+    <div class="bookinginfo" *ngIf="bookingsAvailable; else noBooking">
+        <div class="bookings" *ngFor="let bookings of apiResponse; index as ind">
+            <br>
+            <label>MOVIE NAME: </label>&nbsp;<label>{{bookings.movie_name}}</label><br>
+            <label>SHOW TIME: </label>&nbsp;<label>{{bookings.show_time | filter}}</label><br>
+            <label>BOOKED SEATS: </label>&nbsp;<label>{{bookings.booked_seats}}</label><br>
+        </div><br>
+    </div>
+    <ng-template #noBooking>
+        <p>No seats booked!!</p>
+    </ng-template>
+</div>
