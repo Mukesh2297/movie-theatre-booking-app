@@ -74,12 +74,12 @@ export class SeatsComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  bookSeats(showId, indexval) {
-
-    console.log(showId);
+  bookSeats(showId,Arrind,indexval) {
     
+    const params = {id:showId}
     
-    this.apiService.get(`showstatus/${showId}`).subscribe((hallDetails) => {
+    this.apiService.get(`bookings/show`,params)
+    .subscribe((hallDetails) => {
       this.hallAvailability = hallDetails;
       this.totalRowsCount = this.hallAvailability.hallDetail.total_rows;
       this.totalColumnsCount = this.hallAvailability.hallDetail.total_columns;
@@ -92,7 +92,10 @@ export class SeatsComponent implements OnInit {
 
     this.showId = showId;
 
-    //this.selectedShow.push(this.shows[indexval]);
+    this.selectedShow.push(this.shows[Arrind].availability[indexval]);
+
+    console.log(this.selectedShow);
+    
 
   }
 
