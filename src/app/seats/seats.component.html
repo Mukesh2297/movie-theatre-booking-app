@@ -4,7 +4,7 @@
       <div class="movie-selector">
         <label>NOW SHOWING</label> &nbsp;
         <select (change)="selectedMovie($event)" [disabled]="isHallSelected">
-          <option value="none">--None--</option>
+          <option value="none">--NONE--</option>
           <option *ngFor="let movielist of movies" [value]="movielist.movie_id">
             {{ movielist.name | uppercase }}<br />
             {{ movielist.ticket_price | currency: "INR" }}

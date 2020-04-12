@@ -1,9 +1,4 @@
 <div class="container">
-  <div class="logout">
-    <div class="logout-btn">
-      <a class="btn btn-primary" routerLink="/" (click)="logout()">LOGOUT</a>
-    </div>
-  </div>
   <h2>ADMIN</h2>
   <br />
   <ul class="nav nav-tabs">
@@ -17,6 +12,14 @@
         MANAGE
       </button>
     </li>
+    <div class="logout">
+      <div class="bookings-btn">
+        <a class="btn btn-primary" routerLink="/mybookings">MY BOOKINGS</a>
+      </div>&nbsp;
+      <div class="logout-btn">
+        <a class="btn btn-primary" routerLink="/" (click)="logout()">LOGOUT</a>
+      </div>
+    </div>
   </ul>
   <br />
 

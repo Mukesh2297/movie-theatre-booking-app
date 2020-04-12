@@ -7,6 +7,8 @@ import { HttpClient , HttpParams} from '@angular/common/http';
 })
 export class MainService {
 
+  userName:string;
+
   selectedSeat:any[]=[];
 
 

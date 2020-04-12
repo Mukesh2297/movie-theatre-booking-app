@@ -34,11 +34,16 @@ export class LoginComponent implements OnInit {
 
   displayLoginForm(request) {
     if (request.target.value == "Sign Up") {
+      this.apiLoginResponse = "";
+      this.apiRegisterResponse = "";
       this.signupform = true;
       this.loginform = false;
     } else if (request.target.value == "Login") {
+      this.apiLoginResponse = "";
+      this.apiRegisterResponse = "";
       this.loginform = true;
       this.signupform = false;
+      
     }
   }
 
@@ -79,6 +84,7 @@ export class LoginComponent implements OnInit {
       loginResponse = response;
       if (loginResponse.status == "OK" && loginResponse.role == "USER") {
         this.apiLoginResponse = "";
+        this.Mainservice.userName = loginResponse.full_name;
         this.router.navigate(["/", "home"]);
       } else if (
         loginResponse.status == "OK" &&

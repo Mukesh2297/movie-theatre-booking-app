@@ -111,6 +111,7 @@ export class SeatsComponent implements OnInit {
     if (moviename.target.value == "none") {
       this.shows = null;
       this.showSeats = false;
+      this.movieSelected = false;
     } else {
 
       let ind = 0;
@@ -194,12 +195,15 @@ export class SeatsComponent implements OnInit {
       show_id: this.showId,
     };
 
+    console.log(bookedSeats);
+    
+
     this.apiService
-      .post("showstatus/booktickets", bookedSeats)
+      .post("bookings/booktickets", bookedSeats)
       .subscribe((response) => {
         this.apiResponse = response;
 
-        if(this.apiResponse.status = "OK")
+        if(this.apiResponse.status == "OK")
         {
           this.markedSeats.splice(0);
           this.selectedShow.splice(0);

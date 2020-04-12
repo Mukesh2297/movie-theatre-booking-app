@@ -1,9 +1,14 @@
 <div class="container">
-    <div class="logout">
-        <div class="logout-btn">
-          <a class="btn btn-primary" routerLink="/" (click)="logout()">LOGOUT</a>
-        </div>
-      </div>
+  <div class="nav-tabs">
+    <div class="userinfo">
+      <p>Welcome {{userName | uppercase}}</p>
+    </div>
+    <ul class="nav navigation-tabs">
+      <li class="pull right"><a class="btn btn-link" routerLink="/mybookings">My Bookings</a></li>
+      <li class="pull right"><a routerLink="/" (click)="logout()">Logout</a></li> 
+    </ul>
+  </div>
+
     <div class="movie-picker">
         <app-seats></app-seats> 
     </div>    
@@ -14,3 +19,13 @@
 
 
 
+
+
+
+
+
+    <!-- <div class="logout">
+        <div class="logout-btn">
+          <a class="btn btn-primary" routerLink="/" (click)="logout()">LOGOUT</a>
+        </div>
+      </div> -->
