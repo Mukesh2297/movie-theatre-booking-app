@@ -35,7 +35,7 @@
           <div class="selected-show" *ngFor = "let showSelected of selectedShow">
             <div class="selected-show-position">
               <div class="selected-show-label">
-                <label style="color: blanchedalmond;">{{showSelected.name | uppercase }}</label>
+                <label style="color: blanchedalmond;">{{showSelected.hall_name | uppercase }}</label>
               </div>
               <div class="selected-show-showTime">
                 <button class="btn btn-primary" style="background-color: rosybrown;">{{showSelected.show_time}}</button>
@@ -47,9 +47,11 @@
     <ng-template #allShows>
         <div class="shows">
           <div class="showtime" *ngFor="let showDetails of shows; index as ind">
-                <label style="color: blanchedalmond;">{{showDetails.name | uppercase }}</label><br>
-                <button class="btn btn-primary" (click)="bookSeats(showDetails.show_id,ind)" [disabled]="showSeats">
-                  {{ showDetails.show_time}}
+                <label style="color: blanchedalmond;">{{showDetails.hall_name | uppercase }}</label><br>
+                <button class="btn btn-primary" [value]="availability.show_id"
+                 *ngFor="let availability of showDetails.availability;index as btnindex"
+                 (click)="bookSeats(availability.show_id,btnindex)">
+                  {{availability.show_time | filter}}
                 </button>
           </div>
         </div>

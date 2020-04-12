@@ -75,6 +75,9 @@ export class SeatsComponent implements OnInit {
   ngOnInit(): void {}
 
   bookSeats(showId, indexval) {
+
+    console.log(showId);
+    
     
     this.apiService.get(`showstatus/${showId}`).subscribe((hallDetails) => {
       this.hallAvailability = hallDetails;
@@ -89,7 +92,7 @@ export class SeatsComponent implements OnInit {
 
     this.showId = showId;
 
-    this.selectedShow.push(this.shows[indexval]);
+    //this.selectedShow.push(this.shows[indexval]);
 
   }
 
@@ -126,10 +129,10 @@ export class SeatsComponent implements OnInit {
         this.shows = showtime;
         this.shows = this.shows.movies.map((showDetails) => {
           //this.movieTitle = false;
-          return showDetails;
+          return showDetails;      
         });
       });
-
+      
     }
   }
 
@@ -227,6 +230,7 @@ export class SeatsComponent implements OnInit {
       this.dateArr.push(currentDayValue);
       }
     }
+    
   }
 
   DayPicker()
@@ -255,7 +259,7 @@ export class SeatsComponent implements OnInit {
         case 6:
           this.dayArr.push("Saturday");
           break;
-        case 7:
+        case 0:
           this.dayArr.push("Sunday");
       }
       
@@ -263,6 +267,9 @@ export class SeatsComponent implements OnInit {
 
     this.dayArr.splice(0,1,"Today");
     this.dayArr.splice(1,1,"Tomorrow");
+
+    console.log(this.dayArr);
+    
     
   }
 

@@ -11,17 +11,39 @@ export class FilterPipe implements PipeTransform {
 
   transform(value) {
 
-    this.filterArr = value;
-   
-    this.newArr = this.filterArr.map((element,index)=>
+  let timestamp = new Date(value);
+  
+  let hours = timestamp.getUTCHours()
+
+  let minutesfn = ()=>
+  {
+    let timestampMinutes = timestamp.getUTCMinutes()
+    if(timestampMinutes==0)
     {
-      let obj = {name: element.name}
+      return "00"
+    }
+    else
+    {
+      return timestampMinutes
+    }
+  }
 
-      return element;
+  let minutes = minutesfn();
+  
+  let meridiem;
 
-    })
+  if(hours >=13 && hours <= 23 )
+  {
+    let convertedHour = hours - 12;
+    hours = convertedHour;
+    meridiem = "PM"
+  }
+  else
+  {
+    meridiem = "AM"
+  }
 
-    console.log(this.newArr);
+  return `${hours}:${minutes} ${meridiem}`
     
     
   }
