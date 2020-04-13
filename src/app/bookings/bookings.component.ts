@@ -29,4 +29,9 @@ export class BookingsComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  back()
+  {
+    history.back();
+  }
+
 }

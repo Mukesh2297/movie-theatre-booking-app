@@ -1,13 +1,34 @@
 <div class="container">
     <div class="bookinginfo" *ngIf="bookingsAvailable; else noBooking">
+        <div class="header">
+            <div class="back-arrow">
+                <button style="font-size:24px" (click)="back()">
+                    <i class="fa fa-arrow-left"></i></button>
+            </div>
+            <div class="heading">
+                <label>MY BOOKINGS</label>
+            </div>
+        </div>
         <div class="bookings" *ngFor="let bookings of apiResponse; index as ind">
-            <br>
             <label>MOVIE NAME: </label>&nbsp;<label>{{bookings.movie_name}}</label><br>
             <label>SHOW TIME: </label>&nbsp;<label>{{bookings.show_time | filter}}</label><br>
             <label>BOOKED SEATS: </label>&nbsp;<label>{{bookings.booked_seats}}</label><br>
-        </div><br>
+        </div>
     </div>
     <ng-template #noBooking>
-        <p>No seats booked!!</p>
+        <div class="bookinginfo">
+            <div class="header">
+                <div class="back-arrow">
+                    <button style="font-size:24px" (click)="back()">
+                        <i class="fa fa-arrow-left"></i></button>
+                </div>
+                <div class="heading">
+                    <label>MY BOOKINGS</label>
+                </div>
+            </div>
+            <div class="bookings">
+                <label>No Seats Booked Currently</label><br>
+            </div>
+        </div>
     </ng-template>
 </div>

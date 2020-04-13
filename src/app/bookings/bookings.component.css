@@ -1,0 +1,67 @@
+.container
+{
+    width: 100%;
+    height: 100vh;
+    background-color: black;
+
+}
+
+.header
+{
+    height: 50px;
+    width: 100vw;
+    display: flex;
+    background-color: rgb(114, 1, 1);   
+    margin-bottom: 10px;
+
+}
+
+.heading
+{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    font-size: large;
+    color:blanchedalmond;
+
+}
+
+.header label
+{
+    margin-left: 5px;
+    margin-top: 10px;
+}
+
+.back-arrow
+{
+    width: 20px;
+    display: flex;
+    justify-content: flex-start;
+    border: none;
+}
+
+.back-arrow button
+{
+    background-color: transparent;
+    border: none;
+    outline: none;
+}
+
+.bookinginfo
+{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.bookings
+{
+    width: 100%;
+    height: 200px;
+    margin-top: 30px;
+    background-color: whitesmoke;
+    border-radius: 4px;
+    box-shadow: 10px 10px 5px grey;
+}   
