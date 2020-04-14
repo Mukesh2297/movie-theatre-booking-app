@@ -77,6 +77,11 @@ body::-webkit-scrollbar {
     margin-bottom: 10px;
 }
 
+.showtime label
+{
+    margin-top: 6px;
+}
+
 .showtime button
 {
 
@@ -220,14 +225,15 @@ select
 {
     background-color: rosybrown;
     color: black; 
+    outline: none;
 }
 
 .btn-active
 {
     background-color: rosybrown;
     color: black;
+    outline: none;
 }
-
 
 
 button[disabled=disabled], button:disabled {
