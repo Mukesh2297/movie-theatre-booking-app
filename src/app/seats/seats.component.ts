@@ -116,6 +116,8 @@ export class SeatsComponent implements OnInit {
 
       let ind = 0;
 
+      this.btnValue = 0;
+
       this.movieSelected = true;
   
       this.showSeats = false;

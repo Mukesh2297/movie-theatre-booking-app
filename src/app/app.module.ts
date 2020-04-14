@@ -15,6 +15,7 @@ import {OwlDateTimeModule, OwlNativeDateTimeModule} from 'ng-pick-datetime'
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { FilterPipe } from './Filter/filter.pipe';
 import { BookingsComponent } from './bookings/bookings.component';
+import { HeaderComponent } from './header/header.component';
 
 
 
@@ -29,7 +30,8 @@ import { BookingsComponent } from './bookings/bookings.component';
     AdminComponent,
     HomeComponent,
     FilterPipe,
-    BookingsComponent
+    BookingsComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,

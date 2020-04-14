@@ -1,18 +1,14 @@
 <div class="container">
-  <div class="nav-tabs">
-    <div class="userinfo">
-      <p><i>Hello</i> {{userName | uppercase}}</p>
-    </div>
-    <ul class="nav navigation-tabs">
-      <li class="pull right"><a class="btn btn-link" routerLink="/mybookings">MY BOOKINGS</a></li>
-      <li class="pull right"><a routerLink="/" (click)="logout()">LOGOUT</a></li> 
-    </ul>
-  </div>
-
+  <h4 style="color: blanchedalmond;">HELLO {{userName | uppercase}}</h4>
+  <br>
+  <ul class="nav nav-tabs">
+    <app-header></app-header>
+  </ul>
     <div class="movie-picker">
         <app-seats></app-seats> 
     </div>    
 </div>
+
 
 
 

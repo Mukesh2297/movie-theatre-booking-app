@@ -12,14 +12,7 @@
         MANAGE
       </button>
     </li>
-    <div class="logout">
-      <div class="bookings-btn">
-        <a class="btn btn-primary" routerLink="/mybookings">MY BOOKINGS</a>
-      </div>&nbsp;
-      <div class="logout-btn">
-        <a class="btn btn-primary" routerLink="/" (click)="logout()">LOGOUT</a>
-      </div>
-    </div>
+    <app-header></app-header>
   </ul>
   <br />
 
@@ -31,15 +24,15 @@
   </div>
 
   <div [ngSwitch]="switch">
-      <div class="add-hall" *ngSwitchCase="'addhall'">
-        <app-new-hall></app-new-hall>
-      </div>
-      <div class="add-movie" *ngSwitchCase="'addmovie'">
-        <app-new-movie></app-new-movie>
-      </div>
-      <div class="add-show" *ngSwitchCase="'addshow'">
-        <app-new-show></app-new-show>
-      </div>
+    <div class="add-hall" *ngSwitchCase="'addhall'">
+      <app-new-hall></app-new-hall>
+    </div>
+    <div class="add-movie" *ngSwitchCase="'addmovie'">
+      <app-new-movie></app-new-movie>
+    </div>
+    <div class="add-show" *ngSwitchCase="'addshow'">
+      <app-new-show></app-new-show>
+    </div>
   </div>
 
   <div class="home" *ngIf="home">

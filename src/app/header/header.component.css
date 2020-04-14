@@ -1,0 +1,43 @@
+body
+{
+    overflow-y: hidden;
+}
+
+a
+{
+    text-decoration: none;
+}
+
+a:hover
+{
+    text-decoration: none;
+    color: rosybrown;
+}
+
+.logout
+{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.btn-primary
+{
+    background-color: transparent;
+    color: rosybrown;
+    border-color: rosybrown;
+    margin-bottom: 2px;
+}
+
+.btn-primary:hover
+{
+    background-color: rosybrown;
+    color: black;
+}
+
+.btn-primary:active
+{
+    background-color:rosybrown;
+    color: black;
+}
+
+

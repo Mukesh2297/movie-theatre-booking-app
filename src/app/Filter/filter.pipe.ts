@@ -5,10 +5,6 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class FilterPipe implements PipeTransform {
 
-  filterArr:any[]=[];
-
-  newArr:any[] = [];
-
   transform(value) {
 
   let timestamp = new Date(value);
@@ -18,14 +14,16 @@ export class FilterPipe implements PipeTransform {
   let minutesfn = ()=>
   {
     let timestampMinutes = timestamp.getUTCMinutes()
-    if(timestampMinutes==0)
+    
+    if(timestampMinutes < 10)
     {
-      return "00"
+      return `${timestampMinutes}${0}`
     }
     else
     {
       return timestampMinutes
     }
+
   }
 
   let minutes = minutesfn();
