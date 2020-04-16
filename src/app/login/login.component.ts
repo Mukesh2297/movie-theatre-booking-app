@@ -23,7 +23,9 @@ export class LoginComponent implements OnInit {
 
   routeLink: string;
 
-  hide:boolean = true;
+  hideRegisterPassword:boolean = true;
+
+  hideLoginPassword:boolean = true;
 
   constructor(
     public Mainservice: MainService,
