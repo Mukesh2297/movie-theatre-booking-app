@@ -17,6 +17,32 @@
     color: blanchedalmond;
 }
 
+mat-form-field
+{
+    width: 300px;
+}
+
+mat-form-field mat-label
+{
+    color: blanchedalmond
+}
+
+mat-form-field input 
+{
+    color: gainsboro;
+}
+
+input.mat-input-element .mat-input-element-outline {
+    color: blanchedalmond
+  }
+
+  ::placeholder {
+    color:white;
+    opacity: 0.5;
+  }
+
+
+
 .form-content
 {
     height: 100vh;

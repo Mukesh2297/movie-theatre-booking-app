@@ -1,40 +1,66 @@
 <div class="container">
     <div class="child-items">
         <div class="heading">
-            <h1>Welcome!!</h1>
+            <h1 style="font-family: 'Pacifico', cursive;">Welcome!!</h1>
         </div>
         <div class="form-content">
             <div class="body">
                 <button class="btn btn-primary" value="Sign Up" (click)="displayLoginForm($event)">SIGN
                     UP</button>&nbsp;
                 <button class="btn btn-primary" value="Login" (click)="displayLoginForm($event)">LOGIN</button>
-                <br><br><br>
+                <br>
 
 
                 <div *ngIf='signupform'>
-                    <input type="text" class="form-control" placeholder="Fullname"
-                    #fname><br>
-                    <input type="text" class="form-control" placeholder="Username"
-                        #uname><br>
-                    <input type="password" class="form-control"
-                        placeholder="Password" #password><br>
-                    <input type="email" class="form-control" placeholder="example@address.com"
-                        #email><br>
-                    <input type="number" class="form-control"
-                        placeholder="Mobile Number" #mobile><br>
-                    <button class="btn btn-success" value="Register"
+                    <mat-form-field appearance="standard">
+                            <mat-label >FullName</mat-label>
+                        <input matInput type="text" required #fname><br>
+                    </mat-form-field>
+             
+                    <mat-form-field appearance="standard">
+                            <mat-label>Username</mat-label>
+                        <input matInput required type="text" #uname><br>
+                    </mat-form-field>
+           
+                    <mat-form-field appearance="standard">
+                        <mat-label>Password</mat-label>
+                        <input matInput required [type]="hide ? 'password' : 'text'" #password>
+                        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                            <mat-icon style="color: blanchedalmond;">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                        </button>
+                    </mat-form-field>
+    
+                    <mat-form-field appearance="standard">
+                        <mat-label>Email</mat-label>
+                        <input matInput required type="email" placeholder="Ex. chris@example.com" #email>
+                    </mat-form-field>
+          
+                    <mat-form-field appearance="standard">
+                        <mat-label>Mobile Number</mat-label>
+                        <input matInput required type="number" #mobile>
+                    </mat-form-field>
+
+                    <button mat-raised-button color="primary"  value="Register"
                         (click)="Register(fname,uname,password,email,mobile)">REGISTER</button><br><br>
                     <label>{{apiRegisterResponse}}</label>
 
                 </div>
 
                 <div *ngIf='loginform'>
-                    <input type='text' class="form-control" placeholder="Username"
-                        #regEmail><br><br>
-                    <input type="password" class="form-control" placeholder="Password"
-                        #regPasswrd><br><br>
+                    <mat-form-field appearance="standard">
+                        <mat-label>Username</mat-label>
+                        <input matInput type='text' #regEmail>
+                    </mat-form-field>
+                    <mat-form-field appearance="standard">
+                        <mat-label>Password</mat-label>
+                        <input matInput [type]="hide ? 'password' : 'text'" #regPasswrd>
+                        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                            <mat-icon style="color: blanchedalmond;">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                        </button>
+                    </mat-form-field>
+                  
 
-                    <button class="btn btn-success" (click)="SignIn(regEmail,regPasswrd)">LOGIN</button><br><br>
+                    <button mat-raised-button color="primary" (click)="SignIn(regEmail,regPasswrd)">LOGIN</button><br><br>
                     <label>{{apiLoginResponse}}</label>
 
                 </div>

@@ -1,6 +1,6 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewEncapsulation } from "@angular/core";
 import { MainService } from "../main.service";
-import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import { ApiService } from "../services/api.service";
 import { Router } from "@angular/router";
 
@@ -22,6 +22,8 @@ export class LoginComponent implements OnInit {
   credentialsValid: boolean = false;
 
   routeLink: string;
+
+  hide:boolean = true;
 
   constructor(
     public Mainservice: MainService,
@@ -57,6 +59,8 @@ export class LoginComponent implements OnInit {
 
     const body = {fullname: fullname, username: username, password: password, email: email, mobile:mobileNo };
 
+    console.log(body);
+    
     this.apiService.post("auth/signup", body).subscribe((response) => {
       signupResponse = response;
       if (signupResponse.status == "OK") {

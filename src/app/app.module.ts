@@ -16,8 +16,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { FilterPipe } from './Filter/filter.pipe';
 import { BookingsComponent } from './bookings/bookings.component';
 import { HeaderComponent } from './header/header.component';
-
-
+import { MaterialModule } from './material/material.module';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -40,8 +40,10 @@ import { HeaderComponent } from './header/header.component';
     HttpClientModule,
     OwlDateTimeModule,
     OwlNativeDateTimeModule,
-    BrowserAnimationsModule
-
+    BrowserAnimationsModule,
+    MaterialModule,
+    MatInputModule
+  
   ],
   providers: [],
   bootstrap: [AppComponent]

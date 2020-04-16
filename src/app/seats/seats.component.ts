@@ -227,6 +227,9 @@ export class SeatsComponent implements OnInit {
 
     let currentDay = currentDate.getDay();    
 
+    console.log(currentDay);
+    
+
     for(let i=0; i<=4; i++)
     {
       let currentDayValue = currentDay+i;
@@ -239,6 +242,9 @@ export class SeatsComponent implements OnInit {
       this.dateArr.push(currentDayValue);
       }
     }
+
+    console.log(this.dateArr);
+    
     
   }
 
@@ -268,7 +274,7 @@ export class SeatsComponent implements OnInit {
         case 6:
           this.dayArr.push("Saturday");
           break;
-        case 0:
+        case 7:
           this.dayArr.push("Sunday");
       }
       
