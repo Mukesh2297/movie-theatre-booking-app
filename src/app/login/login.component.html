@@ -26,7 +26,7 @@
                         <mat-label>Password</mat-label>
                         <input matInput required [type]="hideRegisterPassword ? 'password' : 'text'" #password>
                         <button mat-icon-button matSuffix (click)="hideRegisterPassword = !hideRegisterPassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideRegisterPassword">
-                            <mat-icon style="color: blanchedalmond;">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                            <mat-icon style="color: blanchedalmond;">{{hideRegisterPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
                         </button>
                     </mat-form-field>
     
@@ -55,7 +55,7 @@
                         <mat-label>Password</mat-label>
                         <input matInput [type]="hideLoginPassword ? 'password' : 'text'" #regPasswrd>
                         <button mat-icon-button matSuffix (click)="hideLoginPassword = !hideLoginPassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideLoginPassword">
-                            <mat-icon style="color: blanchedalmond;">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                            <mat-icon style="color: blanchedalmond;">{{hideLoginPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
                         </button>
                     </mat-form-field>
                   
