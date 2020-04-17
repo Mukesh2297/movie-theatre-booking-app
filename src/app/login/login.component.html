@@ -5,9 +5,11 @@
         </div>
         <div class="form-content">
             <div class="body">
-                <button class="btn btn-primary" value="Sign Up" (click)="displayLoginForm($event)">SIGN
-                    UP</button>&nbsp;
-                <button class="btn btn-primary" value="Login" (click)="displayLoginForm($event)">LOGIN</button>
+                <button mat-raised-button value="Sign Up" 
+                (click)=" [loginform = false, signupform = !signupform] ">
+                    SIGN UP</button>&nbsp;
+                <button mat-raised-button value="Login"
+                 (click)="[signupform = false , loginform = !loginform] ">LOGIN</button>
                 <br>
 
 

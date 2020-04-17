@@ -1,8 +1,18 @@
-<div class="logout">
-    <div class="bookings-btn">
-        <a class="btn btn-primary" routerLink="/mybookings">MY BOOKINGS</a>
-    </div>&nbsp;
-    <div class="logout-btn">
-        <a class="btn btn-primary" routerLink="/" (click)="logout()">LOGOUT</a>
-    </div>
-</div>
+  
+<!-- <div class="logout">
+        <div class="bookings-btn">
+            <a class="btn btn-primary" routerLink="/mybookings">MY BOOKINGS</a>
+        </div>&nbsp;
+        <div class="logout-btn">
+            <a class="btn btn-primary" routerLink="/" (click)="logout()">LOGOUT</a>
+        </div>
+</div> -->
+
+<mat-toolbar color="primary" class="nav-bar" >
+  <div>Movie Booking</div>
+  <div>
+        <span>Hello {{userName}}</span>
+        <a routerLink="/mybookings">MY BOOKINGS</a>
+        <a routerLink="/" (click)="logout()">LOGOUT</a>   
+  </div>
+</mat-toolbar>

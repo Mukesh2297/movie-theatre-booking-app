@@ -3,13 +3,16 @@
     <div class="movie-picker-position">
       <div class="movie-selector">
         <label>NOW SHOWING</label> &nbsp;
-        <select (change)="selectedMovie($event)" [disabled]="isHallSelected">
-          <option value="none">--NONE--</option>
-          <option *ngFor="let movielist of movies" [value]="movielist.movie_id">
-            {{ movielist.name | uppercase }}<br />
-            {{ movielist.ticket_price | currency: "INR" }}
-          </option>
-        </select>
+        <mat-form-field>
+          <mat-label>Select Movie</mat-label>
+          <mat-select (selectionChange)="selectedMovie($event)"  [disabled]="isHallSelected">
+            <mat-option *ngFor="let movielist of movies" [value]="movielist.movie_id">
+              {{ movielist.name | uppercase }} &nbsp; &nbsp;
+              {{ movielist.ticket_price | currency: "INR" }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        
       </div>
     </div>
   </div>
@@ -17,14 +20,14 @@
   <ng-container *ngIf = "movieSelected" >
     <div class="dayPicker" >
       <div class="navigation">
-        <ul class="nav nav-pills nav-fill">
-          <li class="nav-item" *ngFor = "let days of dayArr; index as indexVal">
-            <button [ngClass]="btnValue==indexVal ? 'btn btn-active' : 'btn btn-light'"  
-            [value]="indexVal" (click)="DisplayAvailableShows($event)">
+        <mat-list class="listItems">
+          <mat-list-item class="nav-item" *ngFor = "let days of dayArr; index as indexVal">
+            <button mat-stroked-button [ngClass]="btnValue==indexVal ? 'btn btn-active' : 'btn btn-light'"  
+             (click)="DisplayAvailableShows(indexVal)">
               {{days}}
             </button>
-          </li>
-        </ul>
+          </mat-list-item>
+        </mat-list>
       </div>
     </div>
   </ng-container>
@@ -35,11 +38,10 @@
           <div class="selected-show" *ngFor = "let showSelected of selectedShow;index as selectedInd">
             <div class="selected-show-position">
               <div class="selected-show-label">
-                <label style="color: blanchedalmond;">{{showSelected.hall_name | uppercase }}</label>
+                <label>{{showSelected.hall_name | uppercase }}</label>
               </div>
               <div class="selected-show-showTime">
-                <button class="btn btn-primary"
-                 style="background-color: rosybrown;">
+                <button mat-raised-button color="primary">
                  {{showSelected.show_time | filter}}</button>
               </div>
             </div>
@@ -49,8 +51,8 @@
     <ng-template #allShows>
         <div class="shows">
           <div class="showtime" *ngFor="let showDetails of shows; index as Arrind">
-                <label style="color: blanchedalmond;">{{showDetails.hall_name | uppercase }}</label><br>
-                <button class="btn btn-primary" [value]="availability.show_id"
+                <label>{{showDetails.hall_name | uppercase }}</label><br>
+                <button mat-raised-button color="primary" [value]="availability.show_id"
                  *ngFor="let availability of showDetails.availability;index as btnindex"
                  (click)="bookSeats(availability.show_id,Arrind,btnindex)">
                   {{availability.show_time | filter}}
@@ -70,7 +72,7 @@
     <div class="total-seats" *ngIf="showSeats">
         <div class="hor" *ngFor="let rowSeat of rows; index as i">
           <div *ngFor="let columnSeat of columns; index as j">
-            <button  [value]="(i * columns.length) + (j + 1)" (click)="seatSelected(i, j)"
+            <button [value]="(i * columns.length) + (j + 1)" (click)="seatSelected(i, j)"
            [disabled]="isSeatAvailable(i, j)" 
            [ngClass]="markedSeats.includes((i * columns.length) + (j + 1)) ? 'seat selectedSeat' : 'seat'">
            <!-- [ngClass]="{'selectedSeat' : markedSeats.includes((i * columns.length) + (j + 1)) , 'seat' : true}" -->
@@ -81,8 +83,8 @@
       <br /><br />
       <div class="submit" *ngIf="isHallSelected">
         <div class="submit-button">
-          <button class="btn btn-danger" value="Cancel" (click)="cancel()">CANCEL</button> &nbsp;
-          <button class="btn btn-success" value="Book Seats" (click)="submit()">BOOK SEATS</button>
+          <button mat-raised-button color="warn" value="Cancel" (click)="cancel()">CANCEL</button> &nbsp;
+          <button mat-raised-button color="primary" value="Book Seats" (click)="submit()">BOOK SEATS</button>
 
         </div>
       </div>

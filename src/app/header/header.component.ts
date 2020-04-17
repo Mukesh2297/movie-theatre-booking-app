@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../services/api.service';
+import { Router } from '@angular/router';
+import { MainService } from '../main.service';
 
 @Component({
   selector: 'app-header',
@@ -8,7 +10,13 @@ import { ApiService } from '../services/api.service';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private apiService:ApiService) { }
+  userName:string;
+
+  constructor(private apiService:ApiService,
+    private router:Router,
+    private mainService: MainService) {
+      this.userName = this.mainService.userName;
+     }
 
   ngOnInit(): void {
   }
@@ -18,6 +26,7 @@ export class HeaderComponent implements OnInit {
 
     this.apiService.post("auth/logout", {}).subscribe((logout) => {
       logOutResponse = logout;
+      this.router.navigate(['/'])
     });
   }
 

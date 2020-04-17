@@ -3,41 +3,29 @@ body
     overflow-y: hidden;
 }
 
+.nav-bar
+{
+    justify-content: space-between;
+}
+
+
+
 a
 {
+    padding-right: 1rem;
+    font-size: medium;
+    color: white;
     text-decoration: none;
+}
+
+span
+{
+    padding-right: 2rem;
+    font-size: small;
+    color: white;  
 }
 
 a:hover
 {
-    text-decoration: none;
-    color: rosybrown;
+    color: darkred;
 }
-
-.logout
-{
-    display: flex;
-    justify-content: flex-end;
-}
-
-.btn-primary
-{
-    background-color: transparent;
-    color: rosybrown;
-    border-color: rosybrown;
-    margin-bottom: 2px;
-}
-
-.btn-primary:hover
-{
-    background-color: rosybrown;
-    color: black;
-}
-
-.btn-primary:active
-{
-    background-color:rosybrown;
-    color: black;
-}
-
-

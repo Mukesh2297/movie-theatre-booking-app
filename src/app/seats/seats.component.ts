@@ -108,12 +108,7 @@ export class SeatsComponent implements OnInit {
   }
 
   selectedMovie(moviename) {
-    if (moviename.target.value == "none") {
-      this.shows = null;
-      this.showSeats = false;
-      this.movieSelected = false;
-    } else {
-
+    
       let ind = 0;
 
       this.btnValue = 0;
@@ -122,14 +117,11 @@ export class SeatsComponent implements OnInit {
   
       this.showSeats = false;
 
-      this.movieId = moviename.target.value;
+      this.movieId = moviename.value;
 
       let formattedDate = this.getFormattedDate(ind)
 
       const params = { id: this.movieId, date:formattedDate};
-
-      console.log(params);
-      
 
       this.apiService.get("movies/showtime", params).subscribe((showtime) => {
         this.shows = showtime;
@@ -139,15 +131,13 @@ export class SeatsComponent implements OnInit {
         });
       });
       
-    }
   }
 
   DisplayAvailableShows(ind)
   {
-  
-    this.btnValue = ind.target.value;
+    this.btnValue = ind;
 
-    let indexValue = ind.target.value;
+    let indexValue = ind;
 
     let formattedDate = this.getFormattedDate(indexValue);
 
