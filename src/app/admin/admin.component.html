@@ -7,9 +7,15 @@
     <mat-tab label="Manage">
       <br>
       <div class="manage" >
-        <button mat-raised-button color="accent" (click)="switch='addhall'">Add Hall</button>
-        <button mat-raised-button color="accent" (click)="switch='addmovie'">Add Movie</button>
-        <button mat-raised-button color="accent" (click)="switch='addshow'">Add Show</button>
+        <button mat-raised-button (click)="switch='addhall'"
+        [ngStyle]="{'background-color' : switch=='addhall' ? 'rgb(67, 199, 252)' : 'rgb(252, 102, 152)'}">Add Hall</button>
+
+        <button mat-raised-button (click)="switch='addmovie'"
+        [ngStyle]="{'background-color' : switch=='addmovie' ? 'rgb(67, 199, 252)' : 'rgb(252, 102, 152)'}">Add Movie</button>
+
+        <button mat-raised-button (click)="switch='addshow'"
+        [ngStyle]="{'background-color' : switch=='addshow' ? 'rgb(67, 199, 252)' : 'rgb(252, 102, 152)'}">Add Show</button>
+  
       </div> 
     </mat-tab>
   </mat-tab-group>
