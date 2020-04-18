@@ -27,7 +27,7 @@
         >{{ bookings.booked_seats }}</label
       ><br />
       <qrcode
-        [qrdata]="bookings.booking_id"
+        [qrdata]="bookings.booking_id.toString()"
         [size]="256"
         [level]="'M'"
       ></qrcode>
