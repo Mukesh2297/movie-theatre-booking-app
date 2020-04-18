@@ -12,7 +12,9 @@ module.exports = {
     onProxyRes: (proxyResponse) => {
       if (proxyResponse.headers["set-cookie"]) {
         const cookies = proxyResponse.headers["set-cookie"].map((cookie) => {
-          return cookie.replace(/; secure; SameSite=None/gi, "");
+          return cookie
+            .replace(/; Secure/gi, "")
+            .replace(/; SameSite=None/gi, "");
         });
         proxyResponse.headers["set-cookie"] = cookies;
       }
