@@ -1,31 +1,44 @@
 <div class="container">
-    <mat-toolbar color="primary" class="nav-bar">
-        <div class="back-arrow">
-            <button mat-stroked-button (click)="back()">
-                <i class="fa fa-arrow-left"></i></button>
-        </div>
-        <div class="heading">
-            <div>MY BOOKINGS</div>
-        </div>
-    </mat-toolbar>
-    <div class="bookinginfo" *ngIf="bookingsAvailable; else noBooking">
-        <div class="bookings" *ngFor="let bookings of apiResponse; index as ind">
-            <label class="movieinfo">Movie Name </label>:<label class="movievalue" style="width: auto;">{{bookings.movie_name}}</label><br>
-            <label class="movieinfo">Show Time </label>:<label class="movievalue" style="width: auto;">{{bookings.show_time | filter}}</label><br>
-            <label class="movieinfo">Booked Seats </label>:<label class="movievalue" style="width: auto;">{{bookings.booked_seats}}</label><br>
-        </div>
+  <mat-toolbar color="primary" class="nav-bar">
+    <div class="back-arrow">
+      <button mat-stroked-button (click)="back()">
+        <i class="fa fa-arrow-left"></i>
+      </button>
     </div>
-    <ng-template #noBooking>
-        <div class="bookinginfo">
-            <div class="bookings">
-                <label>No Seats Booked Currently</label><br>
-            </div>
-        </div>
-    </ng-template>
+    <div class="heading">
+      <div>MY BOOKINGS</div>
+    </div>
+  </mat-toolbar>
+  <div class="bookinginfo" *ngIf="bookingsAvailable; else noBooking">
+    <div class="bookings" *ngFor="let bookings of apiResponse; index as ind">
+      <label class="movieinfo">Movie Name </label>:<label
+        class="movievalue"
+        style="width: auto;"
+        >{{ bookings.movie_name }}</label
+      ><br />
+      <label class="movieinfo">Show Time </label>:<label
+        class="movievalue"
+        style="width: auto;"
+        >{{ bookings.show_time | filter }}</label
+      ><br />
+      <label class="movieinfo">Booked Seats </label>:<label
+        class="movievalue"
+        style="width: auto;"
+        >{{ bookings.booked_seats }}</label
+      ><br />
+      <qrcode
+        [qrdata]="bookings.booking_id"
+        [size]="256"
+        [level]="'M'"
+      ></qrcode>
+    </div>
+  </div>
+  <ng-template #noBooking>
+    <div class="bookinginfo">
+      <div class="bookings"><label>No Seats Booked Currently</label><br /></div>
+    </div>
+  </ng-template>
 </div>
-
-
-
 
 <!-- <div class="container">
     <div class="bookinginfo" *ngIf="bookingsAvailable; else noBooking">
