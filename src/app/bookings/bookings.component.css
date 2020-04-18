@@ -1,7 +1,7 @@
 .container
 {
     width: 100%;
-    height: 100vh;
+    height: 100%;
 }
 
 .nav-bar
@@ -42,7 +42,7 @@
 .bookinginfo
 {
     width: 100%;
-    height: 100vh;
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -50,9 +50,16 @@
 
 .bookings
 {
-    width: 100%;
-    height: 200px;
-    margin-top: 30px;
-    background-color: whitesmoke;
-    border-radius: 4px;
-}   
+    width : 400px;
+    padding : 20px;
+    border-radius: 10px;
+    margin-top: 20px;
+    background-color: #FFF8DC;
+}
+
+label
+{
+    width: 110px;
+    display: inline-block;
+    padding-left: 15px;
+}

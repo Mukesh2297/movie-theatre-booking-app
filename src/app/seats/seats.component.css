@@ -229,21 +229,21 @@ select
 
 .btn-light:hover
 {
-    background-color: rosybrown;
+    background-color:  rgb(255, 181, 181);
     color: black; 
 
 }
 
 .btn-light:focus
 {
-    background-color: rosybrown;
+    background-color:  rgb(255, 181, 181);
     color: black; 
     outline: none;
 }
 
 .btn-active
 {
-    background-color: rosybrown;
+    background-color: rgb(255, 181, 181);
     color: black;
     outline: none;
 }

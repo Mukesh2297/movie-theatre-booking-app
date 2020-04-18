@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient , HttpParams} from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -22,7 +23,7 @@ export class MainService {
   ExistingUsers;
   credentialsValid:boolean;
 
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient, private router:Router) { }
 
   seatSelected(seatnum)
   {
@@ -63,6 +64,11 @@ export class MainService {
     
 
     
+  }
+  
+  myBooking()
+  {
+    this.router.navigate(["/","mybookings"])
   }
 
 

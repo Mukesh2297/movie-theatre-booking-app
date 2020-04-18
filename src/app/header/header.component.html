@@ -9,9 +9,9 @@
 </div> -->
 
 <mat-toolbar color="primary" class="nav-bar" >
-  <div>BINGEWATCH MOVIES</div>
+  <div>BINGEWATCH</div>
   <div>
-        <span>HELLO {{userName | uppercase }}</span>
+        <span>Hello {{userName | titlecase }}</span>
         <a routerLink="/mybookings">MY BOOKINGS</a>
         <a routerLink="/" (click)="logout()">LOGOUT</a>   
   </div>

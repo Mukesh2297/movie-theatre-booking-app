@@ -267,7 +267,6 @@ export class SeatsComponent implements OnInit {
 
     this.apiService.get("movies/showtime", params).subscribe((showtime) => {
       this.shows = showtime;
-      console.log(this.shows);
       if (this.shows.movies.length == 0) {
         let errorArr = [{ hall_name: "No Shows Available" }];
         this.shows = errorArr;

@@ -1,5 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MainService } from '../main.service';
 
 
 @Component({
@@ -9,9 +10,17 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 })
 export class DialogBoxComponent implements OnInit {
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data:any){}
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data:any,
+    public mainService:MainService){}
 
   ngOnInit(): void {
   }
+
+  myBookings()
+  {
+    this.mainService.myBooking();
+  }
+
 
 }

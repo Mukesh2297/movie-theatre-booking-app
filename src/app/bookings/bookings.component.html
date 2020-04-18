@@ -10,9 +10,9 @@
     </mat-toolbar>
     <div class="bookinginfo" *ngIf="bookingsAvailable; else noBooking">
         <div class="bookings" *ngFor="let bookings of apiResponse; index as ind">
-            <label>MOVIE NAME: </label>&nbsp;<label>{{bookings.movie_name}}</label><br>
-            <label>SHOW TIME: </label>&nbsp;<label>{{bookings.show_time | filter}}</label><br>
-            <label>BOOKED SEATS: </label>&nbsp;<label>{{bookings.booked_seats}}</label><br>
+            <label class="movieinfo">Movie Name </label>:<label class="movievalue" style="width: auto;">{{bookings.movie_name}}</label><br>
+            <label class="movieinfo">Show Time </label>:<label class="movievalue" style="width: auto;">{{bookings.show_time | filter}}</label><br>
+            <label class="movieinfo">Booked Seats </label>:<label class="movievalue" style="width: auto;">{{bookings.booked_seats}}</label><br>
         </div>
     </div>
     <ng-template #noBooking>

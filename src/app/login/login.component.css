@@ -7,11 +7,15 @@
 
 }
 
+h1
+{
+    font-size: xx-large;
+    font-weight: inherit;
+}
+
 .heading
 {
     text-align: center;
-    font-family: 'Lato', sans-serif;
-    font-family: 'Pacifico', cursive;
 }
 
 mat-form-field
