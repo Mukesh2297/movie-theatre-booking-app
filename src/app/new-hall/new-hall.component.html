@@ -1,20 +1,23 @@
 <div class="container">
     <div class="newHall">
         <h2>ADD NEW HALL</h2><br>
-        <label>Hall Name</label> 
-        <input type="text" class="form-control" placeholder="Enter Hall Name" #hallName>
-        <br><br>
 
-        <label>Enter Columns of Seats</label> 
-        <input type="number" class="form-control" placeholder="Enter Column Value" #seatColumns>
-        <br><br>
-
-        <label>Enter Rows of Seats</label> 
-        <input type="number" class="form-control" placeholder="Enter Row Value" #seatRows>
-
-        <br><br>
-
-        <button class="btn btn-success" (click)='update(hallName,seatColumns,seatRows)'>CREATE</button> &nbsp;
+        <mat-form-field appearance="standard">
+            <mat-label>Hall Name</mat-label>
+            <input matInput type="text" #hallName>
+        </mat-form-field>
+        <br>
+        <mat-form-field appearance="standard">
+            <mat-label>Columns</mat-label>
+            <input matInput type="number" #seatColumns>
+        </mat-form-field>
+        <br>
+        <mat-form-field appearance="standard">
+            <mat-label>Rows</mat-label>
+            <input matInput type="number" #seatRows>
+        </mat-form-field>
+        <br>
+        <button mat-raised-button color="primary" (click)='update(hallName,seatColumns,seatRows)'>CREATE</button> &nbsp;
         <label>{{apiResponseMessage}}</label>
     </div>
 

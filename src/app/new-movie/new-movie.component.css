@@ -1,24 +1,18 @@
 .container
 {
-    height: 300px;
-    width: 300px;
+    height: 400px;
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-h2
-{
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    color: blanchedalmond;
-}
-
-label
-{
-    color: blanchedalmond;
-}
-
 input
 {
     color: black;
+}
+
+mat-form-field
+{
+    width: 300px;
 }

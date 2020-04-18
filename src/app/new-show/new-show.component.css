@@ -1,24 +1,15 @@
 .container
 {
-    height: 420px;
-    width: 400px;
+    height: 400px;
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-h2
+mat-form-field
 {
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    color: blanchedalmond;
+    width: 300px;
 }
 
-label
-{
-    color: blanchedalmond;
-}
 
-select,option,input
-{
-    color: black;
-}

@@ -1,13 +1,17 @@
 <div class="container">
     <div class="newMovie">
         <h2>ADD NEW MOVIE</h2><br>
-        <label>Movie Name</label>
-        <input type="text" class="form-control" placeholder="Enter Movie Name" #movieName>
-        <br><br>
-        <label>Ticket Price</label>
-        <input type="number" class="form-control" placeholder="Enter Ticket Price" #ticketPrice>
-        <br><br>
-        <button class="btn btn-success" (click)='update(movieName,ticketPrice)'>CREATE</button>&nbsp;
+        <mat-form-field appearance="standard">
+            <mat-label>Movie Name</mat-label>
+            <input type="text" matInput #movieName>
+        </mat-form-field>
+        <br>
+        <mat-form-field appearance="standard">
+            <mat-label>Ticket Price</mat-label>
+            <input type="number" matInput #ticketPrice>
+        </mat-form-field>
+        <br>
+        <button mat-raised-button color="primary" (click)='update(movieName,ticketPrice)'>CREATE</button>&nbsp;
         <label>{{apiResponseMessage}}</label>
     </div>
 </div>

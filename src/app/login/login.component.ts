@@ -96,6 +96,7 @@ export class LoginComponent implements OnInit {
         loginResponse.status == "OK" &&
         loginResponse.role == "ADMIN"
       ) {
+        this.Mainservice.userName = "Admin"
         this.apiLoginResponse="";
         this.router.navigate(["/", "admin"]);
       }

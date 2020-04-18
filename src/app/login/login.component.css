@@ -2,10 +2,8 @@
 {
     height: 100vh;
     width: 100%;
-    background-image: url("../../assets/body-background4.jpg");
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
     overflow: hidden;
+    background-color: skyblue;
 
 }
 
@@ -14,7 +12,6 @@
     text-align: center;
     font-family: 'Lato', sans-serif;
     font-family: 'Pacifico', cursive;
-    color: blanchedalmond;
 }
 
 mat-form-field
@@ -22,19 +19,19 @@ mat-form-field
     width: 300px;
 }
 
-mat-form-field mat-label
+/* mat-form-field mat-label
 {
     color: blanchedalmond
 }
 
 mat-form-field input 
 {
-    color: gainsboro;
+    color: blue;
 }
 
 input.mat-input-element .mat-input-element-outline {
     color: blanchedalmond
-  }
+  } */
 
   ::placeholder {
     color:white;

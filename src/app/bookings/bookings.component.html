@@ -1,8 +1,37 @@
 <div class="container">
+    <mat-toolbar color="warn" class="nav-bar">
+        <div class="back-arrow">
+            <button mat-stroked-button (click)="back()">
+                <i class="fa fa-arrow-left"></i></button>
+        </div>
+        <div class="heading">
+            <div>MY BOOKINGS</div>
+        </div>
+    </mat-toolbar>
+    <div class="bookinginfo" *ngIf="bookingsAvailable; else noBooking">
+        <div class="bookings" *ngFor="let bookings of apiResponse; index as ind">
+            <label>MOVIE NAME: </label>&nbsp;<label>{{bookings.movie_name}}</label><br>
+            <label>SHOW TIME: </label>&nbsp;<label>{{bookings.show_time | filter}}</label><br>
+            <label>BOOKED SEATS: </label>&nbsp;<label>{{bookings.booked_seats}}</label><br>
+        </div>
+    </div>
+    <ng-template #noBooking>
+        <div class="bookinginfo">
+            <div class="bookings">
+                <label>No Seats Booked Currently</label><br>
+            </div>
+        </div>
+    </ng-template>
+</div>
+
+
+
+
+<!-- <div class="container">
     <div class="bookinginfo" *ngIf="bookingsAvailable; else noBooking">
         <div class="header">
             <div class="back-arrow">
-                <button style="font-size:24px" (click)="back()">
+                <button mat-stroked-button (click)="back()">
                     <i class="fa fa-arrow-left"></i></button>
             </div>
             <div class="heading">
@@ -31,4 +60,4 @@
             </div>
         </div>
     </ng-template>
-</div>
+</div> -->

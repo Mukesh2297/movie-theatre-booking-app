@@ -38,11 +38,11 @@ export class NewShowComponent implements OnInit {
   }
 
   movieSelected(movie_id) {
-    this.movieId = movie_id.target.value;
+    this.movieId = movie_id.value;
   }
 
   hallSelected(hall_id) {
-    this.hallId = hall_id.target.value;
+    this.hallId = hall_id.value;
   }
 
   update(dateTime) {

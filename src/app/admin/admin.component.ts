@@ -54,17 +54,12 @@ export class AdminComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  seatSelected(row, column) {}
-
   navigate(value) {
-    if (value == "home") {
-      this.home = true;
-      this.manage = false;
+    
+    if (value.index == 0) 
+    {
       this.switch = "";
-    } else {
-      this.manage = true;
-      this.home = false;
-    }
+    } 
   }
 
   DisplayMovieSelector(request: boolean) {

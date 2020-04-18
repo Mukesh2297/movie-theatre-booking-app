@@ -11,7 +11,7 @@
 <mat-toolbar color="primary" class="nav-bar" >
   <div>Movie Booking</div>
   <div>
-        <span>Hello {{userName}}</span>
+        <span>HELLO {{userName | uppercase }}</span>
         <a routerLink="/mybookings">MY BOOKINGS</a>
         <a routerLink="/" (click)="logout()">LOGOUT</a>   
   </div>
