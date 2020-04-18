@@ -7,6 +7,7 @@ import { MatListModule } from '@angular/material/list'
 import { MatSelectModule } from '@angular/material/select';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar'
+import {MatDialogModule} from '@angular/material/dialog';
 
 
 
@@ -17,7 +18,8 @@ const Material = [MatFormFieldModule,
   MatListModule,
   MatSelectModule,
   MatTabsModule,
-  MatToolbarModule
+  MatToolbarModule,
+  MatDialogModule
 ]
 
 

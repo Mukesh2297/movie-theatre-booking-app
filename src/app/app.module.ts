@@ -18,6 +18,7 @@ import { BookingsComponent } from './bookings/bookings.component';
 import { HeaderComponent } from './header/header.component';
 import { MaterialModule } from './material/material.module';
 import { MatInputModule } from '@angular/material/input';
+import { DialogBoxComponent } from './dialog-box/dialog-box.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { MatInputModule } from '@angular/material/input';
     HomeComponent,
     FilterPipe,
     BookingsComponent,
-    HeaderComponent
+    HeaderComponent,
+    DialogBoxComponent
   ],
   imports: [
     BrowserModule,

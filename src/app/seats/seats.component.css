@@ -89,6 +89,8 @@ body::-webkit-scrollbar {
     margin-left: 5px;
 }
 
+
+
 .selected-show
 {
     width: 100%;
@@ -98,9 +100,15 @@ body::-webkit-scrollbar {
 
 .selected-show-position
 {
-    width: 500px;
+    width: 530px;
     display: column;
-    justify-content: left;
+    justify-content: flex-start;
+
+}
+
+.selected-show-position button
+{
+ margin-left: -1px;
 
 }
 
@@ -148,7 +156,7 @@ body::-webkit-scrollbar {
     width: 500px;
     height: 50px;
     display: flex;
-    justify-content: left;
+    justify-content: flex-start;
 }
 
 .dayPicker
@@ -162,10 +170,10 @@ body::-webkit-scrollbar {
 
 .navigation
 {
-    width: 500px;
+    width: 535px;
     display: flex;
     flex-wrap: wrap;
-    justify-content: left;
+    justify-content: flex-start;
 }
 
 .listItems

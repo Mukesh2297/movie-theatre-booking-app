@@ -3,6 +3,8 @@ import { MainService } from "../main.service";
 import { HttpClient } from "@angular/common/http";
 import { ApiService } from "../services/api.service";
 import { Router } from "@angular/router";
+import { MatDialog } from '@angular/material/dialog';
+import { DialogBoxComponent } from '../dialog-box/dialog-box.component';
 
 @Component({
   selector: "app-login",
@@ -31,7 +33,8 @@ export class LoginComponent implements OnInit {
     public Mainservice: MainService,
     public http: HttpClient,
     private apiService: ApiService,
-    private router: Router
+    private router: Router,
+    public dialog:MatDialog
   ) {}
 
   ngOnInit(): void {}
@@ -64,6 +67,7 @@ export class LoginComponent implements OnInit {
     this.apiService.post("auth/signup", body).subscribe((response) => {
       signupResponse = response;
       if (signupResponse.status == "OK") {
+        this.dialog.open(DialogBoxComponent,{data:{message:"Registeration Successful"}})
         this.signupform = false;
         this.loginform = true;
       }

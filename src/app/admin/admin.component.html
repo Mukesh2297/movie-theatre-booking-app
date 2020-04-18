@@ -5,43 +5,21 @@
       <app-seats></app-seats>
     </mat-tab>
     <mat-tab label="Manage">
-      <br>
-      <div class="manage" >
-        <button mat-raised-button (click)="switch='addhall'"
-        [ngStyle]="{'background-color' : switch=='addhall' ? 'rgb(67, 199, 252)' : 'rgb(252, 102, 152)'}">Add Hall</button>
-
-        <button mat-raised-button (click)="switch='addmovie'"
-        [ngStyle]="{'background-color' : switch=='addmovie' ? 'rgb(67, 199, 252)' : 'rgb(252, 102, 152)'}">Add Movie</button>
-
-        <button mat-raised-button (click)="switch='addshow'"
-        [ngStyle]="{'background-color' : switch=='addshow' ? 'rgb(67, 199, 252)' : 'rgb(252, 102, 152)'}">Add Show</button>
-  
-      </div> 
+      <mat-tab-group  mat-align-tabs="center">
+        <mat-tab label="Add Hall">
+          <app-new-hall></app-new-hall>
+        </mat-tab>
+        <mat-tab label="Add Movie">
+          <app-new-movie></app-new-movie>
+        </mat-tab>
+        <mat-tab label="Add Show">
+          <app-new-show></app-new-show>
+        </mat-tab>
+      </mat-tab-group>
     </mat-tab>
   </mat-tab-group>
-  <br>
-  <!-- <ul class="nav nav-tabs">
-    <li class="nav-item">
-      <button class="btn" [ngClass]="{ 'btnactive': home}" (click)="navigate('home')">
-        HOME
-      </button>
-    </li>
-    <li class="nav-item">
-      <button class="btn" [ngClass]="{ 'btnactive': manage}" (click)="navigate('manage')">
-        MANAGE
-      </button>
-    </li>
-  </ul>
-  <br />
-
-
-  <div class="manage" *ngIf="manage">
-    <button class="btn btn-light" (click)="switch='addhall'">Add Hall</button>
-    <button class="btn btn-light" (click)="switch='addmovie'">Add Movie</button>
-    <button class="btn btn-light" (click)="switch='addshow'">Add Show</button>
-  </div> -->
-
-  <div class="admin-components">
+</div>
+  <!-- <div class="admin-components">
     <div [ngSwitch]="switch">
       <div class="add-hall" *ngSwitchCase="'addhall'">
         <app-new-hall></app-new-hall>
@@ -53,15 +31,22 @@
         <app-new-show></app-new-show>
       </div>
   </div>
-  </div>
-  
-
-  <!-- <div class="home" *ngIf="home">
-    <div class="seats-component">
-      <app-seats></app-seats>
-    </div>
   </div> -->
-</div>
+
+
+
+
+ <!-- <div class="manage" >
+        <button mat-raised-button (click)="switch='addhall'"
+        [ngStyle]="{'background-color' : switch=='addhall' ? 'rgb(67, 199, 252)' : 'rgb(252, 102, 152)'}">Add Hall</button>
+
+        <button mat-raised-button (click)="switch='addmovie'"
+        [ngStyle]="{'background-color' : switch=='addmovie' ? 'rgb(67, 199, 252)' : 'rgb(252, 102, 152)'}">Add Movie</button>
+
+        <button mat-raised-button (click)="switch='addshow'"
+        [ngStyle]="{'background-color' : switch=='addshow' ? 'rgb(67, 199, 252)' : 'rgb(252, 102, 152)'}">Add Show</button>
+  
+      </div> -->
 
 
 

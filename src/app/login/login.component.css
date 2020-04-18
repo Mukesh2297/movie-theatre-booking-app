@@ -34,7 +34,7 @@ input.mat-input-element .mat-input-element-outline {
   } */
 
   ::placeholder {
-    color:white;
+    color:black;
     opacity: 0.5;
   }
 
@@ -61,7 +61,7 @@ input.mat-input-element .mat-input-element-outline {
 
 label
 {
-    color: blanchedalmond;
+    color: darkred;
 }
 
 .btn-primary
@@ -86,7 +86,14 @@ label
 }
 
 
-input,button
+button,input
 {
     color: black;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    transition: background-color 5000s ease-in-out 0s;
 }

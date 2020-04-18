@@ -1,9 +1,11 @@
 import { Component, OnInit } from "@angular/core";
 import { MainService } from "../main.service";
-import { HttpClient, HttpParams, HttpHeaders } from "@angular/common/http";
-import { stringify } from "@angular/compiler/src/util";
+import { HttpClient } from "@angular/common/http";
 import { ApiService } from "../services/api.service";
-import { ThrowStmt } from '@angular/compiler';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogBoxComponent } from '../dialog-box/dialog-box.component';
+
+
 
 @Component({
   selector: "app-seats",
@@ -11,7 +13,7 @@ import { ThrowStmt } from '@angular/compiler';
   styleUrls: ["./seats.component.css"],
 })
 export class SeatsComponent implements OnInit {
- 
+
   movies;
 
   shows;
@@ -48,18 +50,19 @@ export class SeatsComponent implements OnInit {
 
   apiResponse;
 
-  dateArr:any[] = [];
+  dateArr: any[] = [];
 
-  dayArr:any[]=[];
+  dayArr: any[] = [];
 
-  movieSelected:boolean = false;
+  movieSelected: boolean = false;
 
-  btnValue:number = 0;  
+  btnValue: number = 0;
 
   constructor(
     public SeatBooking: MainService,
     public http: HttpClient,
-    private apiService: ApiService
+    private apiService: ApiService,
+    public matDialog: MatDialog
   ) {
     this.apiService.get("shows").subscribe((post) => {
       this.movies = post;
@@ -71,21 +74,21 @@ export class SeatsComponent implements OnInit {
     this.DayPicker();
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
-  bookSeats(showId,Arrind,indexval) {
-    
-    const params = {id:showId}
-    
-    this.apiService.get(`bookings/show`,params)
-    .subscribe((hallDetails) => {
-      this.hallAvailability = hallDetails;
-      this.totalRowsCount = this.hallAvailability.hallDetail.total_rows;
-      this.totalColumnsCount = this.hallAvailability.hallDetail.total_columns;
-      this.columns = Array(this.totalColumnsCount).fill(0);
-      this.rows = Array(this.totalRowsCount).fill(0);
-      this.isHallSelected = true;
-    });
+  bookSeats(showId, Arrind, indexval) {
+
+    const params = { id: showId }
+
+    this.apiService.get(`bookings/show`, params)
+      .subscribe((hallDetails) => {
+        this.hallAvailability = hallDetails;
+        this.totalRowsCount = this.hallAvailability.hallDetail.total_rows;
+        this.totalColumnsCount = this.hallAvailability.hallDetail.total_columns;
+        this.columns = Array(this.totalColumnsCount).fill(0);
+        this.rows = Array(this.totalRowsCount).fill(0);
+        this.isHallSelected = true;
+      });
 
     this.showSeats = true;
 
@@ -104,50 +107,38 @@ export class SeatsComponent implements OnInit {
   }
 
   selectedMovie(moviename) {
-    
-      let ind = 0;
 
-      this.btnValue = 0;
+    let ind = 0;
 
-      this.movieSelected = true;
-  
-      this.showSeats = false;
+    this.btnValue = 0;
 
-      this.movieId = moviename.value;
+    this.movieSelected = true;
 
-      let formattedDate = this.getFormattedDate(ind)
+    this.showSeats = false;
 
-      const params = { id: this.movieId, date:formattedDate};
+    this.movieId = moviename.value;
 
-      this.apiService.get("movies/showtime", params).subscribe((showtime) => {
-        this.shows = showtime;
-        this.shows = this.shows.movies.map((showDetails) => {
-          //this.movieTitle = false;
-          return showDetails;      
-        });
-      });
-      
+    let formattedDate = this.getFormattedDate(ind)
+
+    const params = { id: this.movieId, date: formattedDate };
+
+    this.availableShows(params);
+
   }
 
-  DisplayAvailableShows(ind)
-  {
+  DisplayAvailableShows(ind) {
     this.btnValue = ind;
 
     let indexValue = ind;
 
     let formattedDate = this.getFormattedDate(indexValue);
 
-    const params = {id:this.movieId, date:formattedDate};
+    const params = { id: this.movieId, date: formattedDate };
 
-    this.apiService.get("movies/showtime", params).subscribe((showtime) => {
-      this.shows = showtime;
-      this.shows = this.shows.movies.map((showDetails) => {
-        //this.movieTitle = false;
-        return showDetails;
-      });
-    });
-    
+    this.availableShows(params);
   }
+
+
 
   showsAvailable() {
     let hallId = this.hallId;
@@ -180,54 +171,52 @@ export class SeatsComponent implements OnInit {
       sequence_numbers: this.markedSeats.join(","),
       show_id: this.showId,
     };
-  
+
     this.apiService
       .post("bookings/booktickets", bookedSeats)
       .subscribe((response) => {
         this.apiResponse = response;
 
-        if(this.apiResponse.status == "OK")
-        {
+        if (this.apiResponse.status == "OK") {
+          //this.SeatBooking.bookedSeats = bookedSeats;
+          this.matDialog.open(DialogBoxComponent, { data: { bookedSeats, info:"booking"}})
           this.markedSeats.splice(0);
           this.selectedShow.splice(0);
           this.isHallSelected = false;
           this.showSeats = false;
+
+
         }
 
       });
-    
-    
+
+
   }
 
 
-  DayValuePicker()
-  {
-   
+  DayValuePicker() {
+
     let currentDate = new Date();
 
 
-    let currentDay = currentDate.getDay();        
+    let currentDay = currentDate.getDay();
 
-    for(let i=0; i<=4; i++)
-    {
-      let currentDayValue = currentDay+i;
-      if(currentDayValue > 7 )
-      {
+    for (let i = 0; i <= 4; i++) {
+      let currentDayValue = currentDay + i;
+      if (currentDayValue > 7) {
         currentDayValue = currentDayValue - 7;
         this.dateArr.push(Math.abs(currentDayValue));
       }
-      else{
-      this.dateArr.push(currentDayValue);
+      else {
+        this.dateArr.push(currentDayValue);
       }
     }
-    
+
   }
 
-  DayPicker()
-  {
+  DayPicker() {
 
-    for(let i = 0; i <= this.dateArr.length; i++ )
-    {
+    for (let i = 0; i <= this.dateArr.length; i++) {
       let dayValue = this.dateArr[i];
 
       switch (dayValue) {
@@ -252,26 +241,50 @@ export class SeatsComponent implements OnInit {
         case 7:
           this.dayArr.push("Sunday");
       }
-      
+
     }
 
-    this.dayArr.splice(0,1,"Today");
-    this.dayArr.splice(1,1,"Tomorrow");    
-    
+    this.dayArr.splice(0, 1, "Today");
+    this.dayArr.splice(1, 1, "Tomorrow");
+
   }
 
 
-  getFormattedDate(ind)
-  {
+  getFormattedDate(ind) {
 
     let indexVal = ind;
     let currentDate = new Date();
     let numberOfDaysToAdd = Number(indexVal);
     let month = currentDate.toLocaleString('default', { month: 'short' });
-    currentDate.setDate(currentDate.getDate() + numberOfDaysToAdd) 
+    currentDate.setDate(currentDate.getDate() + numberOfDaysToAdd)
     return `${currentDate.getDate()}-${month}-${currentDate.getFullYear()}`
 
   }
 
+  availableShows(bodyParams) {
+
+    let params = bodyParams;
+
+    this.apiService.get("movies/showtime", params).subscribe((showtime) => {
+      this.shows = showtime;
+      console.log(this.shows);
+      if (this.shows.movies.length == 0) {
+        let errorArr = [{ hall_name: "No Shows Available" }];
+        this.shows = errorArr;
+      }
+      else {
+        this.shows = this.shows.movies.map((showDetails) => {
+          //this.movieTitle = false;
+          return showDetails;
+        });
+      }
+
+    });
+
+  }
+
 }
+
+
+
 

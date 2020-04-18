@@ -11,6 +11,7 @@ export class MainService {
 
   selectedSeat:any[]=[];
 
+  bookedSeats;
 
   movies;
 
