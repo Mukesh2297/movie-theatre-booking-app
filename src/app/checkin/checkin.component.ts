@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { ApiService } from "../services/api.service";
 
 declare var Instascan: any;
 
@@ -9,8 +10,8 @@ declare var Instascan: any;
 })
 export class CheckinComponent implements OnInit {
   scanner = null;
-
-  constructor() {}
+  apiResponseMessage = null;
+  constructor(private apiService: ApiService) {}
 
   ngOnInit(): void {
     this.scanner = new Instascan.Scanner({
@@ -19,6 +20,16 @@ export class CheckinComponent implements OnInit {
     });
     this.scanner.addListener("scan", (content, image) => {
       console.log(content);
+      const checkinDetails = {
+        booking_id: content,
+      };
+      this.apiService
+        .post("checkin", checkinDetails)
+        .subscribe((response: any) => {
+          if (response.status === "OK") {
+            this.apiResponseMessage = "Checkin Confirmed";
+          }
+        });
     });
     Instascan.Camera.getCameras()
       .then((cameras) => {
