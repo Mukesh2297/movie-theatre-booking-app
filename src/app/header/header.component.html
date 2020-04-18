@@ -1,4 +1,3 @@
-  
 <!-- <div class="logout">
         <div class="bookings-btn">
             <a class="btn btn-primary" routerLink="/mybookings">MY BOOKINGS</a>
@@ -8,11 +7,12 @@
         </div>
 </div> -->
 
-<mat-toolbar color="primary" class="nav-bar" >
+<mat-toolbar color="primary" class="nav-bar">
   <div>BINGEWATCH</div>
   <div>
-        <span>Hello {{userName | titlecase }}</span>
-        <a routerLink="/mybookings">MY BOOKINGS</a>
-        <a routerLink="/" (click)="logout()">LOGOUT</a>   
+    <span>Hello {{ userName | titlecase }}</span>
+    <a routerLink="/mybookings">MY BOOKINGS</a>
+    <a routerLink="/" (click)="logout()">LOGOUT</a>
+    <a routerLink="/checkin">Checkin scanner</a>
   </div>
 </mat-toolbar>
