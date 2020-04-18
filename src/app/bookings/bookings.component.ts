@@ -20,9 +20,7 @@ export class BookingsComponent implements OnInit {
       if(this.apiResponse.length > 0)
       {
         this.bookingsAvailable = true;
-      }
-      console.log(this.apiResponse);
-      
+      }    
     })
    }
 

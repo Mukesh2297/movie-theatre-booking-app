@@ -60,9 +60,7 @@ export class LoginComponent implements OnInit {
     let mobileNo = umobile.value;
 
     const body = {fullname: fullname, username: username, password: password, email: email, mobile:mobileNo };
-
-    console.log(body);
-    
+  
     this.apiService.post("auth/signup", body).subscribe((response) => {
       signupResponse = response;
       if (signupResponse.status == "OK") {

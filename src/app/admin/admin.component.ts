@@ -134,8 +134,5 @@ export class AdminComponent implements OnInit {
 
   submit() {
     this.bookedSeats = this.markedSeats;
-    console.log(this.movies);
-    console.log(this.shows);
-    console.log(this.showStatus);
   }
 }

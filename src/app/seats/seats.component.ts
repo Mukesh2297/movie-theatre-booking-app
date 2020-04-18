@@ -67,7 +67,6 @@ export class SeatsComponent implements OnInit {
         return movieslist;
       });
     });
-    
     this.DayValuePicker();
     this.DayPicker();
   }
@@ -93,9 +92,6 @@ export class SeatsComponent implements OnInit {
     this.showId = showId;
 
     this.selectedShow.push(this.shows[Arrind].availability[indexval]);
-
-    console.log(this.selectedShow);
-    
 
   }
 
@@ -143,8 +139,6 @@ export class SeatsComponent implements OnInit {
 
     const params = {id:this.movieId, date:formattedDate};
 
-    console.log(params);
-
     this.apiService.get("movies/showtime", params).subscribe((showtime) => {
       this.shows = showtime;
       this.shows = this.shows.movies.map((showDetails) => {
@@ -186,10 +180,7 @@ export class SeatsComponent implements OnInit {
       sequence_numbers: this.markedSeats.join(","),
       show_id: this.showId,
     };
-
-    console.log(bookedSeats);
-    
-
+  
     this.apiService
       .post("bookings/booktickets", bookedSeats)
       .subscribe((response) => {
@@ -215,10 +206,7 @@ export class SeatsComponent implements OnInit {
     let currentDate = new Date();
 
 
-    let currentDay = currentDate.getDay();    
-
-    console.log(currentDay);
-    
+    let currentDay = currentDate.getDay();        
 
     for(let i=0; i<=4; i++)
     {
@@ -232,9 +220,6 @@ export class SeatsComponent implements OnInit {
       this.dateArr.push(currentDayValue);
       }
     }
-
-    console.log(this.dateArr);
-    
     
   }
 
@@ -271,10 +256,7 @@ export class SeatsComponent implements OnInit {
     }
 
     this.dayArr.splice(0,1,"Today");
-    this.dayArr.splice(1,1,"Tomorrow");
-
-    console.log(this.dayArr);
-    
+    this.dayArr.splice(1,1,"Tomorrow");    
     
   }
 
