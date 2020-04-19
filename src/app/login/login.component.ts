@@ -5,7 +5,7 @@ import { ApiService } from "../services/api.service";
 import { Router } from "@angular/router";
 import { MatDialog } from '@angular/material/dialog';
 import { DialogBoxComponent } from '../dialog-box/dialog-box.component';
-import { NgForm } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 
 @Component({
@@ -31,7 +31,9 @@ export class LoginComponent implements OnInit {
 
   hideLoginPassword:boolean = true;
 
-  userinput = "Password"
+  passwordPattern = "^(?=.[a-z])(?=.[A-Z])(?=.\d)(?=.[@$!%?&#])[A-Za-z\d@$!%?&#]{8,30}$"
+
+  signupformTemplate:FormGroup
 
   constructor(
     public Mainservice: MainService,
@@ -41,7 +43,16 @@ export class LoginComponent implements OnInit {
     public dialog:MatDialog
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit()
+  {
+    this.signupformTemplate = new FormGroup({
+      'fullname':new FormControl(null,Validators.required),
+      'username': new FormControl(null,[Validators.required,Validators.minLength(3),Validators.maxLength(50)]),
+      'password': new FormControl("",[Validators.required,Validators.pattern(this.passwordPattern)]),
+      'email': new FormControl(null,[Validators.required,Validators.email]),
+      'mobile': new FormControl(null,Validators.required)
+    })
+  }
 
   displayLoginForm(request) {
     if (request.target.value == "Sign Up") {
@@ -58,28 +69,33 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  Register(fname,uname, upassword, uemail,umobile) {
-    let signupResponse;
-    let fullname = fname.value;
-    let username = uname.value;
-    let password = upassword.value;
-    let email = uemail.value;
-    let mobileNo = umobile.value;
+  Register() {
 
-    const body = {fullname: fullname, username: username, password: password, email: email, mobile:mobileNo };
+    console.log(this.signupformTemplate);
+    
+
+
+    // let signupResponse;
+    // let fullname = fname.value;
+    // let username = uname.value;
+    // let password = upassword.value;
+    // let email = uemail.value;
+    // let mobileNo = umobile.value;
+
+    // const body = {fullname: fullname, username: username, password: password, email: email, mobile:mobileNo };
   
-    this.apiService.post("auth/signup", body).subscribe((response) => {
-      signupResponse = response;
-      if (signupResponse.status == "OK") {
-        this.dialog.open(DialogBoxComponent,{data:{message:"Registeration Successful"}})
-        this.signupform = false;
-        this.loginform = true;
-      }
-      else if(signupResponse.status=="Server error")
-      {
-        this.apiRegisterResponse="Something went wrong. Please try again";
-      }
-    });
+    // this.apiService.post("auth/signup", body).subscribe((response) => {
+    //   signupResponse = response;
+    //   if (signupResponse.status == "OK") {
+    //     this.dialog.open(DialogBoxComponent,{data:{message:"Registeration Successful"}})
+    //     this.signupform = false;
+    //     this.loginform = true;
+    //   }
+    //   else if(signupResponse.status=="Server error")
+    //   {
+    //     this.apiRegisterResponse="Something went wrong. Please try again";
+    //   }
+    // });
   }
 
   SignIn(regEmail, regPasswrd) {
@@ -114,11 +130,22 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  passwordValidator(event)
+  passwordValidator(control: FormControl):{[s:string]:boolean}
   {
-    console.log(event.value);
+    //console.log(control.value);
+
+    console.log(control.value);
+    
+  
+    if(control.value.match(this.passwordPattern))
+    {
+      console.log("password match");
+      
+      return {'PasswordMatch':true}
+    }
     
   }
+  
 
 
 }

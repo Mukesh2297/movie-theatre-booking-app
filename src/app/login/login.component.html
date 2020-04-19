@@ -13,44 +13,62 @@
                  (click)="[signupform = false , loginform = !loginform] ">LOGIN</button>
                 <br>
 
-            <form #f="ngForm">
+            <form [formGroup]="signupformTemplate"  (ngSubmit)="Register()">
 
                 <div *ngIf='signupform'>
                     <mat-form-field appearance="standard">
                             <mat-label >FullName</mat-label>
-                        <input matInput type="text" name="fullname" required #fname ngModel ><br>
+                        <input matInput type="text" formControlName='fullname' #fname><br>
                     </mat-form-field>
-                  
+                    <div class="error-box" 
+                    *ngIf="!signupformTemplate.get('fullname').valid && signupformTemplate.get('fullname').touched">
+                        <p>Please enter your fullname</p>
+                    </div>
                     <mat-form-field appearance="standard">
                             <mat-label>Username</mat-label>
-                        <input matInput required type="text" name="username" ngModel minlength="3" maxlength="50" #uname="ngModel" ><br>
+                        <input matInput  type="text" formControlName='username' #uname ><br>
                     </mat-form-field>
-                    <div class="error-box" *ngIf="uname.errors != null && (uname.dirty || uname.touched)">
-                        <p >
+                    <div class="error-box" 
+                    *ngIf="!signupformTemplate.get('username').valid && signupformTemplate.get('username').touched">
+                        <p>
                             Username must be atleast 3 characters long
                         </p>
                     </div>
+                   
                     <mat-form-field appearance="standard">
                         <mat-label>Password</mat-label>
-                        <input matInput required [(ngModel)]="userinput" [type]="hideRegisterPassword ? 'password' : 'text'" 
-                        name="password" #password >
-                        <button mat-icon-button matSuffix (click)="hideRegisterPassword = !hideRegisterPassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideRegisterPassword">
+                        <input matInput formControlName='password'  [type]="hideRegisterPassword ? 'password' : 'text'" 
+                         #password >
+                        <button mat-icon-button matSuffix (click)="hideRegisterPassword = !hideRegisterPassword"
+                         [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideRegisterPassword">
                             <mat-icon>{{hideRegisterPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
                         </button>
                     </mat-form-field>
 
+                    <div class="error-box" *ngIf="!signupformTemplate.get('password').valid && signupformTemplate.get('password').touched">
+                        <p>{{signupformTemplate.get('password').errors | json}}</p>
+                    </div>
+
                     <mat-form-field appearance="standard">
                         <mat-label>Email</mat-label>
-                        <input matInput required type="email" name="email" email  placeholder="Ex. chris@example.com" #email ngModel>
+                        <input matInput formControlName='email' type="email" placeholder="Ex. chris@example.com" #email>
                     </mat-form-field>
+                    <div class="error-box" 
+                    *ngIf="!signupformTemplate.get('email').valid && signupformTemplate.get('email').touched">
+                        <p>Please enter valid email</p>
+                    </div>
           
                     <mat-form-field appearance="standard">
                         <mat-label>Mobile Number</mat-label>
-                        <input matInput required type="number" name="mobile" #mobile ngModel>
+                        <input matInput formControlName='mobile'  type="number" #mobile >
                     </mat-form-field>
+                    <div class="error-box" 
+                    *ngIf="!signupformTemplate.get('mobile').valid && signupformTemplate.get('mobile').touched">
+                        <p>Please enter valid email</p>
+                    </div>
 
                     <button mat-raised-button color="primary"  value="Register"
-                        (click)="Register(fname,uname,password,email,mobile)" [disabled]="!f.valid">
+                        type="submit">
                         REGISTER</button><br><br>
                     <label>{{apiRegisterResponse}}</label>
 
