@@ -1,10 +1,12 @@
-import { Component, OnInit, ViewEncapsulation } from "@angular/core";
+import { Component, OnInit, ViewEncapsulation, ViewChild } from "@angular/core";
 import { MainService } from "../main.service";
 import { HttpClient } from "@angular/common/http";
 import { ApiService } from "../services/api.service";
 import { Router } from "@angular/router";
 import { MatDialog } from '@angular/material/dialog';
 import { DialogBoxComponent } from '../dialog-box/dialog-box.component';
+import { NgForm } from '@angular/forms';
+
 
 @Component({
   selector: "app-login",
@@ -28,6 +30,8 @@ export class LoginComponent implements OnInit {
   hideRegisterPassword:boolean = true;
 
   hideLoginPassword:boolean = true;
+
+  userinput = "Password"
 
   constructor(
     public Mainservice: MainService,
@@ -109,4 +113,12 @@ export class LoginComponent implements OnInit {
       }
     });
   }
+
+  passwordValidator(event)
+  {
+    console.log(event.value);
+    
+  }
+
+
 }

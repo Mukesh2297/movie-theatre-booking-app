@@ -13,41 +13,50 @@
                  (click)="[signupform = false , loginform = !loginform] ">LOGIN</button>
                 <br>
 
+            <form #f="ngForm">
 
                 <div *ngIf='signupform'>
                     <mat-form-field appearance="standard">
                             <mat-label >FullName</mat-label>
-                        <input matInput type="text" required #fname><br>
+                        <input matInput type="text" name="fullname" required #fname ngModel ><br>
                     </mat-form-field>
-             
+                  
                     <mat-form-field appearance="standard">
                             <mat-label>Username</mat-label>
-                        <input matInput required type="text" #uname><br>
+                        <input matInput required type="text" name="username" ngModel minlength="3" maxlength="50" #uname="ngModel" ><br>
                     </mat-form-field>
-           
+                    <div class="error-box" *ngIf="uname.errors != null && (uname.dirty || uname.touched)">
+                        <p >
+                            Username must be atleast 3 characters long
+                        </p>
+                    </div>
                     <mat-form-field appearance="standard">
                         <mat-label>Password</mat-label>
-                        <input matInput required [type]="hideRegisterPassword ? 'password' : 'text'" #password>
+                        <input matInput required [(ngModel)]="userinput" [type]="hideRegisterPassword ? 'password' : 'text'" 
+                        name="password" #password >
                         <button mat-icon-button matSuffix (click)="hideRegisterPassword = !hideRegisterPassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideRegisterPassword">
                             <mat-icon>{{hideRegisterPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
                         </button>
                     </mat-form-field>
-    
+
                     <mat-form-field appearance="standard">
                         <mat-label>Email</mat-label>
-                        <input matInput required type="email" placeholder="Ex. chris@example.com" #email>
+                        <input matInput required type="email" name="email" email  placeholder="Ex. chris@example.com" #email ngModel>
                     </mat-form-field>
           
                     <mat-form-field appearance="standard">
                         <mat-label>Mobile Number</mat-label>
-                        <input matInput required type="number" #mobile>
+                        <input matInput required type="number" name="mobile" #mobile ngModel>
                     </mat-form-field>
 
                     <button mat-raised-button color="primary"  value="Register"
-                        (click)="Register(fname,uname,password,email,mobile)">REGISTER</button><br><br>
+                        (click)="Register(fname,uname,password,email,mobile)" [disabled]="!f.valid">
+                        REGISTER</button><br><br>
                     <label>{{apiRegisterResponse}}</label>
 
                 </div>
+
+            </form>
 
                 <div *ngIf='loginform'>
                     <mat-form-field appearance="standard">

@@ -196,14 +196,13 @@ export class SeatsComponent implements OnInit {
 
   DayValuePicker() {
 
-    let currentDate = new Date();
-
+    let currentDate = new Date();    
 
     let currentDay = currentDate.getDay();
 
-    for (let i = 0; i <= 4; i++) {
+    for (let i = 0; i <=4; i++) {
       let currentDayValue = currentDay + i;
-      if (currentDayValue > 7) {
+      if (currentDayValue >= 7) {
         currentDayValue = currentDayValue - 7;
         this.dateArr.push(Math.abs(currentDayValue));
       }
@@ -238,7 +237,7 @@ export class SeatsComponent implements OnInit {
         case 6:
           this.dayArr.push("Saturday");
           break;
-        case 7:
+        case 0:
           this.dayArr.push("Sunday");
       }
 

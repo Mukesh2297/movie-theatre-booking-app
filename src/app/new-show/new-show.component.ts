@@ -47,12 +47,39 @@ export class NewShowComponent implements OnInit {
 
   update(dateTime) {
 
-    let showTime = dateTime.value;
+    let showTime = dateTime.value; 
 
+    let formattedShowTime = new Date(showTime)
+
+
+    let monthcalculator=()=>{
+    if(formattedShowTime.getMonth() < 10){return `0${formattedShowTime.getMonth()+1}` }}
+
+    let secondsCalculator = ()=>
+    {
+      if(formattedShowTime.getSeconds()<10){return `0${formattedShowTime.getSeconds()}`}
+    }
+
+    let hoursCalculator = ()=>
+    {
+      if(formattedShowTime.getHours() < 10 ){return `0${formattedShowTime.getHours()}`}
+    }
+    
+
+    let year = formattedShowTime.getFullYear();
+    let month = monthcalculator();
+    let date = formattedShowTime.getDate();
+    let hours = hoursCalculator();
+    let minutes = formattedShowTime.getMinutes();
+    let seconds = secondsCalculator();
+     
+    
+    let formattedDateTime = `${year}-${month}-${date} ${hours}:${minutes}:${seconds}`
+      
      const showDetails = {
       movie_id: `${this.movieId}`,
       hall_id: `${this.hallId}`,
-      show_time: `${showTime}`,
+      show_time: `${formattedDateTime}`,
     };
 
     this.apiService.post("shows", showDetails).subscribe((response) => {
