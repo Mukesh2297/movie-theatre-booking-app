@@ -5,7 +5,7 @@ type AnyObject = { [key: string]: any };
 
 @Injectable({ providedIn: "root" })
 export class ApiService {
-  baseUrl = isDevMode() ? "" : "https://theatreapi.saileshkumar.com";
+  baseUrl = isDevMode() ? "/api" : "https://theatreapi.saileshkumar.com";
   baseOptions = { withCredentials: true };
   constructor(private http: HttpClient) {}
 
