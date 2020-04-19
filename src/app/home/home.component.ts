@@ -18,7 +18,15 @@ export class HomeComponent implements OnInit {
       this.userName = this.MainService.userName;
     }
 
-  ngOnInit(): void {}
+  ngOnInit(public router:Router)
+  {
+    //get isloggedIn value from session storage.
+    //check isloggedIn = true
+    //if true, do nothing
+    //else go to login
+
+    
+  }
 
   logout() {
     let logOutResponse;

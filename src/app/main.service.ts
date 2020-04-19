@@ -23,6 +23,8 @@ export class MainService {
   ExistingUsers;
   credentialsValid:boolean;
 
+  adminAccess:boolean;
+
   constructor(private http:HttpClient, private router:Router) { }
 
   seatSelected(seatnum)

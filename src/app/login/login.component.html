@@ -31,7 +31,7 @@
                     <div class="error-box" 
                     *ngIf="!signupformTemplate.get('username').valid && signupformTemplate.get('username').touched">
                         <p>
-                            Username must be atleast 3 characters long
+                            Username must contain minimum 3 characters
                         </p>
                     </div>
                    
@@ -44,9 +44,11 @@
                             <mat-icon>{{hideRegisterPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
                         </button>
                     </mat-form-field>
-
-                    <div class="error-box" *ngIf="!signupformTemplate.get('password').valid && signupformTemplate.get('password').touched">
-                        <p>{{signupformTemplate.get('password').errors | json}}</p>
+                    <div class="error-box" 
+                    *ngIf="!signupformTemplate.get('password').valid && signupformTemplate.get('password').touched">
+                        <p>
+                           Password must contain minimum 8 characters with 1 uppercase, lowercase letter, special character(@,#) and number
+                        </p>
                     </div>
 
                     <mat-form-field appearance="standard">
@@ -64,11 +66,11 @@
                     </mat-form-field>
                     <div class="error-box" 
                     *ngIf="!signupformTemplate.get('mobile').valid && signupformTemplate.get('mobile').touched">
-                        <p>Please enter valid email</p>
+                        <p>Please enter valid mobile number</p>
                     </div>
 
                     <button mat-raised-button color="primary"  value="Register"
-                        type="submit">
+                        type="submit" [disabled]="!signupformTemplate.valid">
                         REGISTER</button><br><br>
                     <label>{{apiRegisterResponse}}</label>
 
