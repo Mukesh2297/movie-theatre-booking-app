@@ -53,16 +53,27 @@ export class NewShowComponent implements OnInit {
 
 
     let monthcalculator=()=>{
-    if(formattedShowTime.getMonth() < 10){return `0${formattedShowTime.getMonth()+1}` }}
+
+    if(formattedShowTime.getMonth() < 10){return `0${formattedShowTime.getMonth()+1}` }
+    else{return formattedShowTime.getMonth()+1}}
 
     let secondsCalculator = ()=>
     {
       if(formattedShowTime.getSeconds()<10){return `0${formattedShowTime.getSeconds()}`}
+      else{return formattedShowTime.getSeconds()}
+
     }
 
     let hoursCalculator = ()=>
     {
-      if(formattedShowTime.getHours() < 10 ){return `0${formattedShowTime.getHours()}`}
+      if(formattedShowTime.getHours() < 10 )
+      {
+        return `0${formattedShowTime.getHours()}`
+      }
+      else
+      {
+        return formattedShowTime.getHours();
+      }
     }
     
 
@@ -75,13 +86,13 @@ export class NewShowComponent implements OnInit {
      
     
     let formattedDateTime = `${year}-${month}-${date} ${hours}:${minutes}:${seconds}`
-      
+       
      const showDetails = {
       movie_id: `${this.movieId}`,
       hall_id: `${this.hallId}`,
       show_time: `${formattedDateTime}`,
     };
-
+    
     this.apiService.post("shows", showDetails).subscribe((response) => {
       this.apiresponse = response;
       if(this.apiresponse.status=="OK")

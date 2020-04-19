@@ -7,11 +7,11 @@ import { BookingsComponent } from "./bookings/bookings.component";
 import { CheckinComponent } from "./checkin/checkin.component";
 
 const routes: Routes = [
-  { path: "home", component: HomeComponent },
   { path: "admin", component: AdminComponent },
   { path: "mybookings", component: BookingsComponent },
   { path: "checkin", component: CheckinComponent },
-  { path: "**", component: LoginComponent },
+  { path: "login", component: LoginComponent },
+  { path: "**", component: HomeComponent },
 ];
 
 @NgModule({

@@ -3,10 +3,9 @@ import { MainService } from "../main.service";
 import { HttpClient } from "@angular/common/http";
 import { ApiService } from "../services/api.service";
 import { Router } from "@angular/router";
-import { MatDialog } from '@angular/material/dialog';
-import { DialogBoxComponent } from '../dialog-box/dialog-box.component';
-import { NgForm } from '@angular/forms';
-
+import { MatDialog } from "@angular/material/dialog";
+import { DialogBoxComponent } from "../dialog-box/dialog-box.component";
+import { FormGroup, FormControl, Validators } from "@angular/forms";
 
 @Component({
   selector: "app-login",
@@ -16,8 +15,8 @@ import { NgForm } from '@angular/forms';
 export class LoginComponent implements OnInit {
   signupform: boolean = false;
   loginform: boolean = false;
-  apiLoginResponse:string;
-  apiRegisterResponse:string;
+  apiLoginResponse: string;
+  apiRegisterResponse: string;
 
   ExistingUsers;
 
@@ -27,24 +26,56 @@ export class LoginComponent implements OnInit {
 
   routeLink: string;
 
-  hideRegisterPassword:boolean = true;
+  hideRegisterPassword: boolean = true;
 
-  hideLoginPassword:boolean = true;
+  hideLoginPassword: boolean = true;
 
-  userinput = "Password"
+  passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{8,30}$/;
+
+  mobilePattern = /^[789]\d{9}$/;
+
+  emailPattern = /^([a-zA-Z0-9_\-\.\$]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
+
+  signupformTemplate: FormGroup;
 
   constructor(
     public Mainservice: MainService,
     public http: HttpClient,
     private apiService: ApiService,
     private router: Router,
-    public dialog:MatDialog
+    public dialog: MatDialog
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit() {
+    this.signupformTemplate = new FormGroup({
+      fullname: new FormControl(null, [
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(50),
+      ]),
+      username: new FormControl(null, [
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(50),
+      ]),
+      password: new FormControl("", [
+        Validators.required,
+        Validators.pattern(this.passwordPattern),
+      ]),
+      email: new FormControl(null, [
+        Validators.required,
+        Validators.email,
+        Validators.pattern(this.emailPattern),
+      ]),
+      mobile: new FormControl(null, [
+        Validators.required,
+        Validators.pattern(this.mobilePattern),
+      ]),
+    });
+  }
 
   displayLoginForm(request) {
-    if (request.target.value == "Sign Up") {
+    if (request.target.value === "Sign Up") {
       this.apiLoginResponse = "";
       this.apiRegisterResponse = "";
       this.signupform = true;
@@ -54,30 +85,24 @@ export class LoginComponent implements OnInit {
       this.apiRegisterResponse = "";
       this.loginform = true;
       this.signupform = false;
-      
     }
   }
 
-  Register(fname,uname, upassword, uemail,umobile) {
-    let signupResponse;
-    let fullname = fname.value;
-    let username = uname.value;
-    let password = upassword.value;
-    let email = uemail.value;
-    let mobileNo = umobile.value;
+  Register() {
+    const body = this.signupformTemplate.value;
 
-    const body = {fullname: fullname, username: username, password: password, email: email, mobile:mobileNo };
-  
+    let signupResponse;
+
     this.apiService.post("auth/signup", body).subscribe((response) => {
       signupResponse = response;
       if (signupResponse.status == "OK") {
-        this.dialog.open(DialogBoxComponent,{data:{message:"Registeration Successful"}})
+        this.dialog.open(DialogBoxComponent, {
+          data: { message: "Registeration Successful" },
+        });
         this.signupform = false;
         this.loginform = true;
-      }
-      else if(signupResponse.status=="Server error")
-      {
-        this.apiRegisterResponse="Something went wrong. Please try again";
+      } else if (signupResponse.status == "Server error") {
+        this.apiRegisterResponse = "Something went wrong. Please try again";
       }
     });
   }
@@ -96,29 +121,22 @@ export class LoginComponent implements OnInit {
       loginResponse = response;
       if (loginResponse.status == "OK" && loginResponse.role == "USER") {
         this.apiLoginResponse = "";
+        this.Mainservice.adminAccess = false;
         this.Mainservice.userName = loginResponse.full_name;
-        this.router.navigate(["/", "home"]);
+        window.sessionStorage.setItem("isLoggedIn", "true");
+        this.router.navigate(["/"]);
       } else if (
         loginResponse.status == "OK" &&
         loginResponse.role == "ADMIN"
       ) {
-        this.Mainservice.userName = "Admin"
-        this.apiLoginResponse="";
+        this.Mainservice.userName = loginResponse.full_name;
+        this.Mainservice.adminAccess = true;
+        this.apiLoginResponse = "";
+        window.sessionStorage.setItem("isLoggedIn", "true");
         this.router.navigate(["/", "admin"]);
-      }
-
-      else if(loginResponse.status=="Server error")
-      {
-        this.apiLoginResponse = "Invalid Username or Password"
+      } else if (loginResponse.status == "Server error") {
+        this.apiLoginResponse = "Invalid Username or Password";
       }
     });
   }
-
-  passwordValidator(event)
-  {
-    console.log(event.value);
-    
-  }
-
-
 }

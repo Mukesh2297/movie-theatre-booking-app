@@ -12,10 +12,13 @@ export class HeaderComponent implements OnInit {
 
   userName:string;
 
+  adminAccess:boolean;
+
   constructor(private apiService:ApiService,
     private router:Router,
     private mainService: MainService) {
       this.userName = this.mainService.userName;
+      this.adminAccess = this.mainService.adminAccess;
      }
 
   ngOnInit(): void {
@@ -26,7 +29,8 @@ export class HeaderComponent implements OnInit {
 
     this.apiService.post("auth/logout", {}).subscribe((logout) => {
       logOutResponse = logout;
-      this.router.navigate(['/'])
+      window.sessionStorage.removeItem("isLoggedIn");
+      this.router.navigate(['/','login'])
     });
   }
 

@@ -47,4 +47,9 @@ export class CheckinComponent implements OnInit {
   ngOnDestroy(): void {
     this.scanner.stop();
   }
+
+  back()
+  {
+    history.back();
+  }
 }
