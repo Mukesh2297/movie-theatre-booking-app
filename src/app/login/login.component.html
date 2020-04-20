@@ -1,102 +1,130 @@
 <div class="container">
-    <div class="child-items">
-        <br>
-        <div class="heading">
-            <h1>Welcome to BingeWatch</h1>
-        </div>
-        <div class="form-content">
-            <div class="body">
-                <button mat-raised-button value="Sign Up" 
-                (click)=" [loginform = false, signupform = !signupform] ">
-                    SIGN UP</button>&nbsp;
-                <button mat-raised-button value="Login"
-                 (click)="[signupform = false , loginform = !loginform] ">LOGIN</button>
-                <br>
-
-            <form [formGroup]="signupformTemplate"  (ngSubmit)="Register()">
-
-                <div *ngIf='signupform'>
-                    <mat-form-field appearance="standard">
-                            <mat-label >FullName</mat-label>
-                        <input matInput type="text" formControlName='fullname' #fname><br>
-                    </mat-form-field>
-                    <div class="error-box" 
-                    *ngIf="!signupformTemplate.get('fullname').valid && signupformTemplate.get('fullname').touched">
-                        <p>Please enter your fullname</p>
-                    </div>
-                    <mat-form-field appearance="standard">
-                            <mat-label>Username</mat-label>
-                        <input matInput  type="text" formControlName='username' #uname ><br>
-                    </mat-form-field>
-                    <div class="error-box" 
-                    *ngIf="!signupformTemplate.get('username').valid && signupformTemplate.get('username').touched">
-                        <p>
-                            Username must contain minimum 3 characters
-                        </p>
-                    </div>
-                   
-                    <mat-form-field appearance="standard">
-                        <mat-label>Password</mat-label>
-                        <input matInput formControlName='password'  [type]="hideRegisterPassword ? 'password' : 'text'" 
-                         #password >
-                        <button mat-icon-button matSuffix (click)="hideRegisterPassword = !hideRegisterPassword"
-                         [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideRegisterPassword">
-                            <mat-icon>{{hideRegisterPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
-                        </button>
-                    </mat-form-field>
-                    <div class="error-box" 
-                    *ngIf="!signupformTemplate.get('password').valid && signupformTemplate.get('password').touched">
-                        <p>
-                           Password must contain minimum 8 characters with 1 uppercase, lowercase letter, special character(@,#) and number
-                        </p>
-                    </div>
-
-                    <mat-form-field appearance="standard">
-                        <mat-label>Email</mat-label>
-                        <input matInput formControlName='email' type="email" placeholder="Ex. chris@example.com" #email>
-                    </mat-form-field>
-                    <div class="error-box" 
-                    *ngIf="!signupformTemplate.get('email').valid && signupformTemplate.get('email').touched">
-                        <p>Please enter valid email</p>
-                    </div>
-          
-                    <mat-form-field appearance="standard">
-                        <mat-label>Mobile Number</mat-label>
-                        <input matInput formControlName='mobile'  type="number" #mobile >
-                    </mat-form-field>
-                    <div class="error-box" 
-                    *ngIf="!signupformTemplate.get('mobile').valid && signupformTemplate.get('mobile').touched">
-                        <p>Please enter valid mobile number</p>
-                    </div>
-
-                    <button mat-raised-button color="primary"  value="Register"
-                        type="submit" [disabled]="!signupformTemplate.valid">
-                        REGISTER</button><br><br>
-                    <label>{{apiRegisterResponse}}</label>
-
-                </div>
-
-            </form>
-
-                <div *ngIf='loginform'>
-                    <mat-form-field appearance="standard">
-                        <mat-label>Username</mat-label>
-                        <input matInput type='text' #regEmail>
-                    </mat-form-field>
-                    <mat-form-field appearance="standard">
-                        <mat-label>Password</mat-label>
-                        <input matInput [type]="hideLoginPassword ? 'password' : 'text'" #regPasswrd>
-                        <button mat-icon-button matSuffix (click)="hideLoginPassword = !hideLoginPassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideLoginPassword">
-                            <mat-icon>{{hideLoginPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
-                        </button>
-                    </mat-form-field>
-                  
-
-                    <button mat-raised-button color="primary" (click)="SignIn(regEmail,regPasswrd)">LOGIN</button><br><br>
-                    <label>{{apiLoginResponse}}</label>
-
-                </div>
-            </div>
-        </div>
+  <div class="child-items">
+    <br />
+    <div class="heading">
+      <h1>Welcome to BingeWatch</h1>
     </div>
+    <div class="form-content">
+      <div class="body">
+        <button mat-raised-button value="Sign Up" [ngStyle]="{
+            'background-color': signupform ? 'rgb(245, 108, 154)' : 'white'
+          }" (click)="[(loginform = false), (signupform = !signupform)]">
+          SIGN UP</button>&nbsp;
+        <button mat-raised-button value="Login" [ngStyle]="{
+            'background-color': loginform ? 'rgb(245, 108, 154)' : 'white'
+          }" (click)="[(signupform = false), (loginform = !loginform)]">
+          LOGIN
+        </button>
+        <br /><br />
+
+        <form [formGroup]="signupformTemplate" (ngSubmit)="Register()">
+          <div *ngIf="signupform">
+            <mat-form-field appearance="standard">
+              <mat-label>FullName</mat-label>
+              <input matInput type="text" formControlName="fullname" #fname /><br />
+            </mat-form-field>
+            <div class="error-box" *ngIf="
+                !signupformTemplate.get('fullname').valid &&
+                signupformTemplate.get('fullname').touched
+              ">
+              <p>Please enter your fullname</p>
+            </div>
+            <mat-form-field appearance="standard">
+              <mat-label>Username</mat-label>
+              <input matInput type="text" formControlName="username" #uname /><br />
+            </mat-form-field>
+            <div class="error-box" *ngIf="
+                !signupformTemplate.get('username').valid &&
+                signupformTemplate.get('username').touched
+              ">
+              <p>
+                Username must contain minimum 3 characters
+              </p>
+            </div>
+
+            <mat-form-field appearance="standard">
+              <mat-label>Password</mat-label>
+              <input matInput formControlName="password" [type]="hideRegisterPassword ? 'password' : 'text'"
+                #password />
+              <button type="button" mat-icon-button matSuffix (click)="hideRegisterPassword = !hideRegisterPassword"
+                [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideRegisterPassword">
+                <mat-icon>{{
+                  hideRegisterPassword ? "visibility_off" : "visibility"
+                }}</mat-icon>
+              </button>
+            </mat-form-field>
+            <div class="error-box" *ngIf="
+                !signupformTemplate.get('password').valid &&
+                signupformTemplate.get('password').touched
+              ">
+              <p>
+                Password must contain minimum 8 characters with 1 uppercase,
+                lowercase letter, special character(@, $, !, %, *, ?, &, #) and number
+              </p>
+            </div>
+
+            <mat-form-field appearance="standard">
+              <mat-label>Email</mat-label>
+              <input matInput formControlName="email" type="email" placeholder="Ex. chris@example.com" #email />
+            </mat-form-field>
+            <div class="error-box" *ngIf="
+                !signupformTemplate.get('email').valid &&
+                signupformTemplate.get('email').touched
+              ">
+              <p>Please enter valid email</p>
+            </div>
+
+            <mat-form-field appearance="standard">
+              <mat-label>Mobile Number</mat-label>
+              <input matInput formControlName="mobile" type="number" #mobile />
+            </mat-form-field>
+            <div class="error-box" *ngIf="
+                !signupformTemplate.get('mobile').valid &&
+                signupformTemplate.get('mobile').touched
+              ">
+              <p>Please enter valid mobile number</p>
+            </div>
+
+            <button mat-raised-button color="primary" value="Register" type="submit"
+              [disabled]="!signupformTemplate.valid">
+              REGISTER</button><br /><br />
+            <label>{{ apiRegisterResponse }}</label>
+          </div>
+        </form>
+
+        <div *ngIf="loginform">
+          <form (ngSubmit)="SignIn(loginForm)" #loginForm="ngForm">
+            <mat-form-field appearance="standard">
+              <mat-label>Username</mat-label>
+              <input matInput type="text" name="username" required minlength="3" maxlength="50" ngModel
+                #username="ngModel" />
+            </mat-form-field>
+            <div class="error-box" *ngIf="!username.valid && username.touched">
+              <p>Please enter registered username</p>
+            </div>
+            <br />
+
+            <mat-form-field appearance="standard">
+              <mat-label>Password</mat-label>
+              <input matInput required name="password" minlength="8" ngModel
+                [type]="hideLoginPassword ? 'password' : 'text'" #userpassword="ngModel" />
+              <button type="button" mat-icon-button matSuffix (click)="hideLoginPassword = !hideLoginPassword"
+                [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideLoginPassword">
+                <mat-icon>{{
+                  hideLoginPassword ? "visibility_off" : "visibility"
+                }}</mat-icon>
+              </button>
+            </mat-form-field>
+            <div class="error-box" *ngIf="!userpassword.valid && userpassword.touched">
+              <p>Please enter registered password</p>
+            </div>
+            <br />
+            <button mat-raised-button color="primary" type="submit">
+              LOGIN</button><br /><br />
+            <label>{{ apiLoginResponse }}</label>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

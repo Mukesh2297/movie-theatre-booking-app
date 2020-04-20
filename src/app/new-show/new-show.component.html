@@ -1,34 +1,49 @@
 <div class="container">
   <div class="newShows">
-    <h2>ADD SHOWS</h2><br>
+    <h2>ADD SHOWS</h2>
+    <br />
 
-    <mat-form-field appearance="standard">
-      <mat-label>Select a Movie</mat-label>
-      <mat-select (selectionChange)="movieSelected($event)">
-        <mat-option [value]="movieslist.movie_id" *ngFor="let movieslist of movies">
-          {{ movieslist.name | uppercase }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-    <br>
-
-    <mat-form-field appearance="standard">
-      <mat-label>Select a Hall</mat-label>
-        <mat-select (selectionChange)="hallSelected($event)">
-           <mat-option [value]="hallList.hall_id" *ngFor="let hallList of halls">
-              {{ hallList.name }}
-            </mat-option>
+    <form (ngSubmit)="update(showForm)" #showForm="ngForm">
+      <mat-form-field appearance="standard">
+        <mat-label>Select a Movie</mat-label>
+        <mat-select (selectionChange)="movieSelected($event)" name="movie_id" ngModel required #movieSelect="ngModel">
+          <mat-option [value]="movieslist.movie_id" *ngFor="let movieslist of movies">
+            {{ movieslist.name | uppercase }}
+          </mat-option>
         </mat-select>
-    </mat-form-field>
-    <br>
+      </mat-form-field>
+      <p *ngIf="!movieSelect.valid && movieSelect.touched">
+        Please select a movie
+      </p>
+      <br />
 
-    <mat-form-field appearance="standard">
-      <mat-label>Enter a Show Time</mat-label>
-      <input matInput [owlDateTime]="dt1" [owlDateTimeTrigger]="dt1" placeholder="Date & Time" #dateTime />
-      <owl-date-time #dt1></owl-date-time>
-    </mat-form-field>
-    <br>
-    <button mat-raised-button color="primary" (click)="update(dateTime)">CREATE</button>&nbsp;
-    <label>{{apiResponseMessage}}</label>
+      <mat-form-field appearance="standard">
+        <mat-label>Select a Hall</mat-label>
+        <mat-select (selectionChange)="hallSelected($event)" name="hall_id" ngModel required #hallSelect="ngModel">
+          <mat-option [value]="hallList.hall_id" *ngFor="let hallList of halls">
+            {{ hallList.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <p *ngIf="!hallSelect.valid && hallSelect.touched">
+        Please select a hall
+      </p>
+      <br />
+
+      <mat-form-field appearance="standard">
+        <mat-label>Enter a Show Time</mat-label>
+        <input matInput required ngModel name="show_time" [owlDateTime]="dt1" [owlDateTimeTrigger]="dt1"
+          placeholder="Date & Time" #dateTime="ngModel" />
+        <owl-date-time #dt1></owl-date-time>
+      </mat-form-field>
+      <p *ngIf="!dateTime.valid && dateTime.touched">
+        Please select a show date and time
+      </p>
+      <br />
+
+      <button mat-raised-button color="primary" type="submit" [disabled]="!showForm.valid">
+        CREATE</button>&nbsp;
+      <label>{{ apiResponseMessage }}</label>
+    </form>
   </div>
 </div>

@@ -1,17 +1,27 @@
 <div class="container">
-    <div class="newMovie">
-        <h2>ADD NEW MOVIE</h2><br>
-        <mat-form-field appearance="standard">
-            <mat-label>Movie Name</mat-label>
-            <input type="text" matInput #movieName>
-        </mat-form-field>
-        <br>
-        <mat-form-field appearance="standard">
-            <mat-label>Ticket Price</mat-label>
-            <input type="number" matInput #ticketPrice>
-        </mat-form-field>
-        <br>
-        <button mat-raised-button color="primary" (click)='update(movieName,ticketPrice)'>CREATE</button>&nbsp;
-        <label>{{apiResponseMessage}}</label>
-    </div>
+  <div class="newMovie">
+    <h2>ADD NEW MOVIE</h2>
+    <br />
+    <form (ngSubmit)="update(movieForm)" #movieForm="ngForm">
+      <mat-form-field appearance="standard">
+        <mat-label>Movie Name</mat-label>
+        <input type="text" name="name" required ngModel matInput #movieName="ngModel" />
+      </mat-form-field>
+      <p *ngIf="!movieName.valid && movieName.touched">
+        Please enter movie Name
+      </p>
+      <br />
+      <mat-form-field appearance="standard">
+        <mat-label>Ticket Price</mat-label>
+        <input type="number" name="ticket_price" required ngModel matInput #ticketPrice="ngModel" />
+      </mat-form-field>
+      <p *ngIf="!ticketPrice.valid && ticketPrice.touched">
+        Please enter ticket price
+      </p>
+      <br />
+      <button mat-raised-button color="primary" type="submit" [disabled]="!movieForm.valid">
+        CREATE</button>&nbsp;
+      <label>{{ apiResponseMessage }}</label>
+    </form>
+  </div>
 </div>

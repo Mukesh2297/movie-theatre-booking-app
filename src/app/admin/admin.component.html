@@ -2,24 +2,34 @@
   <app-header></app-header>
   <mat-tab-group (selectedTabChange)="navigate($event)">
     <mat-tab label="Home">
-      <app-seats></app-seats>
+      <ng-template matTabContent>
+        <app-seats></app-seats>
+      </ng-template>
     </mat-tab>
     <mat-tab label="Manage">
-      <mat-tab-group  mat-align-tabs="center" animationDuration="0ms">
-        <mat-tab label="Add Hall">
-          <app-new-hall></app-new-hall>
-        </mat-tab>
-        <mat-tab label="Add Movie">
-          <app-new-movie></app-new-movie>
-        </mat-tab>
-        <mat-tab label="Add Show">
-          <app-new-show></app-new-show>
-        </mat-tab>
-      </mat-tab-group>
+      <ng-template matTabContent>
+        <mat-tab-group mat-align-tabs="center" animationDuration="0ms">
+          <mat-tab label="Add Hall">
+            <ng-template matTabContent>
+              <app-new-hall></app-new-hall>
+            </ng-template>
+          </mat-tab>
+          <mat-tab label="Add Movie">
+            <ng-template matTabContent>
+              <app-new-movie></app-new-movie>
+            </ng-template>
+          </mat-tab>
+          <mat-tab label="Add Show">
+            <ng-template matTabContent>
+              <app-new-show></app-new-show>
+            </ng-template>
+          </mat-tab>
+        </mat-tab-group>
+      </ng-template>
     </mat-tab>
   </mat-tab-group>
 </div>
-  <!-- <div class="admin-components">
+<!-- <div class="admin-components">
     <div [ngSwitch]="switch">
       <div class="add-hall" *ngSwitchCase="'addhall'">
         <app-new-hall></app-new-hall>
@@ -33,10 +43,7 @@
   </div>
   </div> -->
 
-
-
-
- <!-- <div class="manage" >
+<!-- <div class="manage" >
         <button mat-raised-button (click)="switch='addhall'"
         [ngStyle]="{'background-color' : switch=='addhall' ? 'rgb(67, 199, 252)' : 'rgb(252, 102, 152)'}">Add Hall</button>
 
@@ -47,6 +54,3 @@
         [ngStyle]="{'background-color' : switch=='addshow' ? 'rgb(67, 199, 252)' : 'rgb(252, 102, 152)'}">Add Show</button>
   
       </div> -->
-
-
-

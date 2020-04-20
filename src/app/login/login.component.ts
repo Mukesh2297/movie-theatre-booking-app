@@ -1,20 +1,20 @@
-import { Component, OnInit, ViewEncapsulation, ViewChild } from "@angular/core";
-import { MainService } from "../main.service";
-import { HttpClient } from "@angular/common/http";
-import { ApiService } from "../services/api.service";
-import { Router } from "@angular/router";
-import { MatDialog } from "@angular/material/dialog";
-import { DialogBoxComponent } from "../dialog-box/dialog-box.component";
-import { FormGroup, FormControl, Validators } from "@angular/forms";
+import { Component, OnInit, ViewEncapsulation, ViewChild } from '@angular/core';
+import { MainService } from '../main.service';
+import { HttpClient } from '@angular/common/http';
+import { ApiService } from '../services/api.service';
+import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogBoxComponent } from '../dialog-box/dialog-box.component';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
-  selector: "app-login",
-  templateUrl: "./login.component.html",
-  styleUrls: ["./login.component.css"],
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  signupform: boolean = false;
-  loginform: boolean = false;
+  signupform = false;
+  loginform = true;
   apiLoginResponse: string;
   apiRegisterResponse: string;
 
@@ -22,13 +22,13 @@ export class LoginComponent implements OnInit {
 
   userDetails: any[] = [];
 
-  credentialsValid: boolean = false;
+  credentialsValid = false;
 
   routeLink: string;
 
-  hideRegisterPassword: boolean = true;
+  hideRegisterPassword = true;
 
-  hideLoginPassword: boolean = true;
+  hideLoginPassword = true;
 
   passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{8,30}$/;
 
@@ -58,7 +58,7 @@ export class LoginComponent implements OnInit {
         Validators.minLength(3),
         Validators.maxLength(50),
       ]),
-      password: new FormControl("", [
+      password: new FormControl('', [
         Validators.required,
         Validators.pattern(this.passwordPattern),
       ]),
@@ -75,14 +75,14 @@ export class LoginComponent implements OnInit {
   }
 
   displayLoginForm(request) {
-    if (request.target.value === "Sign Up") {
-      this.apiLoginResponse = "";
-      this.apiRegisterResponse = "";
+    if (request.target.value === 'Sign Up') {
+      this.apiLoginResponse = '';
+      this.apiRegisterResponse = '';
       this.signupform = true;
       this.loginform = false;
-    } else if (request.target.value == "Login") {
-      this.apiLoginResponse = "";
-      this.apiRegisterResponse = "";
+    } else if (request.target.value === 'Login') {
+      this.apiLoginResponse = '';
+      this.apiRegisterResponse = '';
       this.loginform = true;
       this.signupform = false;
     }
@@ -93,49 +93,45 @@ export class LoginComponent implements OnInit {
 
     let signupResponse;
 
-    this.apiService.post("auth/signup", body).subscribe((response) => {
+    this.apiService.post('auth/signup', body).subscribe((response) => {
       signupResponse = response;
-      if (signupResponse.status == "OK") {
+      if (signupResponse.status === 'OK') {
         this.dialog.open(DialogBoxComponent, {
-          data: { message: "Registeration Successful" },
+          data: { message: 'Registeration Successful' },
         });
         this.signupform = false;
         this.loginform = true;
-      } else if (signupResponse.status == "Server error") {
-        this.apiRegisterResponse = "Something went wrong. Please try again";
+      } else if (signupResponse.status === 'Server error') {
+        this.apiRegisterResponse = 'Something went wrong. Please try again';
       }
     });
   }
 
-  SignIn(regEmail, regPasswrd) {
+  SignIn(loginForm) {
+
     let loginResponse;
-    let loginEmail = regEmail.value;
-    let loginPassword = regPasswrd.value;
 
-    const params = {
-      username: loginEmail,
-      password: loginPassword,
-    };
+    const params = loginForm.value;
 
-    this.apiService.post("auth/login", params).subscribe((response) => {
+    this.apiService.post('auth/login', params).subscribe((response) => {
       loginResponse = response;
-      if (loginResponse.status == "OK" && loginResponse.role == "USER") {
-        this.apiLoginResponse = "";
+      if (loginResponse.status === 'OK' && loginResponse.role === 'USER') {
+        this.apiLoginResponse = '';
         this.Mainservice.adminAccess = false;
         this.Mainservice.userName = loginResponse.full_name;
-        window.sessionStorage.setItem("isLoggedIn", "true");
-        this.router.navigate(["/"]);
+        window.sessionStorage.setItem('isLoggedIn', 'true');
+        this.router.navigate(['/']);
       } else if (
-        loginResponse.status == "OK" &&
-        loginResponse.role == "ADMIN"
+        loginResponse.status === 'OK' &&
+        loginResponse.role === 'ADMIN'
       ) {
         this.Mainservice.userName = loginResponse.full_name;
         this.Mainservice.adminAccess = true;
-        this.apiLoginResponse = "";
-        window.sessionStorage.setItem("isLoggedIn", "true");
-        this.router.navigate(["/", "admin"]);
-      } else if (loginResponse.status == "Server error") {
-        this.apiLoginResponse = "Invalid Username or Password";
+        this.apiLoginResponse = '';
+        window.sessionStorage.setItem('isLoggedIn', 'true');
+        this.router.navigate(['/', 'admin']);
+      } else if (loginResponse.status === 'Server error') {
+        this.apiLoginResponse = 'Invalid Username or Password';
       }
     });
   }
