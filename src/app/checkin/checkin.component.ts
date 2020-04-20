@@ -20,7 +20,7 @@ export class CheckinComponent implements OnInit {
     });
     this.scanner.addListener('scan', (content, image) => {
       const checkinDetails = {
-        booking_id: content,
+        qr_data: content,
       };
       this.apiService
         .post('bookings/checkin', checkinDetails)

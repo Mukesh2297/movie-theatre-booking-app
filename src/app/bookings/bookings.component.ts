@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../services/api.service';
+import { MainService } from '../main.service';
 
 @Component({
   selector: 'app-bookings',
@@ -10,25 +11,26 @@ export class BookingsComponent implements OnInit {
 
   apiResponse;
 
-  bookingsAvailable:boolean = false;
+  bookingsAvailable = false;
 
-  constructor(public apiService:ApiService){
-    this.apiService.get("bookings").subscribe((response)=>
-    {
-      this.apiResponse = response;
-      this.apiResponse = this.apiResponse.bookings;
-      if(this.apiResponse.length > 0)
-      {
-        this.bookingsAvailable = true;
-      }    
-    })
-   }
+  userId: string;
+
+  // userid:bookingid
+
+  constructor(public apiService: ApiService, private mainService: MainService) {}
 
   ngOnInit(): void {
+    this.apiService.get('bookings').subscribe((response: any) => {
+      this.apiResponse = response.bookings.map((bookingObj) => {
+        return {...bookingObj, qrdata: `${bookingObj.user_id}:${bookingObj.booking_id}`};
+      });
+      if (this.apiResponse.length > 0) {
+        this.bookingsAvailable = true;
+      }
+    });
   }
 
-  back()
-  {
+  back() {
     history.back();
   }
 
