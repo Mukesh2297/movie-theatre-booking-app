@@ -19,7 +19,6 @@ export class CheckinComponent implements OnInit {
       scanPeriod: 5,
     });
     this.scanner.addListener('scan', (content, image) => {
-      console.log(content);
       const checkinDetails = {
         qr_data: content,
       };
