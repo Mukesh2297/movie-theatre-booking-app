@@ -1,14 +1,14 @@
-import { Component, OnInit } from "@angular/core";
-import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
-import { ApiService } from "../services/api.service";
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { ApiService } from '../services/api.service';
+import { NgForm } from '@angular/forms';
 
 @Component({
-  selector: "app-new-show",
-  templateUrl: "./new-show.component.html",
-  styleUrls: ["./new-show.component.css"],
+  selector: 'app-new-show',
+  templateUrl: './new-show.component.html',
+  styleUrls: ['./new-show.component.css'],
 })
 export class NewShowComponent implements OnInit {
-
   dt1;
 
   movies;
@@ -21,74 +21,98 @@ export class NewShowComponent implements OnInit {
 
   apiresponse;
 
-  apiResponseMessage:string;
+  apiResponseMessage: string;
 
-  constructor(public http: HttpClient, private apiService: ApiService) {}
+  @ViewChild('showForm') private formDirective: NgForm;
+
+  constructor(public http: HttpClient, private apiService: ApiService) { }
 
   ngOnInit(): void {
-    this.apiService.get("movies").subscribe((response) => {
+    this.apiService.get('movies').subscribe((response) => {
       this.movies = response;
       this.movies = this.movies.movies;
     });
 
-    this.apiService.get("halls").subscribe((response) => {
+    this.apiService.get('halls').subscribe((response) => {
       this.halls = response;
       this.halls = this.halls.halls;
     });
   }
 
-  movieSelected(movie_id) {
-    this.movieId = movie_id.value;
+  movieSelected(movieId) {
+    this.movieId = movieId.value;
   }
 
-  hallSelected(hall_id) {
-    this.hallId = hall_id.value;
+  hallSelected(hallId) {
+    this.hallId = hallId.value;
   }
 
-  update(dateTime) {
+  update(showForm) {
 
-    let showTime = dateTime.value; 
+    const showTime = showForm.value;
 
-    let formattedShowTime = new Date(showTime)
+    const formattedShowTime = new Date(showTime.show_time);
 
-
-    let monthcalculator=()=>{
-    if(formattedShowTime.getMonth() < 10){return `0${formattedShowTime.getMonth()+1}` }}
-
-    let secondsCalculator = ()=>
-    {
-      if(formattedShowTime.getSeconds()<10){return `0${formattedShowTime.getSeconds()}`}
-    }
-
-    let hoursCalculator = ()=>
-    {
-      if(formattedShowTime.getHours() < 10 ){return `0${formattedShowTime.getHours()}`}
-    }
-    
-
-    let year = formattedShowTime.getFullYear();
-    let month = monthcalculator();
-    let date = formattedShowTime.getDate();
-    let hours = hoursCalculator();
-    let minutes = formattedShowTime.getMinutes();
-    let seconds = secondsCalculator();
-     
-    
-    let formattedDateTime = `${year}-${month}-${date} ${hours}:${minutes}:${seconds}`
-      
-     const showDetails = {
-      movie_id: `${this.movieId}`,
-      hall_id: `${this.hallId}`,
-      show_time: `${formattedDateTime}`,
+    const monthcalculator = () => {
+      if (formattedShowTime.getMonth() < 10) {
+        return `0${formattedShowTime.getMonth() + 1}`;
+      } else {
+        return formattedShowTime.getMonth() + 1;
+      }
     };
 
-    this.apiService.post("shows", showDetails).subscribe((response) => {
+    const secondsCalculator = () => {
+      if (formattedShowTime.getSeconds() < 10) {
+        return `0${formattedShowTime.getSeconds()}`;
+      } else {
+        return formattedShowTime.getSeconds();
+      }
+    };
+
+    const minutesCalculator = () => {
+      if (formattedShowTime.getMinutes() < 10) {
+        return `0${formattedShowTime.getMinutes()}`;
+      } else {
+        return formattedShowTime.getMinutes();
+      }
+    };
+
+    const hoursCalculator = () => {
+      if (formattedShowTime.getHours() < 10) {
+        return `0${formattedShowTime.getHours()}`;
+      } else {
+        return formattedShowTime.getHours();
+      }
+    };
+
+    const year = formattedShowTime.getFullYear();
+    const month = monthcalculator();
+    const date = formattedShowTime.getDate();
+    const hours = hoursCalculator();
+    const minutes = minutesCalculator();
+    const seconds = secondsCalculator();
+
+    const formattedDateTime = `${year}-${month}-${date} ${hours}:${minutes}:${seconds}`;
+
+    showTime.show_time = formattedDateTime;
+
+    this.apiService.post('shows', showTime).subscribe((response) => {
       this.apiresponse = response;
-      if(this.apiresponse.status=="OK")
-      {
-        this.apiResponseMessage="Show Created"
+      if (this.apiresponse.status === 'OK') {
+        this.apiResponseMessage = 'Show Created';
+        setTimeout(() => {
+          showForm.form.reset();
+          this.formDirective.resetForm();
+          this.apiResponseMessage = '';
+        }, 1000);
+      } else {
+        this.apiResponseMessage = 'Something went wrong';
+        setTimeout(() => {
+          showForm.form.reset();
+          this.formDirective.resetForm();
+          this.apiResponseMessage = '';
+        }, 1000);
       }
     });
-    
   }
 }

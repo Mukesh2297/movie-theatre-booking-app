@@ -11,26 +11,15 @@
   </mat-toolbar>
   <div class="bookinginfo" *ngIf="bookingsAvailable; else noBooking">
     <div class="bookings" *ngFor="let bookings of apiResponse; index as ind">
-      <label class="movieinfo">Movie Name </label>:<label
-        class="movievalue"
-        style="width: auto;"
-        >{{ bookings.movie_name }}</label
-      ><br />
-      <label class="movieinfo">Show Time </label>:<label
-        class="movievalue"
-        style="width: auto;"
-        >{{ bookings.show_time | filter }}</label
-      ><br />
-      <label class="movieinfo">Booked Seats </label>:<label
-        class="movievalue"
-        style="width: auto;"
-        >{{ bookings.booked_seats }}</label
-      ><br />
-      <qrcode
-        [qrdata]="bookings.booking_id.toString()"
-        [size]="256"
-        [level]="'M'"
-      ></qrcode>
+      <label class="movieinfo">Movie Name </label>:<label class="movievalue"
+        style="width: auto;">{{ bookings.movie_name }}</label><br />
+      <label class="movieinfo">Checked In</label>:<label class="movievalue"
+        style="width: auto;">{{ bookings.checked_in }}</label><br />
+      <label class="movieinfo">Show Time </label>:<label class="movievalue"
+        style="width: auto;">{{ bookings.show_time | filter }}</label><br />
+      <label class="movieinfo">Booked Seats </label>:<label class="movievalue"
+        style="width: auto;">{{ bookings.booked_seats }}</label><br />
+      <qrcode [qrdata]="bookings.qrdata" [size]="256" [level]="'M'"></qrcode>
     </div>
   </div>
   <ng-template #noBooking>

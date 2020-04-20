@@ -1,38 +1,43 @@
-import { Component, OnInit } from "@angular/core";
-import { HttpClient, HttpParams, HttpHeaders } from "@angular/common/http";
-import { ApiService } from "../services/api.service";
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
+import { ApiService } from '../services/api.service';
+import { NgForm } from '@angular/forms';
 
 @Component({
-  selector: "app-new-hall",
-  templateUrl: "./new-hall.component.html",
-  styleUrls: ["./new-hall.component.css"],
+  selector: 'app-new-hall',
+  templateUrl: './new-hall.component.html',
+  styleUrls: ['./new-hall.component.css'],
 })
 export class NewHallComponent implements OnInit {
   apiResponse;
 
-  apiResponseMessage:string;
+  apiResponseMessage: string;
+
+  @ViewChild('hallForm') private formDirective: NgForm;
 
   constructor(public http: HttpClient, private apiService: ApiService) {}
 
   ngOnInit(): void {}
 
-  update(hallName, seatColumns, seatRows) {
-    let hall_name = hallName.value;
-    let total_rows = seatRows.value;
-    let total_columns = seatColumns.value;
+  update(form) {
+    const newHallDetails = form.value;
 
-    const newHallDetails = {
-      name: hall_name,
-      total_rows: `${total_rows}`,
-      total_columns: `${total_columns}`,
-    };
-
-    this.apiService.post("halls", newHallDetails).subscribe((response) => {
+    this.apiService.post('halls', newHallDetails).subscribe((response) => {
       this.apiResponse = response;
-      if(this.apiResponse.status=="OK")
-      {
-
-        this.apiResponseMessage = "Hall Created";
+      if (this.apiResponse.status === 'OK') {
+        this.apiResponseMessage = 'Hall Created';
+        setTimeout(() => {
+          form.form.reset();
+          this.formDirective.resetForm();
+          this.apiResponseMessage = '';
+        }, 1000);
+      } else {
+        this.apiResponseMessage = 'Something went wrong';
+        setTimeout(() => {
+          form.form.reset();
+          this.formDirective.resetForm();
+          this.apiResponseMessage = '';
+        }, 2000);
       }
     });
   }

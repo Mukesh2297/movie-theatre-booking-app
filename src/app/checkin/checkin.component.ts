@@ -21,10 +21,10 @@ export class CheckinComponent implements OnInit {
     this.scanner.addListener('scan', (content, image) => {
       console.log(content);
       const checkinDetails = {
-        booking_id: content,
+        qr_data: content,
       };
       this.apiService
-        .post('checkin', checkinDetails)
+        .post('bookings/checkin', checkinDetails)
         .subscribe((response: any) => {
           if (response.status === 'OK') {
             this.apiResponseMessage = 'Checkin Confirmed';
@@ -47,5 +47,9 @@ export class CheckinComponent implements OnInit {
 
   ngOnDestroy(): void {
     this.scanner.stop();
+  }
+
+  back() {
+    history.back();
   }
 }
