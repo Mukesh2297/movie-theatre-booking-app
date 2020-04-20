@@ -8,23 +8,18 @@ import { Router } from '@angular/router';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit {
   title = 'seats-booking';
 
-  constructor(private router:Router)
-  {}
+  constructor(private router: Router) {}
 
-  ngOnInit()
-  {
-    const sessionStorage = window.sessionStorage.getItem("isLoggedIn");
+  ngOnInit() {
+    const sessionStorage = window.sessionStorage.getItem('isLoggedIn');
 
-    if(sessionStorage === 'true' )
-    {
-      this.router.navigate(["/",window.location.pathname.replace("/","")])
-    }
-    else
-    {
-      this.router.navigate(["/","login"])
+    if (sessionStorage === 'true' ) {
+      this.router.navigate(['/', window.location.pathname.replace('/', '')]);
+    } else {
+      this.router.navigate(['/', 'login']);
     }
   }
 

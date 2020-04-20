@@ -1,17 +1,22 @@
-<div class="booking" *ngIf="data.info=='booking';else registeration">
-    <h2>Booking Successful</h2>
-<mat-dialog-content>You Booked Seats {{data.bookedSeats.sequence_numbers}}</mat-dialog-content>
-<br>
-<mat-dialog-content>Enjoy BingeWatching!!</mat-dialog-content>
-<mat-dialog-actions>
-    <button mat-button mat-dialog-close (click)="myBookings()">Go to My Bookings</button>
+<div class="booking" *ngIf="data.info == 'booking'; else registeration">
+  <h2>Booking Successful</h2>
+  <mat-dialog-content
+    >You Booked Seats
+    {{ data.bookedSeats.sequence_numbers }}</mat-dialog-content
+  >
+  <br />
+  <mat-dialog-content>Enjoy BingeWatching!!</mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button mat-dialog-close (click)="myBookings()">
+      Go to My Bookings
+    </button>
     <button mat-button mat-dialog-close>Close</button>
-</mat-dialog-actions>
+  </mat-dialog-actions>
 </div>
 <ng-template #registeration>
-    <h2>{{data.message}}</h2>
-    <mat-dialog-content>Navigating to Login Page</mat-dialog-content>
-    <mat-dialog-actions>
-        <button mat-button mat-dialog-close>Close</button>
-    </mat-dialog-actions>
+  <h2>{{ data.message }}</h2>
+  <mat-dialog-content>Navigating to Login Page</mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button mat-dialog-close>Close</button>
+  </mat-dialog-actions>
 </ng-template>

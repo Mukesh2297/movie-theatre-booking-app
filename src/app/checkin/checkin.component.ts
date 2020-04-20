@@ -1,12 +1,12 @@
-import { Component, OnInit } from "@angular/core";
-import { ApiService } from "../services/api.service";
+import { Component, OnInit } from '@angular/core';
+import { ApiService } from '../services/api.service';
 
 declare var Instascan: any;
 
 @Component({
-  selector: "app-checkin",
-  templateUrl: "./checkin.component.html",
-  styleUrls: ["./checkin.component.css"],
+  selector: 'app-checkin',
+  templateUrl: './checkin.component.html',
+  styleUrls: ['./checkin.component.css'],
 })
 export class CheckinComponent implements OnInit {
   scanner = null;
@@ -15,19 +15,18 @@ export class CheckinComponent implements OnInit {
 
   ngOnInit(): void {
     this.scanner = new Instascan.Scanner({
-      video: document.getElementById("preview"),
+      video: document.getElementById('preview'),
       scanPeriod: 5,
     });
-    this.scanner.addListener("scan", (content, image) => {
-      console.log(content);
+    this.scanner.addListener('scan', (content, image) => {
       const checkinDetails = {
         booking_id: content,
       };
       this.apiService
-        .post("checkin", checkinDetails)
+        .post('bookings/checkin', checkinDetails)
         .subscribe((response: any) => {
-          if (response.status === "OK") {
-            this.apiResponseMessage = "Checkin Confirmed";
+          if (response.status === 'OK') {
+            this.apiResponseMessage = 'Checkin Confirmed';
           }
         });
     });
@@ -36,7 +35,7 @@ export class CheckinComponent implements OnInit {
         if (cameras.length > 0) {
           this.scanner.start(cameras[0]);
         } else {
-          console.error("No cameras found.");
+          console.error('No cameras found.');
         }
       })
       .catch((e) => {
@@ -48,8 +47,7 @@ export class CheckinComponent implements OnInit {
     this.scanner.stop();
   }
 
-  back()
-  {
+  back() {
     history.back();
   }
 }
