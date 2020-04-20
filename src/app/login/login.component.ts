@@ -115,18 +115,18 @@ export class LoginComponent implements OnInit {
 
     this.apiService.post('auth/login', params).subscribe((response) => {
       loginResponse = response;
-      if (loginResponse.status === 'OK' && loginResponse.role === 'USER') {
+      if (loginResponse.status === 'OK' && loginResponse.user.role === 'USER') {
         this.apiLoginResponse = '';
         this.Mainservice.adminAccess = false;
-        this.Mainservice.userName = loginResponse.full_name;
+        this.Mainservice.userName = loginResponse.user.full_name;
         window.sessionStorage.setItem('isLoggedIn', 'true');
         this.router.navigate(['/']);
       } else if (
         loginResponse.status === 'OK' &&
-        loginResponse.role === 'ADMIN'
+        loginResponse.user.role === 'ADMIN'
       ) {
-        this.Mainservice.userName = loginResponse.full_name;
         this.Mainservice.adminAccess = true;
+        this.Mainservice.userName = loginResponse.user.full_name;
         this.apiLoginResponse = '';
         window.sessionStorage.setItem('isLoggedIn', 'true');
         this.router.navigate(['/', 'admin']);
