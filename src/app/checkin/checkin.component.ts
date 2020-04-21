@@ -49,8 +49,7 @@ export class CheckinComponent implements OnInit, OnDestroy {
 
   cameraChange(event) {
     this.selectedInd = event.value;
-    this.scanner.stop();
-    this.scanner.start(this.selectedInd);
+    this.scanner.stop().then(() => this.scanner.start(this.selectedInd));
   }
 
   back() {
