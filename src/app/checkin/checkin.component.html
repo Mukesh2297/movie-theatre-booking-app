@@ -14,7 +14,7 @@
     <div class="camera-obj">
       <mat-form-field>
         <mat-label>Select Camera</mat-label>
-        <mat-select (selectionTabChange)="selectedInd=ind" [value]="selectedInd">
+        <mat-select (selectionTabChange)="[selectedInd=ind]" [value]="selectedInd">
           <mat-option [value]="ind" *ngFor="let cameras of apiResponse; index as ind">
             {{cameras.name}}
           </mat-option>
