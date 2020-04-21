@@ -33,7 +33,7 @@ export class CheckinComponent implements OnInit, OnDestroy {
     });
     this.scanner = new Instascan.Scanner({
       video: document.getElementById('preview'),
-      scanPeriod: 5,
+      scanPeriod: 5, mirror: false
     });
     this.scanner.addListener('scan', (content, image) => {
       const checkinDetails = {
