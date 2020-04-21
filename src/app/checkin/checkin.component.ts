@@ -10,7 +10,9 @@ declare var Instascan: any;
 })
 export class CheckinComponent implements OnInit {
   scanner = null;
+  apiResponse;
   apiResponseMessage = null;
+  selectedInd = 0;
   constructor(private apiService: ApiService) {}
 
   ngOnInit(): void {
@@ -32,9 +34,11 @@ export class CheckinComponent implements OnInit {
     });
     Instascan.Camera.getCameras()
       .then((cameras) => {
+        this.apiResponse = cameras;
+        console.log(this.apiResponse);
         if (cameras.length > 0) {
           alert(JSON.stringify(cameras));
-          this.scanner.start(cameras[0]);
+          this.scanner.start(cameras[this.selectedInd]);
         } else {
           console.error('No cameras found.');
         }

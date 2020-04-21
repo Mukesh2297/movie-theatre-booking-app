@@ -12,6 +12,14 @@
     font-size: large;
 }
 
+.select-camera
+{
+    height: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
 .back-arrow
 {
     width: 20px;
