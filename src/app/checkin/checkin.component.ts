@@ -18,16 +18,17 @@ export class CheckinComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     Instascan.Camera.getCameras()
       .then((cameras) => {
-        alert(cameras);
+        this.apiResponse = cameras;
+        alert(JSON.stringify(cameras));
         if (cameras.length > 0 && this.selectedInd !== undefined) {
           // alert(JSON.stringify(cameras));
-          this.scanner.start(cameras[this.selectedInd]);
+          this.scanner.start(cameras[1]);
         } else {
-          console.error("No cameras found.");
+          alert("No cameras found.");
         }
       })
       .catch((e) => {
-        console.error(e);
+        alert(e);
       });
     this.scanner = new Instascan.Scanner({
       video: document.getElementById("preview"),
@@ -57,11 +58,15 @@ export class CheckinComponent implements OnInit, OnDestroy {
 
     this.selectedInd = event.value;
 
-    Instascan.Camera.getCameras().then((cameras) => {
-      this.apiResponse = cameras;
-      alert(cameras);
-      this.scanner.start(cameras[this.selectedInd]);
-    });
+    Instascan.Camera.getCameras()
+      .then((cameras) => {
+        this.apiResponse = cameras;
+        alert(cameras);
+        this.scanner.start(cameras[this.selectedInd]);
+      })
+      .catch((e) => {
+        alert(e);
+      });
     this.scanner = new Instascan.Scanner({
       video: document.getElementById("preview"),
       scanPeriod: 5,
