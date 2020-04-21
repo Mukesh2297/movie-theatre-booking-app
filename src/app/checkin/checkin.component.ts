@@ -16,22 +16,11 @@ export class CheckinComponent implements OnInit, OnDestroy {
   constructor(private apiService: ApiService) {}
 
   ngOnInit(): void {
-    Instascan.Camera.getCameras()
-      .then((cameras) => {
-        this.apiResponse = cameras;
-        if (cameras.length > 0 && this.selectedInd !== undefined) {
-          this.scanner.start(this.selectedInd);
-        } else {
-          console.log("No cameras found.");
-        }
-      })
-      .catch((e) => {
-        alert(e);
-      });
     this.scanner = new Instascan.Scanner({
       video: document.getElementById("preview"),
-      scanPeriod: 5,
+      scanPeriod: 1,
       mirror: false,
+      backgroundScan: false,
     });
     this.scanner.addListener("scan", (content, image) => {
       const checkinDetails = {
@@ -45,11 +34,25 @@ export class CheckinComponent implements OnInit, OnDestroy {
           }
         });
     });
+    Instascan.Camera.getCameras()
+      .then((cameras) => {
+        this.apiResponse = cameras;
+        if (cameras.length > 0 && this.selectedInd !== undefined) {
+          this.scanner.start(this.apiResponse[this.selectedInd]);
+        } else {
+          console.log("No cameras found.");
+        }
+      })
+      .catch((e) => {
+        alert(`Unable to access camera ${e}`);
+      });
   }
 
   cameraChange(event) {
     this.selectedInd = event.value;
-    this.scanner.stop().then(() => this.scanner.start(this.selectedInd));
+    this.scanner
+      .stop()
+      .then(() => this.scanner.start(this.apiResponse[this.selectedInd]));
   }
 
   back() {
