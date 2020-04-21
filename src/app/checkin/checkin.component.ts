@@ -19,12 +19,10 @@ export class CheckinComponent implements OnInit, OnDestroy {
     Instascan.Camera.getCameras()
       .then((cameras) => {
         this.apiResponse = cameras;
-        alert(JSON.stringify(cameras));
         if (cameras.length > 0 && this.selectedInd !== undefined) {
-          // alert(JSON.stringify(cameras));
-          this.scanner.start(cameras[1]);
+          this.scanner.start(this.selectedInd);
         } else {
-          alert("No cameras found.");
+          console.log("No cameras found.");
         }
       })
       .catch((e) => {
@@ -49,44 +47,17 @@ export class CheckinComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnDestroy(): void {
-    this.scanner.stop();
-  }
-
   cameraChange(event) {
-    alert(event.value);
-
     this.selectedInd = event.value;
-
-    Instascan.Camera.getCameras()
-      .then((cameras) => {
-        this.apiResponse = cameras;
-        alert(cameras);
-        this.scanner.start(cameras[this.selectedInd]);
-      })
-      .catch((e) => {
-        alert(e);
-      });
-    this.scanner = new Instascan.Scanner({
-      video: document.getElementById("preview"),
-      scanPeriod: 5,
-      mirror: false,
-    });
-    this.scanner.addListener("scan", (content, image) => {
-      const checkinDetails = {
-        qr_data: content,
-      };
-      this.apiService
-        .post("bookings/checkin", checkinDetails)
-        .subscribe((response: any) => {
-          if (response.status === "OK") {
-            this.apiResponseMessage = "Checkin Confirmed";
-          }
-        });
-    });
+    this.scanner.stop();
+    this.scanner.start(this.selectedInd);
   }
 
   back() {
     history.back();
+  }
+
+  ngOnDestroy(): void {
+    this.scanner.stop();
   }
 }
