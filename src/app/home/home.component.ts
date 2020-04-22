@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../services/api.service';
 import { Router } from '@angular/router';
 import { MainService } from '../main.service';
@@ -9,12 +9,23 @@ import { MainService } from '../main.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
   userName: string;
 
-  constructor(private apiService: ApiService, private router: Router, private appService: MainService) {
-      this.userName = this.appService.userName;
-    }
+  userData;
+
+  constructor(private apiService: ApiService, private router: Router, private appService: MainService) {}
+
+  ngOnInit() {
+
+    console.log(history);
+
+
+    this.userData = history.state;
+
+    // this.userData = this.userData;
+
+  }
 
   logout() {
     let logOutResponse;

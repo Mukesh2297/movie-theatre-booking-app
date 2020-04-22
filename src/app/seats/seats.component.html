@@ -5,14 +5,8 @@
         <label>NOW SHOWING</label> &nbsp;&nbsp;
         <mat-form-field>
           <mat-label>Select Movie</mat-label>
-          <mat-select
-            (selectionChange)="selectedMovie($event)"
-            [disabled]="isHallSelected"
-          >
-            <mat-option
-              *ngFor="let movielist of movies"
-              [value]="movielist.movie_id"
-            >
+          <mat-select (selectionChange)="selectedMovie($event)" [disabled]="isHallSelected">
+            <mat-option *ngFor="let movielist of movies" [value]="movielist.movie_id">
               {{ movielist.name | uppercase }} &nbsp; &nbsp;
               {{ movielist.ticket_price | currency: "INR" }}
             </mat-option>
@@ -26,17 +20,10 @@
     <div class="dayPicker">
       <div class="navigation">
         <mat-list class="listItems">
-          <mat-list-item
-            class="nav-item"
-            *ngFor="let days of dayArr; index as indexVal"
-          >
-            <button
-              mat-stroked-button
-              [ngClass]="
+          <mat-list-item class="nav-item" *ngFor="let days of dayArr; index as indexVal">
+            <button mat-stroked-button [ngClass]="
                 btnValue == indexVal ? 'btn btn-active' : 'btn btn-light'
-              "
-              (click)="DisplayAvailableShows(indexVal)"
-            >
+              " (click)="DisplayAvailableShows(indexVal)">
               {{ days }}
             </button>
           </mat-list-item>
@@ -48,10 +35,7 @@
   <ng-container>
     <div class="shows" *ngIf="selectedShow.length > 0; else allShows">
       <div class="showtime">
-        <div
-          class="selected-show"
-          *ngFor="let showSelected of selectedShow; index as selectedInd"
-        >
+        <div class="selected-show" *ngFor="let showSelected of selectedShow; index as selectedInd">
           <div class="selected-show-position">
             <div class="selected-show-label">
               <label>{{ showSelected.hall_name | uppercase }}</label>
@@ -67,22 +51,12 @@
     </div>
     <ng-template #allShows>
       <div class="shows">
-        <div
-          class="showtime"
-          *ngFor="let showDetails of shows; index as Arrind"
-        >
-          <label>{{ showDetails.hall_name | uppercase }}</label
-          ><br />
-          <button
-            mat-raised-button
-            color="primary"
-            [value]="availability.show_id"
-            *ngFor="
+        <div class="showtime" *ngFor="let showDetails of shows; index as Arrind">
+          <label>{{ showDetails.hall_name | uppercase }}</label><br />
+          <button mat-raised-button color="primary" [value]="availability.show_id" *ngFor="
               let availability of showDetails.availability;
               index as btnindex
-            "
-            (click)="bookSeats(availability.show_id, Arrind, btnindex)"
-          >
+            " (click)="bookSeats(availability.show_id, Arrind, btnindex)">
             {{ availability.show_time | filter }}
           </button>
         </div>
@@ -100,16 +74,12 @@
     <div class="total-seats" *ngIf="showSeats">
       <div class="hor" *ngFor="let rowSeat of rows; index as i">
         <div *ngFor="let columnSeat of columns; index as j">
-          <button
-            [value]="i * columns.length + (j + 1)"
-            (click)="seatSelected(i, j)"
-            [disabled]="isSeatAvailable(i, j)"
+          <button [value]="i * columns.length + (j + 1)" (click)="seatSelected(i, j)" [disabled]="isSeatAvailable(i, j)"
             [ngClass]="
               markedSeats.includes(i * columns.length + (j + 1))
                 ? 'seat selectedSeat'
                 : 'seat'
-            "
-          >
+            ">
             <!-- [ngClass]="{'selectedSeat' : markedSeats.includes((i * columns.length) + (j + 1)) , 'seat' : true}" -->
             <!-- [ngStyle]="{'background-color': markedSeats.includes((i * columns.length) + (j + 1)) ? 'green' : 'white'}"> -->
           </button>
@@ -118,21 +88,11 @@
       <br /><br />
       <div class="submit" *ngIf="isHallSelected">
         <div class="submit-button">
-          <button
-            mat-raised-button
-            color="warn"
-            value="Cancel"
-            (click)="cancel()"
-          >
+          <button mat-raised-button color="warn" value="Cancel" (click)="cancel()">
             CANCEL
           </button>
           &nbsp;
-          <button
-            mat-raised-button
-            color="primary"
-            value="Book Seats"
-            (click)="submit()"
-          >
+          <button mat-raised-button color="primary" value="Book Seats" (click)="submit()">
             BOOK SEATS
           </button>
         </div>

@@ -1,22 +1,22 @@
-import { Component, OnInit } from "@angular/core";
-import { MainService } from "../main.service";
-import { HttpClient, HttpParams } from "@angular/common/http";
-import { stringify } from "@angular/compiler/src/util";
-import { ApiService } from "../services/api.service";
+import { Component, OnInit } from '@angular/core';
+import { MainService } from '../main.service';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { stringify } from '@angular/compiler/src/util';
+import { ApiService } from '../services/api.service';
 
 @Component({
-  selector: "app-admin",
-  templateUrl: "./admin.component.html",
-  styleUrls: ["./admin.component.css"],
+  selector: 'app-admin',
+  templateUrl: './admin.component.html',
+  styleUrls: ['./admin.component.css'],
 })
 export class AdminComponent implements OnInit {
-  home: boolean = true;
-  manage: boolean = false;
-  displayMovieSelector: boolean = false;
+  home = true;
+  manage = false;
+  displayMovieSelector = false;
 
-  movieTitle: boolean = false;
+  movieTitle = false;
 
-  switch:string = "";
+  switch = '';
 
   movies;
 
@@ -30,7 +30,7 @@ export class AdminComponent implements OnInit {
 
   hallId;
 
-  isHallSelected: boolean = false;
+  isHallSelected = false;
 
   markedSeats: any[] = [];
 
@@ -44,7 +44,9 @@ export class AdminComponent implements OnInit {
 
   columns: number[] = [];
 
-  showSeats: boolean = false;
+  showSeats = false;
+
+  userData;
 
   constructor(
     public SeatBooking: MainService,
@@ -52,18 +54,23 @@ export class AdminComponent implements OnInit {
     private apiService: ApiService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit() {
+    console.log(history.state);
+    this.userData = history.state;
+    console.log(this.userData);
+
+
+  }
 
   navigate(value) {
-    
-    if (value.index == 0) 
-    {
-      this.switch = "";
-    } 
+
+    if (value.index === 0) {
+      this.switch = '';
+    }
   }
 
   DisplayMovieSelector(request: boolean) {
-    this.apiService.get("shows").subscribe((post) => {
+    this.apiService.get('shows').subscribe((post) => {
       this.movies = post;
       this.movies = this.movies.shows.map((movieslist) => {
         return movieslist;
@@ -95,7 +102,7 @@ export class AdminComponent implements OnInit {
   }
 
   selectedMovie(moviename) {
-    if (moviename.target.value == "none") {
+    if (moviename.target.value == 'none') {
       this.shows = null;
       this.showSeats = false;
     } else {
@@ -105,7 +112,7 @@ export class AdminComponent implements OnInit {
 
       const params = { id: this.movieId };
 
-      this.apiService.get("movies/showtime", params).subscribe((showtime) => {
+      this.apiService.get('movies/showtime', params).subscribe((showtime) => {
         this.shows = showtime;
         this.shows = this.shows.movies.map((showDetails) => {
           return showDetails;
@@ -117,7 +124,7 @@ export class AdminComponent implements OnInit {
   }
 
   showsAvailable() {
-    let hallId = this.hallId;
+    const hallId = this.hallId;
 
     this.shows = this.shows.movies.map((showTime) => {
       return showTime;
@@ -127,7 +134,7 @@ export class AdminComponent implements OnInit {
   logout() {
     let logOutResponse;
 
-    this.apiService.post("auth/logout", {}).subscribe((logout) => {
+    this.apiService.post('auth/logout', {}).subscribe((logout) => {
       logOutResponse = logout;
     });
   }

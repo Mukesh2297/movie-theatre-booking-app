@@ -21,6 +21,9 @@ import { MatInputModule } from '@angular/material/input';
 import { DialogBoxComponent } from './dialog-box/dialog-box.component';
 import { CheckinComponent } from './checkin/checkin.component';
 import { QRCodeModule } from 'angularx-qrcode';
+import { MainService } from './main.service';
+import { ApiService } from './services/api.service';
+import { AuthGuard } from './services/auth-guard.service';
 
 @NgModule({
   declarations: [
@@ -51,7 +54,7 @@ import { QRCodeModule } from 'angularx-qrcode';
     QRCodeModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [MainService, ApiService, AuthGuard],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
