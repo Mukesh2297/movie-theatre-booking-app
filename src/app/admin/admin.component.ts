@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { MainService } from '../main.service';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { stringify } from '@angular/compiler/src/util';
 import { ApiService } from '../services/api.service';
@@ -46,11 +45,7 @@ export class AdminComponent implements OnInit {
 
   showSeats = false;
 
-  constructor(
-    public SeatBooking: MainService,
-    public http: HttpClient,
-    private apiService: ApiService
-  ) {}
+  constructor(public http: HttpClient, private apiService: ApiService) {}
 
   ngOnInit(): void {}
 

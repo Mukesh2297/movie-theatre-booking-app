@@ -1,37 +1,29 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from '../services/api.service';
-import { Router } from '@angular/router';
-import { MainService } from '../main.service';
+import { AuthService } from '../auth/authService.service';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css']
+  styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit {
-
   userName: string;
 
   adminAccess: boolean;
 
-  constructor(private apiService: ApiService,
-              private router: Router,
-              private mainService: MainService) {
-      this.userName = this.mainService.userName;
-      this.adminAccess = this.mainService.adminAccess;
-     }
+  constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
-  }
-
-  logout() {
-    let logOutResponse;
-
-    this.apiService.post('auth/logout', {}).subscribe((logout) => {
-      logOutResponse = logout;
-      window.sessionStorage.removeItem('isLoggedIn');
-      this.router.navigate(['/', 'login']);
+    this.authService.user.subscribe((user) => {
+      if (!user) {
+        return null;
+      }
+      this.userName = user.fullName;
+      this.adminAccess = user.role === 'ADMIN';
     });
   }
 
+  logout() {
+    return this.authService.signOut();
+  }
 }

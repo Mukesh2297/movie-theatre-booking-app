@@ -49,7 +49,7 @@ import { QRCodeModule } from 'angularx-qrcode';
     MaterialModule,
     MatInputModule,
     QRCodeModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
