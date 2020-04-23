@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MainService } from '../main.service';
 import { HttpClient } from '@angular/common/http';
 import { ApiService } from '../services/api.service';
@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogBoxComponent } from '../dialog-box/dialog-box.component';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-login',
@@ -38,12 +39,15 @@ export class LoginComponent implements OnInit {
 
   signupformTemplate: FormGroup;
 
+  captchaSvg: SafeHtml;
+
   constructor(
     public Mainservice: MainService,
     public http: HttpClient,
     private apiService: ApiService,
     private router: Router,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private sanitized: DomSanitizer
   ) {}
 
   ngOnInit() {
@@ -71,6 +75,13 @@ export class LoginComponent implements OnInit {
         Validators.required,
         Validators.pattern(this.mobilePattern),
       ]),
+      captcha: new FormControl(null, [Validators.required]),
+    });
+
+    this.apiService.get('auth/captcha').subscribe((response: any) => {
+      this.captchaSvg = this.sanitized.bypassSecurityTrustHtml(
+        response.captcha
+      );
     });
   }
 
@@ -91,24 +102,25 @@ export class LoginComponent implements OnInit {
   Register() {
     const body = this.signupformTemplate.value;
 
-    let signupResponse;
-
-    this.apiService.post('auth/signup', body).subscribe((response) => {
-      signupResponse = response;
-      if (signupResponse.status === 'OK') {
+    this.apiService.post('auth/signup', body).subscribe((response: any) => {
+      if (response.status === 'OK') {
         this.dialog.open(DialogBoxComponent, {
           data: { message: 'Registeration Successful' },
         });
         this.signupform = false;
         this.loginform = true;
-      } else if (signupResponse.status === 'Server error') {
+      } else if (response.status === 'Server error') {
+        this.apiRegisterResponse = 'Something went wrong. Please try again';
+      } else if (response.status === 'Unauthorized' && response.captcha) {
+        this.captchaSvg = this.sanitized.bypassSecurityTrustHtml(
+          response.captcha
+        );
         this.apiRegisterResponse = 'Something went wrong. Please try again';
       }
     });
   }
 
   SignIn(loginForm) {
-
     let loginResponse;
 
     const params = loginForm.value;
