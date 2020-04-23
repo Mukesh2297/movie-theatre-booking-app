@@ -1,8 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MainService } from '../main.service';
-import { HttpClient } from '@angular/common/http';
-import { ApiService } from '../services/api.service';
-import { Router } from '@angular/router';
+import { AuthService } from '../auth/authService.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogBoxComponent } from '../dialog-box/dialog-box.component';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
@@ -42,11 +39,8 @@ export class LoginComponent implements OnInit {
   captchaSvg: SafeHtml;
 
   constructor(
-    public Mainservice: MainService,
-    public http: HttpClient,
-    private apiService: ApiService,
-    private router: Router,
-    public dialog: MatDialog,
+    private authService: AuthService,
+    private dialog: MatDialog,
     private sanitized: DomSanitizer
   ) {}
 
@@ -78,7 +72,7 @@ export class LoginComponent implements OnInit {
       captcha: new FormControl(null, [Validators.required]),
     });
 
-    this.apiService.get('auth/captcha').subscribe((response: any) => {
+    this.authService.getCaptcha().subscribe((response: any) => {
       this.captchaSvg = this.sanitized.bypassSecurityTrustHtml(
         response.captcha
       );
@@ -102,7 +96,7 @@ export class LoginComponent implements OnInit {
   Register() {
     const body = this.signupformTemplate.value;
 
-    this.apiService.post('auth/signup', body).subscribe((response: any) => {
+    this.authService.signup(body).subscribe((response: any) => {
       if (response.status === 'OK') {
         this.dialog.open(DialogBoxComponent, {
           data: { message: 'Registeration Successful' },
@@ -125,23 +119,15 @@ export class LoginComponent implements OnInit {
 
     const params = loginForm.value;
 
-    this.apiService.post('auth/login', params).subscribe((response) => {
+    this.authService.signIn(params).subscribe((response) => {
       loginResponse = response;
       if (loginResponse.status === 'OK' && loginResponse.user.role === 'USER') {
         this.apiLoginResponse = '';
-        this.Mainservice.adminAccess = false;
-        this.Mainservice.userName = loginResponse.user.full_name;
-        window.sessionStorage.setItem('isLoggedIn', 'true');
-        this.router.navigate(['/']);
       } else if (
         loginResponse.status === 'OK' &&
         loginResponse.user.role === 'ADMIN'
       ) {
-        this.Mainservice.adminAccess = true;
-        this.Mainservice.userName = loginResponse.user.full_name;
         this.apiLoginResponse = '';
-        window.sessionStorage.setItem('isLoggedIn', 'true');
-        this.router.navigate(['/', 'admin']);
       } else if (loginResponse.status === 'Server error') {
         this.apiLoginResponse = 'Invalid Username or Password';
       }

@@ -13,6 +13,6 @@
     <span>Hello {{ userName | titlecase }}</span>
     <a *ngIf="adminAccess" routerLink="/checkin">Checkin Scanner</a>
     <a routerLink="/mybookings">My Bookings</a>
-    <a routerLink="/" (click)="logout()">Logout</a>
+    <a (click)="logout()">Logout</a>
   </div>
 </mat-toolbar>
