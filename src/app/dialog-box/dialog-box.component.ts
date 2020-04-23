@@ -11,14 +11,13 @@ import { MainService } from '../main.service';
 export class DialogBoxComponent implements OnInit {
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data:any,
-    public mainService:MainService){}
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    public mainService: MainService) {}
 
   ngOnInit(): void {
   }
 
-  myBookings()
-  {
+  myBookings() {
     this.mainService.myBooking();
   }
 

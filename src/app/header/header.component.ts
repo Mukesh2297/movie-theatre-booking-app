@@ -10,13 +10,13 @@ import { MainService } from '../main.service';
 })
 export class HeaderComponent implements OnInit {
 
-  userName:string;
+  userName: string;
 
-  adminAccess:boolean;
+  adminAccess: boolean;
 
-  constructor(private apiService:ApiService,
-    private router:Router,
-    private mainService: MainService) {
+  constructor(private apiService: ApiService,
+              private router: Router,
+              private mainService: MainService) {
       this.userName = this.mainService.userName;
       this.adminAccess = this.mainService.adminAccess;
      }
@@ -27,10 +27,10 @@ export class HeaderComponent implements OnInit {
   logout() {
     let logOutResponse;
 
-    this.apiService.post("auth/logout", {}).subscribe((logout) => {
+    this.apiService.post('auth/logout', {}).subscribe((logout) => {
       logOutResponse = logout;
-      window.sessionStorage.removeItem("isLoggedIn");
-      this.router.navigate(['/','login'])
+      window.sessionStorage.removeItem('isLoggedIn');
+      this.router.navigate(['/', 'login']);
     });
   }
 

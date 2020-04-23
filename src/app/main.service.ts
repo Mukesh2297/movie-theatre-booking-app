@@ -8,9 +8,9 @@ import { Router } from '@angular/router';
 })
 export class MainService {
 
-  userName:string;
+  userName: string;
 
-  selectedSeat:any[]=[];
+  selectedSeat: any[] = [];
 
   bookedSeats;
 
@@ -21,56 +21,49 @@ export class MainService {
   hallAvailability;
 
   ExistingUsers;
-  credentialsValid:boolean;
+  credentialsValid: boolean;
 
-  adminAccess:boolean;
+  adminAccess: boolean;
 
-  constructor(private http:HttpClient, private router:Router) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
-  seatSelected(seatnum)
-  {
-    let seatNumber = seatnum.target.value;
+  seatSelected(seatnum) {
+    const seatNumber = seatnum.target.value;
     this.selectedSeat.push(seatNumber);
   }
 
-  SignIn(regUname,regPasswrd)
-  {
+  SignIn(regUname, regPasswrd) {
 
-    let LoginUname = regUname.value;
-    let LoginPassWord = regPasswrd.value;
+    const LoginUname = regUname.value;
+    const LoginPassWord = regPasswrd.value;
 
-    let LoginDetails = LoginUname.concat(","+LoginPassWord);
+    const LoginDetails = LoginUname.concat(',' + LoginPassWord);
 
-    this.ExistingUsers= localStorage.getItem("Users");
+    this.ExistingUsers = localStorage.getItem('Users');
     this.ExistingUsers = JSON.parse(this.ExistingUsers);
-    
-    let NewUsers = this.ExistingUsers.map((ListItem,index)=>{return `${ListItem.UserName},${ListItem.Password}`})
 
-    if(NewUsers.indexOf(LoginDetails) >=0)
-    {
-      sessionStorage.setItem("LoggedIn_Users",(JSON.stringify(LoginDetails)));
+    const NewUsers = this.ExistingUsers.map((ListItem, index) => `${ListItem.UserName},${ListItem.Password}`);
+
+    if (NewUsers.indexOf(LoginDetails) >= 0) {
+      sessionStorage.setItem('LoggedIn_Users', (JSON.stringify(LoginDetails)));
 
       this.credentialsValid = true;
 
-      
-      
-        
-    }
 
-    else
-    {
+
+
+    } else {
       this.credentialsValid = false;
-      alert("Login Credentials does not match");
+      alert('Login Credentials does not match');
 
     }
-    
 
-    
+
+
   }
-  
-  myBooking()
-  {
-    this.router.navigate(["/","mybookings"])
+
+  myBooking() {
+    this.router.navigate(['/', 'mybookings']);
   }
 
 

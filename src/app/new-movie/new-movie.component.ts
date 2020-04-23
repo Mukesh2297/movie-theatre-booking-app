@@ -14,7 +14,7 @@ export class NewMovieComponent implements OnInit {
 
   @ViewChild('movieForm') private formDirective: NgForm;
 
-  constructor(public http: HttpClient, private apiService: ApiService) { }
+  constructor(public http: HttpClient, private apiService: ApiService) {}
 
   ngOnInit(): void {}
 
