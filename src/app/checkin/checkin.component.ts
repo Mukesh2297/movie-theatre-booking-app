@@ -1,12 +1,12 @@
-import { Component, OnInit, OnDestroy } from "@angular/core";
-import { ApiService } from "../services/api.service";
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { ApiService } from '../services/api.service';
 
 declare var Instascan: any;
 
 @Component({
-  selector: "app-checkin",
-  templateUrl: "./checkin.component.html",
-  styleUrls: ["./checkin.component.css"],
+  selector: 'app-checkin',
+  templateUrl: './checkin.component.html',
+  styleUrls: ['./checkin.component.css'],
 })
 export class CheckinComponent implements OnInit, OnDestroy {
   scanner = null;
@@ -17,20 +17,20 @@ export class CheckinComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.scanner = new Instascan.Scanner({
-      video: document.getElementById("preview"),
+      video: document.getElementById('preview'),
       scanPeriod: 1,
       mirror: false,
       backgroundScan: false,
     });
-    this.scanner.addListener("scan", (content, image) => {
+    this.scanner.addListener('scan', (content, image) => {
       const checkinDetails = {
         qr_data: content,
       };
       this.apiService
-        .post("bookings/checkin", checkinDetails)
+        .post('bookings/checkin', checkinDetails)
         .subscribe((response: any) => {
-          if (response.status === "OK") {
-            this.apiResponseMessage = "Checkin Confirmed";
+          if (response.status === 'OK') {
+            this.apiResponseMessage = 'Checkin Confirmed';
           }
         });
     });
@@ -40,7 +40,7 @@ export class CheckinComponent implements OnInit, OnDestroy {
         if (cameras.length > 0 && this.selectedInd !== undefined) {
           this.scanner.start(this.apiResponse[this.selectedInd]);
         } else {
-          console.log("No cameras found.");
+          console.log('No cameras found.');
         }
       })
       .catch((e) => {

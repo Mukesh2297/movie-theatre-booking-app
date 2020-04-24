@@ -26,7 +26,6 @@ import { ApiService } from './services/api.service';
 import { AuthGuard } from './services/auth-guard.service';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -55,7 +54,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatInputModule,
     QRCodeModule,
     ReactiveFormsModule,
-    FlexLayoutModule
+    FlexLayoutModule,
   ],
   providers: [MainService, ApiService, AuthGuard],
   bootstrap: [AppComponent],

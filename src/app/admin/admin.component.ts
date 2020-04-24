@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { MainService } from '../main.service';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { stringify } from '@angular/compiler/src/util';
 import { ApiService } from '../services/api.service';
@@ -48,22 +47,15 @@ export class AdminComponent implements OnInit {
 
   userData;
 
-  constructor(
-    public SeatBooking: MainService,
-    public http: HttpClient,
-    private apiService: ApiService
-  ) {}
+  constructor(public http: HttpClient, private apiService: ApiService) {}
 
   ngOnInit() {
     console.log(history.state);
     this.userData = history.state;
     console.log(this.userData);
-
-
   }
 
   navigate(value) {
-
     if (value.index === 0) {
       this.switch = '';
     }
@@ -102,7 +94,7 @@ export class AdminComponent implements OnInit {
   }
 
   selectedMovie(moviename) {
-    if (moviename.target.value == 'none') {
+    if (moviename.target.value === 'none') {
       this.shows = null;
       this.showSeats = false;
     } else {

@@ -1,22 +1,22 @@
 module.exports = {
-  "/api": {
-    target: "https://theatreapi.saileshkumar.com",
-    // target: "http://localhost:3000",
+  '/api': {
+    // target: "https://theatreapi.saileshkumar.com",
+    target: 'http://localhost:3000',
     changeOrigin: true,
     secure: false,
-    cookieDomainRewrite: "localhost",
+    cookieDomainRewrite: 'localhost',
     debug: true,
     pathRewrite: function (path, req) {
-      return path.replace("/api", "");
+      return path.replace('/api', '');
     },
     onProxyRes: (proxyResponse) => {
-      if (proxyResponse.headers["set-cookie"]) {
-        const cookies = proxyResponse.headers["set-cookie"].map((cookie) => {
+      if (proxyResponse.headers['set-cookie']) {
+        const cookies = proxyResponse.headers['set-cookie'].map((cookie) => {
           return cookie
-            .replace(/; Secure/gi, "")
-            .replace(/; SameSite=None/gi, "");
+            .replace(/; Secure/gi, '')
+            .replace(/; SameSite=None/gi, '');
         });
-        proxyResponse.headers["set-cookie"] = cookies;
+        proxyResponse.headers['set-cookie'] = cookies;
       }
     },
   },

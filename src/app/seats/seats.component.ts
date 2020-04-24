@@ -1,11 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { MainService } from '../main.service';
 import { HttpClient } from '@angular/common/http';
 import { ApiService } from '../services/api.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogBoxComponent } from '../dialog-box/dialog-box.component';
-
-
 
 @Component({
   selector: 'app-seats',
@@ -13,7 +10,6 @@ import { DialogBoxComponent } from '../dialog-box/dialog-box.component';
   styleUrls: ['./seats.component.css'],
 })
 export class SeatsComponent implements OnInit {
-
   movies;
 
   shows;
@@ -59,7 +55,6 @@ export class SeatsComponent implements OnInit {
   btnValue = 0;
 
   constructor(
-    public SeatBooking: MainService,
     public http: HttpClient,
     private apiService: ApiService,
     public matDialog: MatDialog
@@ -78,25 +73,22 @@ export class SeatsComponent implements OnInit {
   }
 
   bookSeats(showId, Arrind, indexval) {
-
     const params = { id: showId };
 
-    this.apiService.get(`bookings/show`, params)
-      .subscribe((hallDetails) => {
-        this.hallAvailability = hallDetails;
-        this.totalRowsCount = this.hallAvailability.hallDetail.total_rows;
-        this.totalColumnsCount = this.hallAvailability.hallDetail.total_columns;
-        this.columns = Array(this.totalColumnsCount).fill(0);
-        this.rows = Array(this.totalRowsCount).fill(0);
-        this.isHallSelected = true;
-      });
+    this.apiService.get(`bookings/show`, params).subscribe((hallDetails) => {
+      this.hallAvailability = hallDetails;
+      this.totalRowsCount = this.hallAvailability.hallDetail.total_rows;
+      this.totalColumnsCount = this.hallAvailability.hallDetail.total_columns;
+      this.columns = Array(this.totalColumnsCount).fill(0);
+      this.rows = Array(this.totalRowsCount).fill(0);
+      this.isHallSelected = true;
+    });
 
     this.showSeats = true;
 
     this.showId = showId;
 
     this.selectedShow.push(this.shows[Arrind].availability[indexval]);
-
   }
 
   isSeatAvailable(i, j) {
@@ -108,7 +100,6 @@ export class SeatsComponent implements OnInit {
   }
 
   selectedMovie(moviename) {
-
     const ind = 0;
 
     this.btnValue = 0;
@@ -124,7 +115,6 @@ export class SeatsComponent implements OnInit {
     const params = { id: this.movieId, date: formattedDate };
 
     this.availableShows(params);
-
   }
 
   DisplayAvailableShows(ind) {
@@ -138,8 +128,6 @@ export class SeatsComponent implements OnInit {
 
     this.availableShows(params);
   }
-
-
 
   showsAvailable() {
     const hallId = this.hallId;
@@ -180,23 +168,18 @@ export class SeatsComponent implements OnInit {
 
         if (this.apiResponse.status === 'OK') {
           // this.SeatBooking.bookedSeats = bookedSeats;
-          this.matDialog.open(DialogBoxComponent, { data: { bookedSeats, info: 'booking'}});
+          this.matDialog.open(DialogBoxComponent, {
+            data: { bookedSeats, info: 'booking' },
+          });
           this.markedSeats.splice(0);
           this.selectedShow.splice(0);
           this.isHallSelected = false;
           this.showSeats = false;
-
-
         }
-
       });
-
-
   }
 
-
   DayValuePicker() {
-
     const currentDate = new Date();
 
     const currentDay = currentDate.getDay();
@@ -210,11 +193,9 @@ export class SeatsComponent implements OnInit {
         this.dateArr.push(currentDayValue);
       }
     }
-
   }
 
   DayPicker() {
-
     for (let i = 0; i <= this.dateArr.length; i++) {
       const dayValue = this.dateArr[i];
 
@@ -240,28 +221,22 @@ export class SeatsComponent implements OnInit {
         case 0:
           this.dayArr.push('Sunday');
       }
-
     }
 
     this.dayArr.splice(0, 1, 'Today');
     this.dayArr.splice(1, 1, 'Tomorrow');
-
   }
 
-
   getFormattedDate(ind) {
-
     const indexVal = ind;
     const currentDate = new Date();
     const numberOfDaysToAdd = Number(indexVal);
     const month = currentDate.toLocaleString('default', { month: 'short' });
     currentDate.setDate(currentDate.getDate() + numberOfDaysToAdd);
     return `${currentDate.getDate()}-${month}-${currentDate.getFullYear()}`;
-
   }
 
   availableShows(bodyParams) {
-
     const params = bodyParams;
 
     this.apiService.get('movies/showtime', params).subscribe((showtime) => {
@@ -275,13 +250,6 @@ export class SeatsComponent implements OnInit {
           return showDetails;
         });
       }
-
     });
-
   }
-
 }
-
-
-
-

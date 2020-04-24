@@ -25,7 +25,7 @@ export class NewShowComponent implements OnInit {
 
   @ViewChild('showForm') private formDirective: NgForm;
 
-  constructor(public http: HttpClient, private apiService: ApiService) { }
+  constructor(public http: HttpClient, private apiService: ApiService) {}
 
   ngOnInit(): void {
     this.apiService.get('movies').subscribe((response) => {
@@ -48,7 +48,6 @@ export class NewShowComponent implements OnInit {
   }
 
   update(showForm) {
-
     const showTime = showForm.value;
 
     const formattedShowTime = new Date(showTime.show_time);

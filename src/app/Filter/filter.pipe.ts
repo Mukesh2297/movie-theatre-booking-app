@@ -7,43 +7,36 @@ export class FilterPipe implements PipeTransform {
 
   transform(value) {
 
-  let timestamp = new Date(value);
-  
-  let hours = timestamp.getUTCHours()
+  const timestamp = new Date(value);
 
-  let minutesfn = ()=>
-  {
-    let timestampMinutes = timestamp.getUTCMinutes()
-    
-    if(timestampMinutes < 10)
-    {
-      return `${timestampMinutes}${0}`
-    }
-    else
-    {
-      return timestampMinutes
+  let hours = timestamp.getUTCHours();
+
+  const minutesfn = () => {
+    const timestampMinutes = timestamp.getUTCMinutes();
+
+    if (timestampMinutes < 10) {
+      return `${timestampMinutes}${0}`;
+    } else {
+      return timestampMinutes;
     }
 
-  }
+  };
 
-  let minutes = minutesfn();
-  
+  const minutes = minutesfn();
+
   let meridiem;
 
-  if(hours >=13 && hours <= 23 )
-  {
-    let convertedHour = hours - 12;
+  if (hours >= 13 && hours <= 23 ) {
+    const convertedHour = hours - 12;
     hours = convertedHour;
-    meridiem = "PM"
-  }
-  else
-  {
-    meridiem = "AM"
+    meridiem = 'PM';
+  } else {
+    meridiem = 'AM';
   }
 
-  return `${hours}:${minutes} ${meridiem}`
-    
-    
+  return `${hours}:${minutes} ${meridiem}`;
+
+
   }
 
 }
