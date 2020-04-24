@@ -66,6 +66,7 @@ export class SeatsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    console.log('seats component');
     this.apiService.get('shows').subscribe((post) => {
       this.movies = post;
       this.movies = this.movies.shows.map((movieslist) => {

@@ -82,6 +82,7 @@ label
     color: darkred;
 }
 
+
 button,input
 {
     color: black;
@@ -94,22 +95,13 @@ input:-webkit-autofill:active {
     transition: background-color 5000s ease-in-out 0s;
 }
 
-
 /* MEDIA QUERIES */
 
-@media (min-width: 320px) and (max-width:480px) {
-    
-    mat-form-field
+@media (min-width:320px) and (max-width:480px)
 {
-    width: 300px;
+    .child-items
+    {
+        background-color: linen;
+    }
+   
 }
-
-input:-webkit-autofill,
-input:-webkit-autofill:hover,
-input:-webkit-autofill:focus,
-input:-webkit-autofill:active {
-    transition: background-color 5000s ease-in-out 0s;
-}
-  
-    
-  }

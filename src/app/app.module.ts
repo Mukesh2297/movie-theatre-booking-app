@@ -24,6 +24,8 @@ import { QRCodeModule } from 'angularx-qrcode';
 import { MainService } from './main.service';
 import { ApiService } from './services/api.service';
 import { AuthGuard } from './services/auth-guard.service';
+import { FlexLayoutModule } from '@angular/flex-layout';
+
 
 @NgModule({
   declarations: [
@@ -52,7 +54,8 @@ import { AuthGuard } from './services/auth-guard.service';
     MaterialModule,
     MatInputModule,
     QRCodeModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FlexLayoutModule
   ],
   providers: [MainService, ApiService, AuthGuard],
   bootstrap: [AppComponent],

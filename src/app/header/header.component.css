@@ -1,3 +1,9 @@
+.container
+{
+    height: 80px;
+    width: 100%;
+}
+
 body
 {
     overflow-y: hidden;
@@ -8,8 +14,11 @@ body
     justify-content: space-between;
 }
 
-
-
+.side-nav-container
+{
+    height: 100px;
+    width: 100%;
+}
 a
 {
     padding-right: 1rem;
@@ -23,6 +32,13 @@ span
     padding-right: 2rem;
     font-size: small;
     color: white;  
+}
+
+.sidenav-routes a,span
+{
+    color: black;
+    font-size: medium;
+    margin: 3px;  
 }
 
 a:hover

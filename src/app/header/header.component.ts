@@ -2,6 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ApiService } from '../services/api.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MainService } from '../main.service';
+import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
+
 
 @Component({
   selector: 'app-header',
@@ -18,16 +20,21 @@ export class HeaderComponent implements OnInit {
 
   adminAccess: boolean;
 
+  mobileDevice: boolean;
+
   stateResponse;
 
   constructor(private apiService: ApiService,
               private router: Router,
               private mainService: MainService,
-              public route: ActivatedRoute) {
+              public route: ActivatedRoute, public breakpointObserver: BreakpointObserver) {
                 // console.log(mainService.userName, mainService.adminAccess);
               }
 
   ngOnInit() {
+
+    this.breakpointObserver.observe(['(min-width: 480px )'])
+    .subscribe((result) => {if (result.matches) {this.mobileDevice = true; } else {this.mobileDevice = false; }});
 
     console.log(this.userInfo);
 
