@@ -1,7 +1,7 @@
 module.exports = {
   '/api': {
-    // target: "https://theatreapi.saileshkumar.com",
-    target: 'http://localhost:3000',
+    target: 'https://theatreapi.saileshkumar.com',
+    // target: 'http://localhost:3000',
     changeOrigin: true,
     secure: false,
     cookieDomainRewrite: 'localhost',
