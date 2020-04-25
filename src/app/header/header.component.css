@@ -41,8 +41,15 @@ span
 {
     color: black;
     font-size: medium;
-    margin: 3px;  
-    padding: 5px;
+    padding-left: 20px;
+    padding-top: 20px;
+    
+}
+
+.sidenav-routes a
+{
+    color: #ff4081;
+    cursor: pointer;
 }
 
 a:hover

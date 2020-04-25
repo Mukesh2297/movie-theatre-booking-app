@@ -36,3 +36,24 @@
     justify-content: center;
     align-items: center;
 }
+
+/* MEDIA QUERIES */
+
+@media (min-width:320px) and (max-width:480px)
+{
+    .video
+    {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        overflow: none;
+        
+    }
+
+    video
+    {
+        height: 300px;
+        width: 350px;
+    }
+   
+}

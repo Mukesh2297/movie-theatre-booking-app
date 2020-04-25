@@ -31,7 +31,9 @@
         style="width: auto;"
         >{{ bookings.booked_seats }}</label
       ><br />
-      <qrcode [qrdata]="bookings.qrdata" [size]="256" [level]="'M'"></qrcode>
+      <div class="qrcode">
+        <qrcode [qrdata]="bookings.qrdata" [size]="256" [level]="'M'"></qrcode>
+      </div>
     </div>
   </div>
   <ng-template #noBooking>

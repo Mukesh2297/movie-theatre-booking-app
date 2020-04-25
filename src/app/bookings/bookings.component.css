@@ -64,6 +64,11 @@ label
     padding-left: 15px;
 }
 
+.qrcode
+{
+    margin-top: 10px;
+}
+
 
 /* MEDIA QUERIES */
 

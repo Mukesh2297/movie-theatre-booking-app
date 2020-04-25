@@ -70,6 +70,7 @@ body::-webkit-scrollbar {
 {
     width: 500px;
     display: flex;
+    flex-direction: column;
     justify-content: left;
     margin-bottom: 10px;
 }
@@ -77,13 +78,13 @@ body::-webkit-scrollbar {
 .showtime label
 {
     margin-top: 6px;
+    margin-bottom: 5px;
 }
 
 .showtime button
 {
 
     margin-right: 5px;
-    margin-left: 5px;
 }
 
 
@@ -101,6 +102,11 @@ body::-webkit-scrollbar {
     display: column;
     justify-content: flex-start;
 
+}
+
+.selected-show-label
+{
+    margin-bottom: 5px;
 }
 
 .selected-show-position button
@@ -124,7 +130,7 @@ body::-webkit-scrollbar {
     text-align: center;
     transform: rotateX(-35deg);
     box-shadow: 0 3px 10px rgba(255, 255, 255, 0.7);
-    background-color: black;
+    background-color: grey;
 }
 
 .screen p
@@ -307,7 +313,7 @@ button[disabled=disabled], button:disabled {
     text-align: center;
     transform: rotateX(-35deg);
     box-shadow: 0 3px 10px rgba(255, 255, 255, 0.7);
-    background-color: black;
+    background-color: grey;
     }
 
     .screen p

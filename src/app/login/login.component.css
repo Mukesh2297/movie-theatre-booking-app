@@ -131,11 +131,9 @@ input.mat-input-element .mat-input-element-outline {
 
 .form-content
 {
-    height: 100vh;
     width: 100%;
     display: flex;
     justify-content: center;
-    align-items: center;
 
 }
 
@@ -168,10 +166,12 @@ input:-webkit-autofill:active {
 
 /* MEDIA QUERIES */
 
+
 @media (min-width:320px) and (max-width:480px)
 {
     .heading
     {
-        margin-bottom: 50px;
+        margin-bottom: 100px;
     }
 }
+
