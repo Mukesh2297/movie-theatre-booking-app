@@ -36,7 +36,7 @@
           <div class="listItems">
             <mat-form-field>
               <mat-label>Select a day</mat-label>
-              <mat-select [value]="0" (selectionChange)="DisplayAvailableShows($event)">
+              <mat-select [disabled]="isHallSelected" [value]="0" (selectionChange)="DisplayAvailableShows($event)">
                 <mat-option [value]="indexVal" *ngFor="let days of dayArr; index as indexVal">
                   {{ days }}
                 </mat-option>
