@@ -15,7 +15,7 @@ export class FilterPipe implements PipeTransform {
     const timestampMinutes = timestamp.getUTCMinutes();
 
     if (timestampMinutes < 10) {
-      return `${timestampMinutes}${0}`;
+      return `${0}${timestampMinutes}`;
     } else {
       return timestampMinutes;
     }

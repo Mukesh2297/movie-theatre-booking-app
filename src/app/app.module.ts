@@ -22,7 +22,6 @@ import { DialogBoxComponent } from './dialog-box/dialog-box.component';
 import { CheckinComponent } from './checkin/checkin.component';
 import { QRCodeModule } from 'angularx-qrcode';
 import { ApiService } from './services/api.service';
-import { AuthGuard } from './services/auth-guard.service';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { BodyComponent } from './body/body.component';
 
@@ -57,7 +56,7 @@ import { BodyComponent } from './body/body.component';
     ReactiveFormsModule,
     FlexLayoutModule,
   ],
-  providers: [ApiService, AuthGuard],
+  providers: [ApiService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

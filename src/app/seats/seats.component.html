@@ -67,13 +67,13 @@
     </div>
     <ng-template #allShows>
       <div class="shows">
-        <div class="showtime" *ngFor="let showDetails of shows; index as Arrind">
+        <div class="showtime" *ngFor="let showDetails of shows; index as hallInd">
           <label>{{ showDetails.hall_name | uppercase }}</label>
           <div class="showtime-btn">
           <button mat-raised-button color="primary" [value]="availability.show_id" *ngFor="
               let availability of showDetails.availability;
-              index as btnindex
-            " (click)="bookSeats(availability.show_id, Arrind, btnindex)">
+              index as showtimeIndex
+            " (click)="bookSeats(availability.show_id, hallInd, showtimeIndex)">
             {{ availability.show_time | filter }}
           </button>
         </div>

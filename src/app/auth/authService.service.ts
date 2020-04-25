@@ -33,6 +33,7 @@ export class AuthService {
   signIn(values) {
     return this.apiService.post('auth/login', values).pipe(
       tap((response: any) => {
+        if (response.hasError) {return null;}
         const user = new User(
           response.user.full_name,
           response.user.role,

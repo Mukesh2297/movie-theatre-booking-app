@@ -3,8 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { ApiService } from '../services/api.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogBoxComponent } from '../dialog-box/dialog-box.component';
-import { AuthService, User } from '../auth/authService.service';
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { AuthService } from '../auth/authService.service';
+import { BreakpointObserver } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-seats',
@@ -67,17 +67,14 @@ export class SeatsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    console.log('seats component');
-
     this.breakpointObserver
-    .observe(['(max-width: 700px )'])
+    .observe(['(max-width: 480px )'])
     .subscribe((result) => {
       if (result.matches) {
         this.mobileDevice = true;
       } else {
         this.mobileDevice = false;
       }
-      console.log(this.mobileDevice);
     });
 
     this.apiService.get('shows').subscribe((post) => {
