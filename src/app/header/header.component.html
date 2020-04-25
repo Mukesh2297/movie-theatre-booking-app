@@ -6,47 +6,23 @@
             <a class="btn btn-primary" routerLink="/" (click)="logout()">LOGOUT</a>
         </div>
 </div> -->
-
-<mat-toolbar color="primary" class="nav-bar">
-  <div>BINGEWATCH</div>
-  <div *ngIf="mobileDevice; else menu">
-    <span>Hello {{ userName | titlecase }}</span>
-    <a *ngIf="adminAccess" routerLink="/checkin">Checkin Scanner</a>
-    <a routerLink="/mybookings">My Bookings</a>
-    <a (click)="logout()">Logout</a>
-  </div>
-  <ng-template #menu>
-    <div class="menu">
-      <button
-        mat-icon-button
-        [matMenuTriggerFor]="menu"
-        aria-label="Example icon-button with a menu"
-      >
-        <mat-icon>menu</mat-icon>
-      </button>
-      <mat-menu #menu="matMenu">
-        <button mat-menu-item>
-          <mat-icon>dialpad</mat-icon>
-          <a *ngIf="adminAccess" routerLink="/checkin">Checkin Scanner</a>
+<div class="container">
+    <mat-toolbar color="primary" class="nav-bar">
+      <div>BINGEWATCH</div>
+      <div fxShow="true" fxHide.lt-md="true">
+        <span>Hello {{ userName | titlecase }}</span>
+        <a *ngIf="adminAccess" routerLink="/checkin">Checkin Scanner</a>
+        <a routerLink="/mybookings">My Bookings</a>
+        <a (click)="logout()">Logout</a>
+      </div>
+      <div fxShow="true" fxHide.gt-sm="true">
+        <button type="button" (click)="sidenav.toggle()" mat-button>
+          <mat-icon>menu</mat-icon>
         </button>
-        <button mat-menu-item>
-          <mat-icon>voicemail</mat-icon>
-          <a routerLink="/mybookings">My Bookings</a>
-        </button>
-        <button mat-menu-item>
-          <mat-icon>notifications_off</mat-icon>
-          <a (click)="logout()">Logout</a>
-        </button>
-      </mat-menu>
-    </div>
-  </ng-template>
-
-  <!-- <div fxShow="true" fxHide.gt-sm="true">
-    <button type="button" (click)="sidenav.toggle()" mat-button>Show Side Menu</button>
-  </div> -->
-</mat-toolbar>
-
-<!-- <mat-sidenav-container fxFlexFill class="side-nav-container">
+      </div>
+    </mat-toolbar>
+  
+<mat-sidenav-container fxFlexFill class="side-nav-container">
   <mat-sidenav #sidenav fxLayout="column" mode="over" opened="false" position="end" role="navigation">
     <div fxLayout="column" class="sidenav-routes">
       <span>Hello {{ userName | titlecase }}</span>
@@ -55,4 +31,6 @@
       <a routerLink="/" (click)="logout()">Logout</a>
     </div>
   </mat-sidenav>
-</mat-sidenav-container> -->
+  <mat-sidenav-content><app-body></app-body></mat-sidenav-content>
+</mat-sidenav-container>
+</div>

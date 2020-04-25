@@ -6,6 +6,7 @@ import { HomeComponent } from './home/home.component';
 import { BookingsComponent } from './bookings/bookings.component';
 import { CheckinComponent } from './checkin/checkin.component';
 import { AuthGuard } from './auth/auth-guard.service';
+import { HeaderComponent } from './header/header.component';
 
 const routes: Routes = [
   { path: 'admin', component: AdminComponent, canActivate: [AuthGuard] },
@@ -16,7 +17,7 @@ const routes: Routes = [
   },
   { path: 'checkin', component: CheckinComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
-  { path: '**', component: HomeComponent, canActivate: [AuthGuard] },
+  { path: '**', component: HeaderComponent, canActivate: [AuthGuard] },
 ];
 
 @NgModule({

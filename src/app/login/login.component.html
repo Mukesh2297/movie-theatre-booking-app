@@ -6,64 +6,38 @@
     </div>
     <div class="form-content">
       <div class="body">
-        <button
-          mat-raised-button
-          value="Sign Up"
-          [ngStyle]="{
-            'background-color': signupform ? 'rgb(245, 108, 154)' : 'white'
-          }"
-          (click)="[(loginform = false), (signupform = !signupform)]"
-        >
-          SIGN UP</button
-        >&nbsp;
-        <button
-          mat-raised-button
-          value="Login"
-          [ngStyle]="{
-            'background-color': loginform ? 'rgb(245, 108, 154)' : 'white'
-          }"
-          (click)="[(signupform = false), (loginform = !loginform)]"
-        >
-          LOGIN
-        </button>
-        <br /><br />
-
+          <div class="title" *ngIf="loginform;else signup">
+            <h2>Login</h2>
+            <p>Enter your details below to continue</p>
+          </div>
+          <ng-template #signup>
+            <div class="title">
+            <h2>Sign Up</h2>
+            <p>Enter required fields to complete registeration</p>
+            </div>
+          </ng-template>
+          
+        <br />
         <form [formGroup]="signupformTemplate" (ngSubmit)="Register()">
           <div *ngIf="signupform">
             <mat-form-field appearance="standard">
               <mat-label>FullName</mat-label>
-              <input
-                matInput
-                type="text"
-                formControlName="fullname"
-                #fname
-              /><br />
+              <input matInput type="text" formControlName="fullname" #fname /><br />
             </mat-form-field>
-            <div
-              class="error-box"
-              *ngIf="
+            <div class="error-box" *ngIf="
                 !signupformTemplate.get('fullname').valid &&
                 signupformTemplate.get('fullname').touched
-              "
-            >
+              ">
               <p>Please enter your fullname</p>
             </div>
             <mat-form-field appearance="standard">
               <mat-label>Username</mat-label>
-              <input
-                matInput
-                type="text"
-                formControlName="username"
-                #uname
-              /><br />
+              <input matInput type="text" formControlName="username" #uname /><br />
             </mat-form-field>
-            <div
-              class="error-box"
-              *ngIf="
+            <div class="error-box" *ngIf="
                 !signupformTemplate.get('username').valid &&
                 signupformTemplate.get('username').touched
-              "
-            >
+              ">
               <p>
                 Username must contain minimum 3 characters
               </p>
@@ -71,32 +45,19 @@
 
             <mat-form-field appearance="standard">
               <mat-label>Password</mat-label>
-              <input
-                matInput
-                formControlName="password"
-                [type]="hideRegisterPassword ? 'password' : 'text'"
-                #password
-              />
-              <button
-                type="button"
-                mat-icon-button
-                matSuffix
-                (click)="hideRegisterPassword = !hideRegisterPassword"
-                [attr.aria-label]="'Hide password'"
-                [attr.aria-pressed]="hideRegisterPassword"
-              >
+              <input matInput formControlName="password" [type]="hideRegisterPassword ? 'password' : 'text'"
+                #password />
+              <button type="button" mat-icon-button matSuffix (click)="hideRegisterPassword = !hideRegisterPassword"
+                [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideRegisterPassword">
                 <mat-icon>{{
                   hideRegisterPassword ? 'visibility_off' : 'visibility'
                 }}</mat-icon>
               </button>
             </mat-form-field>
-            <div
-              class="error-box"
-              *ngIf="
+            <div class="error-box" *ngIf="
                 !signupformTemplate.get('password').valid &&
                 signupformTemplate.get('password').touched
-              "
-            >
+              ">
               <p>
                 Password must contain minimum 8 characters with 1 uppercase,
                 lowercase letter, special character(@, $, !, %, *, ?, &, #) and
@@ -106,21 +67,12 @@
 
             <mat-form-field appearance="standard">
               <mat-label>Email</mat-label>
-              <input
-                matInput
-                formControlName="email"
-                type="email"
-                placeholder="Ex. chris@example.com"
-                #email
-              />
+              <input matInput formControlName="email" type="email" placeholder="Ex. chris@example.com" #email />
             </mat-form-field>
-            <div
-              class="error-box"
-              *ngIf="
+            <div class="error-box" *ngIf="
                 !signupformTemplate.get('email').valid &&
                 signupformTemplate.get('email').touched
-              "
-            >
+              ">
               <p>Please enter valid email</p>
             </div>
 
@@ -128,13 +80,10 @@
               <mat-label>Mobile Number</mat-label>
               <input matInput formControlName="mobile" type="number" #mobile />
             </mat-form-field>
-            <div
-              class="error-box"
-              *ngIf="
+            <div class="error-box" *ngIf="
                 !signupformTemplate.get('mobile').valid &&
                 signupformTemplate.get('mobile').touched
-              "
-            >
+              ">
               <p>Please enter valid mobile number</p>
             </div>
 
@@ -144,26 +93,22 @@
               <mat-label>Captcha</mat-label>
               <input matInput formControlName="captcha" type="text" #captcha />
             </mat-form-field>
-            <div
-              class="error-box"
-              *ngIf="
+            <div class="error-box" *ngIf="
                 !signupformTemplate.get('captcha').valid &&
                 signupformTemplate.get('captcha').touched
-              "
-            >
+              ">
               <p>Please enter captcha</p>
             </div>
-
-            <button
-              mat-raised-button
-              color="primary"
-              value="Register"
-              type="submit"
-              [disabled]="!signupformTemplate.valid"
-            >
-              REGISTER</button
-            ><br /><br />
+            <br><br>
+            <button class="signupbtn" mat-raised-button color="primary" value="Register" type="submit"
+              [disabled]="!signupformTemplate.valid">
+              REGISTER</button><br />
             <label>{{ apiRegisterResponse }}</label>
+            <br><br>
+            <div class="login-here">
+              <span>Already have an account?</span>&nbsp;<a  (click)="[(signupform=false),(loginform=true)]">Login</a>
+            </div>
+            <br>
           </div>
         </form>
 
@@ -171,16 +116,9 @@
           <form (ngSubmit)="SignIn(loginForm)" #loginForm="ngForm">
             <mat-form-field appearance="standard">
               <mat-label>Username</mat-label>
-              <input
-                matInput
-                type="text"
-                name="username"
-                required
-                minlength="3"
-                maxlength="50"
-                ngModel
-                #username="ngModel"
-              />
+              <input matInput type="text" name="username" required minlength="3" maxlength="50" ngModel
+                #username="ngModel" />
+                <mat-icon matPrefix color="accent">person</mat-icon>
             </mat-form-field>
             <div class="error-box" *ngIf="!username.valid && username.touched">
               <p>Please enter registered username</p>
@@ -189,39 +127,31 @@
 
             <mat-form-field appearance="standard">
               <mat-label>Password</mat-label>
-              <input
-                matInput
-                required
-                name="password"
-                minlength="8"
-                ngModel
-                [type]="hideLoginPassword ? 'password' : 'text'"
-                #userpassword="ngModel"
-              />
-              <button
-                type="button"
-                mat-icon-button
-                matSuffix
-                (click)="hideLoginPassword = !hideLoginPassword"
-                [attr.aria-label]="'Hide password'"
-                [attr.aria-pressed]="hideLoginPassword"
-              >
+              <input matInput required name="password" minlength="8" ngModel
+                [type]="hideLoginPassword ? 'password' : 'text'" #userpassword="ngModel" />
+                <mat-icon matPrefix color="accent">lock</mat-icon>
+              <button type="button" mat-icon-button matSuffix (click)="hideLoginPassword = !hideLoginPassword"
+                [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideLoginPassword">
                 <mat-icon>{{
                   hideLoginPassword ? 'visibility_off' : 'visibility'
                 }}</mat-icon>
               </button>
             </mat-form-field>
-            <div
-              class="error-box"
-              *ngIf="!userpassword.valid && userpassword.touched"
-            >
+            <div class="error-box" *ngIf="!userpassword.valid && userpassword.touched">
               <p>Please enter registered password</p>
             </div>
             <br />
-            <button mat-raised-button color="primary" type="submit">
-              LOGIN</button
-            ><br /><br />
+            <!-- <div class="forgot-password">
+              <a href="">Forgot Password  > </a>
+            </div> -->
+            <br>
+            <button class="loginbtn" mat-raised-button color="primary" type="submit">
+              LOGIN</button><br /><br />
             <label>{{ apiLoginResponse }}</label>
+            <br>
+            <div class="signup-here">
+              <span>Don't have an account?</span>&nbsp;<a  (click)="[(signupform=true),(loginform=false)]">Sign up here</a>
+            </div>
           </form>
         </div>
       </div>

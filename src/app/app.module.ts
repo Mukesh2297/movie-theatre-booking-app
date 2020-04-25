@@ -21,10 +21,10 @@ import { MatInputModule } from '@angular/material/input';
 import { DialogBoxComponent } from './dialog-box/dialog-box.component';
 import { CheckinComponent } from './checkin/checkin.component';
 import { QRCodeModule } from 'angularx-qrcode';
-import { MainService } from './main.service';
 import { ApiService } from './services/api.service';
 import { AuthGuard } from './services/auth-guard.service';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { BodyComponent } from './body/body.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +41,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     HeaderComponent,
     DialogBoxComponent,
     CheckinComponent,
+    BodyComponent,
   ],
   imports: [
     BrowserModule,
@@ -56,7 +57,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     ReactiveFormsModule,
     FlexLayoutModule,
   ],
-  providers: [MainService, ApiService, AuthGuard],
+  providers: [ApiService, AuthGuard],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

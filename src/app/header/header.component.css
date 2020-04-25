@@ -1,7 +1,8 @@
 .container
 {
-    height: 80px;
+    height: 100%;
     width: 100%;
+    overflow-y: hidden;
 }
 
 body
@@ -19,12 +20,14 @@ body
     height: 100px;
     width: 100%;
 }
+
 a
 {
     padding-right: 1rem;
     font-size: medium;
     color: white;
     text-decoration: none;
+    cursor: pointer;
 }
 
 span

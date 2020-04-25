@@ -8,6 +8,77 @@
 
 }
 
+.title
+{
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    font-size: larger;
+    color: black;
+}
+
+.title p
+{
+    font-size: small;
+    margin-top: -20px;
+}
+
+.forgot-password
+{
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    font-size: small;
+    color: black;
+}
+
+.forgot-password a
+{
+    text-decoration: none;
+}
+
+.signup-here
+{
+    width: 300px;
+    display: flex;
+    justify-content: flex-start;
+    font-size: small;
+    color: black;
+}
+
+.signup-here a
+{
+    cursor: pointer;
+    color: #ff4081;
+}
+
+.login-here
+{
+    width: 300px;
+    display: flex;
+    justify-content: flex-start;
+    font-size: small;
+    color: black;
+}
+
+.login-here a
+{
+    cursor: pointer;
+    color: #ff4081;
+}
+
+.loginbtn
+{
+    width: 300px;
+}
+
+.signupbtn
+{
+    width: 300px;
+}
+
 .error-box
 {
     width: 290px;

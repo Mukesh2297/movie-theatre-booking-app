@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { ApiService } from '../services/api.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogBoxComponent } from '../dialog-box/dialog-box.component';
+import { AuthService, User } from '../auth/authService.service';
 
 @Component({
   selector: 'app-seats',
@@ -57,7 +58,8 @@ export class SeatsComponent implements OnInit {
   constructor(
     public http: HttpClient,
     private apiService: ApiService,
-    public matDialog: MatDialog
+    public matDialog: MatDialog,
+    public authService: AuthService
   ) {}
 
   ngOnInit() {

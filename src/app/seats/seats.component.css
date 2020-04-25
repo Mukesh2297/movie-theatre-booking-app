@@ -1,14 +1,12 @@
 
+.container
+{
+    overflow: auto;
+}
+
 .hor{
     display:flex;
 }
-
-
-.container
-{
-    height: 100%;
-    width: 100%;
-} 
 
 body::-webkit-scrollbar {
     display: none;
@@ -253,3 +251,54 @@ button[disabled=disabled], button:disabled {
     border-color: red;
     background-color: red;
 }
+
+
+/* MEDIA QUERIES */
+
+
+@media (min-width:320px) and (max-width:480px)
+{
+
+    .movie-picker-position
+    {
+    width: 300px;
+    height: 50px;
+    display: flex;
+    justify-content: flex-start;
+    }
+
+    .dayPicker
+    {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        color: black;
+        margin-bottom: 20px;
+    }
+
+    .navigation
+    {
+    width: 150px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    }
+
+    .listItems
+    {
+    display: flex;
+    justify-content: flex-start;
+    }
+
+    .btn-active
+    {
+        width: 100px;
+    }
+
+    .btn-light
+    {
+        width: 100px;
+    }
+    
+}
+
