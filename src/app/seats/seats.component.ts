@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { ApiService } from '../services/api.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogBoxComponent } from '../dialog-box/dialog-box.component';
+import { AuthService } from '../auth/authService.service';
+import { BreakpointObserver } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-seats',
@@ -54,13 +56,27 @@ export class SeatsComponent implements OnInit {
 
   btnValue = 0;
 
+  mobileDevice: boolean;
+
   constructor(
     public http: HttpClient,
     private apiService: ApiService,
-    public matDialog: MatDialog
+    public matDialog: MatDialog,
+    public authService: AuthService,
+    public breakpointObserver: BreakpointObserver
   ) {}
 
   ngOnInit() {
+    this.breakpointObserver
+    .observe(['(max-width: 480px )'])
+    .subscribe((result) => {
+      if (result.matches) {
+        this.mobileDevice = true;
+      } else {
+        this.mobileDevice = false;
+      }
+    });
+
     this.apiService.get('shows').subscribe((post) => {
       this.movies = post;
       this.movies = this.movies.shows.map((movieslist) => {
@@ -117,15 +133,30 @@ export class SeatsComponent implements OnInit {
   }
 
   DisplayAvailableShows(ind) {
-    this.btnValue = ind;
+    if (this.mobileDevice === true) {
+      this.btnValue = ind.value;
 
-    const indexValue = ind;
+      const indexValue = ind.value;
 
-    const formattedDate = this.getFormattedDate(indexValue);
+      const formattedDate = this.getFormattedDate(indexValue);
 
-    const params = { id: this.movieId, date: formattedDate };
+      const params = { id: this.movieId, date: formattedDate };
 
-    this.availableShows(params);
+      this.availableShows(params);
+
+    } else {
+      this.btnValue = ind;
+
+      const indexValue = ind;
+
+      const formattedDate = this.getFormattedDate(indexValue);
+
+      const params = { id: this.movieId, date: formattedDate };
+
+      this.availableShows(params);
+
+    }
+
   }
 
   showsAvailable() {

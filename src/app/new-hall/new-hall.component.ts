@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { ApiService } from '../services/api.service';
 import { NgForm } from '@angular/forms';
 

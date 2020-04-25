@@ -1,9 +1,10 @@
 <div class="container">
-  <app-header></app-header>
   <mat-tab-group (selectedTabChange)="navigate($event)">
     <mat-tab label="Home">
       <ng-template matTabContent>
-        <app-seats></app-seats>
+        <div class="movie-picker">
+          <app-seats></app-seats>
+        </div>
       </ng-template>
     </mat-tab>
     <mat-tab label="Manage">

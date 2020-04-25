@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { stringify } from '@angular/compiler/src/util';
+import { HttpClient } from '@angular/common/http';
 import { ApiService } from '../services/api.service';
 
 @Component({
@@ -47,7 +46,7 @@ export class AdminComponent implements OnInit {
 
   constructor(public http: HttpClient, private apiService: ApiService) {}
 
-  ngOnInit(): void {}
+  ngOnInit() {}
 
   navigate(value) {
     if (value.index === 0) {

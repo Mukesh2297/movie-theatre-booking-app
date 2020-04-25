@@ -121,6 +121,7 @@ export class LoginComponent implements OnInit {
 
     this.authService.signIn(params).subscribe((response) => {
       loginResponse = response;
+      console.log(loginResponse.hasError);
       if (loginResponse.status === 'OK' && loginResponse.user.role === 'USER') {
         this.apiLoginResponse = '';
       } else if (
@@ -128,7 +129,7 @@ export class LoginComponent implements OnInit {
         loginResponse.user.role === 'ADMIN'
       ) {
         this.apiLoginResponse = '';
-      } else if (loginResponse.status === 'Server error') {
+      } else if (loginResponse.hasError === true) {
         this.apiLoginResponse = 'Invalid Username or Password';
       }
     });

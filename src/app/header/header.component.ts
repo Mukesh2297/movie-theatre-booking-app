@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+
 import { AuthService } from '../auth/authService.service';
 
 @Component({
@@ -8,12 +10,14 @@ import { AuthService } from '../auth/authService.service';
 })
 export class HeaderComponent implements OnInit {
   userName: string;
-
   adminAccess: boolean;
 
-  constructor(private authService: AuthService) {}
+  constructor(
+    private authService: AuthService,
+    public route: ActivatedRoute
+  ) {}
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.authService.user.subscribe((user) => {
       if (!user) {
         return null;

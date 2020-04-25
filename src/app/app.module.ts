@@ -21,6 +21,9 @@ import { MatInputModule } from '@angular/material/input';
 import { DialogBoxComponent } from './dialog-box/dialog-box.component';
 import { CheckinComponent } from './checkin/checkin.component';
 import { QRCodeModule } from 'angularx-qrcode';
+import { ApiService } from './services/api.service';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { BodyComponent } from './body/body.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +40,7 @@ import { QRCodeModule } from 'angularx-qrcode';
     HeaderComponent,
     DialogBoxComponent,
     CheckinComponent,
+    BodyComponent,
   ],
   imports: [
     BrowserModule,
@@ -50,8 +54,9 @@ import { QRCodeModule } from 'angularx-qrcode';
     MatInputModule,
     QRCodeModule,
     ReactiveFormsModule,
+    FlexLayoutModule,
   ],
-  providers: [],
+  providers: [ApiService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

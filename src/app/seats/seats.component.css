@@ -1,14 +1,12 @@
 
+.container
+{
+    overflow: auto;
+}
+
 .hor{
     display:flex;
 }
-
-
-.container
-{
-    height: 100%;
-    width: 100%;
-} 
 
 body::-webkit-scrollbar {
     display: none;
@@ -48,7 +46,6 @@ body::-webkit-scrollbar {
 
 .seat-position
 {
-    width: 500px;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -73,6 +70,7 @@ body::-webkit-scrollbar {
 {
     width: 500px;
     display: flex;
+    flex-direction: column;
     justify-content: left;
     margin-bottom: 10px;
 }
@@ -80,13 +78,13 @@ body::-webkit-scrollbar {
 .showtime label
 {
     margin-top: 6px;
+    margin-bottom: 5px;
 }
 
 .showtime button
 {
 
     margin-right: 5px;
-    margin-left: 5px;
 }
 
 
@@ -104,6 +102,11 @@ body::-webkit-scrollbar {
     display: column;
     justify-content: flex-start;
 
+}
+
+.selected-show-label
+{
+    margin-bottom: 5px;
 }
 
 .selected-show-position button
@@ -127,7 +130,7 @@ body::-webkit-scrollbar {
     text-align: center;
     transform: rotateX(-35deg);
     box-shadow: 0 3px 10px rgba(255, 255, 255, 0.7);
-    background-color: black;
+    background-color: grey;
 }
 
 .screen p
@@ -166,6 +169,7 @@ body::-webkit-scrollbar {
     justify-content: center;
     color: black;
     margin-bottom: 20px;
+   
 }
 
 .navigation
@@ -180,8 +184,8 @@ body::-webkit-scrollbar {
 {
     display: flex;
     justify-content: flex-start;
+    
 }
-
 
 select
 {
@@ -253,3 +257,90 @@ button[disabled=disabled], button:disabled {
     border-color: red;
     background-color: red;
 }
+
+
+/* MEDIA QUERIES */
+
+
+@media (min-width:320px) and (max-width:480px)
+{
+
+    .movie-picker-position
+    {
+    width: 300px;
+    height: 50px;
+    display: flex;
+    justify-content: flex-start;
+    }
+
+    .navigation
+    {
+    width: 300px;
+    display: flex;
+    justify-content: flex-start;
+
+    }
+
+    .dayPicker
+    {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        color: black;
+        margin-bottom: 20px;
+    }
+
+    .shows
+    {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    }
+
+    .showtime
+    {
+    width: 300px;
+    display: flex;
+    justify-content: left;
+    margin-bottom: 10px;
+    }
+
+    .screen
+    {
+    height: 100px;
+    width: 350px;
+    text-align: center;
+    transform: rotateX(-35deg);
+    box-shadow: 0 3px 10px rgba(255, 255, 255, 0.7);
+    background-color: grey;
+    }
+
+    .screen p
+    {
+    margin-top: 40px;
+    color: white;
+    }
+
+    .seat-position
+    {
+    width: 350px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    overflow-x: auto;
+    overflow-y: auto;
+    }
+
+    .btn-active
+    {
+        width: 100px;
+    }
+
+    .btn-light
+    {
+        width: 100px;
+    }
+    
+}
+

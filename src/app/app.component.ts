@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { AuthService } from './auth/authService.service';
 
 @Component({
   selector: 'app-root',
@@ -10,9 +8,7 @@ import { AuthService } from './auth/authService.service';
 export class AppComponent implements OnInit {
   title = 'seats-booking';
 
-  constructor(private router: Router, private authService: AuthService) {}
+  constructor() {}
 
-  ngOnInit() {
-    // this.authService.ping();
-  }
+  ngOnInit() {}
 }

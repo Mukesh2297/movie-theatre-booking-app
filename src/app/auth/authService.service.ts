@@ -33,6 +33,7 @@ export class AuthService {
   signIn(values) {
     return this.apiService.post('auth/login', values).pipe(
       tap((response: any) => {
+        if (response.hasError) {return null;}
         const user = new User(
           response.user.full_name,
           response.user.role,
@@ -42,12 +43,9 @@ export class AuthService {
         this.expiryTimer = setTimeout(() => {
           this.user.next(null);
         }, response.cookieExpiryTime);
-        if (response.status === 'OK' && response.user.role === 'USER') {
+        if ((response.status === 'OK' && response.user.role === 'USER')  || (response.status === 'OK' && response.user.role === 'ADMIN')) {
           this.router.navigate(['/']);
-        } else if (response.status === 'OK' && response.user.role === 'ADMIN') {
-          this.router.navigate(['admin']);
-        }
-      })
+        }})
     );
   }
 
@@ -72,6 +70,7 @@ export class AuthService {
       })
     );
   }
+
 
   signOut() {
     return this.apiService.post('auth/logout').subscribe((response) => {

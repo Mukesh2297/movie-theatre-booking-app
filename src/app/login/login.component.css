@@ -8,6 +8,77 @@
 
 }
 
+.title
+{
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    font-size: larger;
+    color: black;
+}
+
+.title p
+{
+    font-size: small;
+    margin-top: -20px;
+}
+
+.forgot-password
+{
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    font-size: small;
+    color: black;
+}
+
+.forgot-password a
+{
+    text-decoration: none;
+}
+
+.signup-here
+{
+    width: 300px;
+    display: flex;
+    justify-content: flex-start;
+    font-size: small;
+    color: black;
+}
+
+.signup-here a
+{
+    cursor: pointer;
+    color: #ff4081;
+}
+
+.login-here
+{
+    width: 300px;
+    display: flex;
+    justify-content: flex-start;
+    font-size: small;
+    color: black;
+}
+
+.login-here a
+{
+    cursor: pointer;
+    color: #ff4081;
+}
+
+.loginbtn
+{
+    width: 300px;
+}
+
+.signupbtn
+{
+    width: 300px;
+}
+
 .error-box
 {
     width: 290px;
@@ -60,11 +131,9 @@ input.mat-input-element .mat-input-element-outline {
 
 .form-content
 {
-    height: 100vh;
     width: 100%;
     display: flex;
     justify-content: center;
-    align-items: center;
 
 }
 
@@ -82,27 +151,6 @@ label
     color: darkred;
 }
 
-.btn-primary
-{
-    background-color: transparent;
-    box-shadow: none;
-    border-color: rosybrown;
-    color: blanchedalmond;
-
-}
-
-.btn-primary:hover
-{
-    background-color: rosybrown;
-    color: black;
-}
-
-.btn-primary:focus
-{
-    background-color: rosybrown;
-    color: black; 
-}
-
 
 button,input
 {
@@ -115,3 +163,15 @@ input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
     transition: background-color 5000s ease-in-out 0s;
 }
+
+/* MEDIA QUERIES */
+
+
+@media (min-width:320px) and (max-width:480px)
+{
+    .heading
+    {
+        margin-bottom: 100px;
+    }
+}
+

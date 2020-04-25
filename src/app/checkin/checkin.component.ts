@@ -30,7 +30,11 @@ export class CheckinComponent implements OnInit, OnDestroy {
         .post('bookings/checkin', checkinDetails)
         .subscribe((response: any) => {
           if (response.status === 'OK') {
-            this.apiResponseMessage = 'Checkin Confirmed';
+            alert('Checkin Confirmed');
+          } else if (response.status === 'Already Checked In') {
+            alert('Already Checked In');
+          } else {
+            alert('Scan error');
           }
         });
     });
@@ -41,6 +45,7 @@ export class CheckinComponent implements OnInit, OnDestroy {
           this.scanner.start(this.apiResponse[this.selectedInd]);
         } else {
           console.log('No cameras found.');
+          alert('No cameras found.');
         }
       })
       .catch((e) => {
