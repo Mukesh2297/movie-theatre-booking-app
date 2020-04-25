@@ -42,9 +42,14 @@ span
     color: black;
     font-size: medium;
     margin: 3px;  
+    padding: 5px;
 }
 
 a:hover
 {
     color: darkred;
 }
+
+mat-sidenav {
+    width: 250px;
+  }

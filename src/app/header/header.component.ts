@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+
 import { AuthService } from '../auth/authService.service';
 
 @Component({
@@ -11,12 +11,10 @@ import { AuthService } from '../auth/authService.service';
 export class HeaderComponent implements OnInit {
   userName: string;
   adminAccess: boolean;
-  mobileDevice: boolean;
 
   constructor(
     private authService: AuthService,
-    public route: ActivatedRoute,
-    public breakpointObserver: BreakpointObserver
+    public route: ActivatedRoute
   ) {}
 
   ngOnInit() {
@@ -27,16 +25,6 @@ export class HeaderComponent implements OnInit {
       this.userName = user.fullName;
       this.adminAccess = user.role === 'ADMIN';
     });
-
-    this.breakpointObserver
-      .observe(['(min-width: 480px )'])
-      .subscribe((result) => {
-        if (result.matches) {
-          this.mobileDevice = true;
-        } else {
-          this.mobileDevice = false;
-        }
-      });
   }
 
   logout() {

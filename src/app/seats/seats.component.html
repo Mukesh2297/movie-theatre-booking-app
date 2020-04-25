@@ -17,7 +17,7 @@
   </div>
 
   <ng-container *ngIf="movieSelected">
-    <div class="dayPicker">
+    <div class="dayPicker" *ngIf="!mobileDevice; else mobileVersion">
       <div class="navigation">
         <mat-list class="listItems">
           <mat-list-item class="nav-item" *ngFor="let days of dayArr; index as indexVal">
@@ -30,6 +30,22 @@
         </mat-list>
       </div>
     </div>
+    <ng-template #mobileVersion>
+      <div class="dayPicker">
+        <div class="navigation">
+          <div class="listItems">
+            <mat-form-field>
+              <mat-label>Select a day</mat-label>
+              <mat-select [value]="0" (selectionChange)="DisplayAvailableShows($event)">
+                <mat-option [value]="indexVal" *ngFor="let days of dayArr; index as indexVal">
+                  {{ days }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+    </ng-template>
   </ng-container>
 
   <ng-container>
@@ -72,17 +88,19 @@
     </div>
 
     <div class="total-seats" *ngIf="showSeats">
-      <div class="hor" *ngFor="let rowSeat of rows; index as i">
-        <div *ngFor="let columnSeat of columns; index as j">
-          <button [value]="i * columns.length + (j + 1)" (click)="seatSelected(i, j)" [disabled]="isSeatAvailable(i, j)"
-            [ngClass]="
+      <div class="seat-position">
+        <div class="hor" *ngFor="let rowSeat of rows; index as i">
+          <div *ngFor="let columnSeat of columns; index as j">
+            <button [value]="i * columns.length + (j + 1)" (click)="seatSelected(i, j)"
+              [disabled]="isSeatAvailable(i, j)" [ngClass]="
               markedSeats.includes(i * columns.length + (j + 1))
                 ? 'seat selectedSeat'
                 : 'seat'
             ">
-            <!-- [ngClass]="{'selectedSeat' : markedSeats.includes((i * columns.length) + (j + 1)) , 'seat' : true}" -->
-            <!-- [ngStyle]="{'background-color': markedSeats.includes((i * columns.length) + (j + 1)) ? 'green' : 'white'}"> -->
-          </button>
+              <!-- [ngClass]="{'selectedSeat' : markedSeats.includes((i * columns.length) + (j + 1)) , 'seat' : true}" -->
+              <!-- [ngStyle]="{'background-color': markedSeats.includes((i * columns.length) + (j + 1)) ? 'green' : 'white'}"> -->
+            </button>
+          </div>
         </div>
       </div>
       <br />
@@ -97,9 +115,12 @@
           </button>
         </div>
       </div>
+
     </div>
     <br>
   </ng-container>
 </div>
 
 <!-- Seat: {{ i * columns.length + (j + 1) }} -->
+
+<!-- " (click)="DisplayAvailableShows(indexVal)" -->

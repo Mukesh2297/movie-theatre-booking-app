@@ -9,8 +9,8 @@
 <div class="container">
     <mat-toolbar color="primary" class="nav-bar">
       <div>BINGEWATCH</div>
-      <div fxShow="true" fxHide.lt-md="true">
-        <span>Hello {{ userName | titlecase }}</span>
+      <div class="toolbar-content" fxShow="true" fxHide.lt-md="true">
+        <span style="color: white;">Hello {{ userName | titlecase }}</span> &nbsp;
         <a *ngIf="adminAccess" routerLink="/checkin">Checkin Scanner</a>
         <a routerLink="/mybookings">My Bookings</a>
         <a (click)="logout()">Logout</a>

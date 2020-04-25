@@ -170,9 +170,8 @@ input:-webkit-autofill:active {
 
 @media (min-width:320px) and (max-width:480px)
 {
-    .child-items
+    .heading
     {
-        background-color: linen;
+        margin-bottom: 50px;
     }
-   
 }
