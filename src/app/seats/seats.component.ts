@@ -58,6 +58,8 @@ export class SeatsComponent implements OnInit {
 
   mobileDevice: boolean;
 
+  selectValue = 0 ;
+
   constructor(
     public http: HttpClient,
     private apiService: ApiService,
@@ -115,6 +117,9 @@ export class SeatsComponent implements OnInit {
   }
 
   selectedMovie(moviename) {
+
+    this.selectValue = 0;
+
     const ind = 0;
 
     this.btnValue = 0;
