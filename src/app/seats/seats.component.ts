@@ -173,14 +173,13 @@ export class SeatsComponent implements OnInit {
   seatSelected(i, j) {
     const selected = i * this.columns.length + (j + 1);
 
-    if (this.markedSeats.length >= this.MAX_ALLOWED_SEATS_TO_SELECT) {
-      return;
-    }
-
     if (this.markedSeats.indexOf(selected) !== -1) {
       const indexValue = this.markedSeats.indexOf(selected);
       this.markedSeats.splice(indexValue, 1);
     } else {
+      if (this.markedSeats.length >= this.MAX_ALLOWED_SEATS_TO_SELECT) {
+        return;
+      }
       this.markedSeats.push(selected);
     }
   }
