@@ -102,11 +102,11 @@
             <br><br>
             <button class="signupbtn" mat-raised-button color="primary" value="Register" type="submit"
               [disabled]="!signupformTemplate.valid">
-              REGISTER</button><br />
+              REGISTER</button><br /><br>
             <label>{{ apiRegisterResponse }}</label>
             <br><br>
             <div class="login-here">
-              <span>Already have an account?</span>&nbsp;<a  (click)="[(signupform=false),(loginform=true)]">Login</a>
+              <span>Already have an account?</span>&nbsp;<a  (click)="[(signupform=false),(loginform=true),(apiRegisterResponse='')]">Login</a>
             </div>
             <br>
           </div>
@@ -148,9 +148,9 @@
             <button class="loginbtn" mat-raised-button color="primary" type="submit">
               LOGIN</button><br /><br />
             <label>{{ apiLoginResponse }}</label>
-            <br>
+            <br><br>
             <div class="signup-here">
-              <span>Don't have an account?</span>&nbsp;<a  (click)="[(signupform=true),(loginform=false)]">Sign up here</a>
+              <span>Don't have an account?</span>&nbsp;<a  (click)="[(signupform=true),(loginform=false),(apiLoginResponse='')]">Sign up here</a>
             </div>
           </form>
         </div>
