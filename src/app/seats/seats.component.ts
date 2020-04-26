@@ -58,7 +58,9 @@ export class SeatsComponent implements OnInit {
 
   mobileDevice: boolean;
 
-  selectValue = 0 ;
+  selectValue = 0;
+
+  MAX_ALLOWED_SEATS_TO_SELECT = 10;
 
   constructor(
     public http: HttpClient,
@@ -70,14 +72,14 @@ export class SeatsComponent implements OnInit {
 
   ngOnInit() {
     this.breakpointObserver
-    .observe(['(max-width: 480px )'])
-    .subscribe((result) => {
-      if (result.matches) {
-        this.mobileDevice = true;
-      } else {
-        this.mobileDevice = false;
-      }
-    });
+      .observe(['(max-width: 480px )'])
+      .subscribe((result) => {
+        if (result.matches) {
+          this.mobileDevice = true;
+        } else {
+          this.mobileDevice = false;
+        }
+      });
 
     this.apiService.get('shows').subscribe((post) => {
       this.movies = post;
@@ -117,7 +119,6 @@ export class SeatsComponent implements OnInit {
   }
 
   selectedMovie(moviename) {
-
     this.selectValue = 0;
 
     const ind = 0;
@@ -148,7 +149,6 @@ export class SeatsComponent implements OnInit {
       const params = { id: this.movieId, date: formattedDate };
 
       this.availableShows(params);
-
     } else {
       this.btnValue = ind;
 
@@ -159,9 +159,7 @@ export class SeatsComponent implements OnInit {
       const params = { id: this.movieId, date: formattedDate };
 
       this.availableShows(params);
-
     }
-
   }
 
   showsAvailable() {
@@ -174,6 +172,10 @@ export class SeatsComponent implements OnInit {
 
   seatSelected(i, j) {
     const selected = i * this.columns.length + (j + 1);
+
+    if (this.markedSeats.length >= this.MAX_ALLOWED_SEATS_TO_SELECT) {
+      return;
+    }
 
     if (this.markedSeats.indexOf(selected) !== -1) {
       const indexValue = this.markedSeats.indexOf(selected);
