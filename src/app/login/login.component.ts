@@ -103,7 +103,9 @@ export class LoginComponent implements OnInit {
         });
         this.signupform = false;
         this.loginform = true;
-      } else {
+      } else if (response.status === 'Server error') {
+        this.apiRegisterResponse = 'Something went wrong. Please try again';
+      } else if (response.status === 'Unauthorized' && response.captcha) {
         this.captchaSvg = this.sanitized.bypassSecurityTrustHtml(
           response.captcha
         );
@@ -119,7 +121,6 @@ export class LoginComponent implements OnInit {
 
     this.authService.signIn(params).subscribe((response) => {
       loginResponse = response;
-      console.log(loginResponse.hasError);
       if (loginResponse.status === 'OK' && loginResponse.user.role === 'USER') {
         this.apiLoginResponse = '';
       } else if (

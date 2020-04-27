@@ -24,6 +24,7 @@ import { QRCodeModule } from 'angularx-qrcode';
 import { ApiService } from './services/api.service';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { BodyComponent } from './body/body.component';
+import { ScannerPopupComponent } from './scanner-popup/scanner-popup.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { BodyComponent } from './body/body.component';
     DialogBoxComponent,
     CheckinComponent,
     BodyComponent,
+    ScannerPopupComponent,
   ],
   imports: [
     BrowserModule,

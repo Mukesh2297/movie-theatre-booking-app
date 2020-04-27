@@ -1,5 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ApiService } from '../services/api.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ScannerPopupComponent } from '../scanner-popup/scanner-popup.component';
 
 declare var Instascan: any;
 
@@ -13,7 +15,7 @@ export class CheckinComponent implements OnInit, OnDestroy {
   apiResponse;
   apiResponseMessage = null;
   selectedInd = 0;
-  constructor(private apiService: ApiService) {}
+  constructor(private apiService: ApiService, private scannerPopup: MatDialog) {}
 
   ngOnInit(): void {
     this.scanner = new Instascan.Scanner({
@@ -30,11 +32,11 @@ export class CheckinComponent implements OnInit, OnDestroy {
         .post('bookings/checkin', checkinDetails)
         .subscribe((response: any) => {
           if (response.status === 'OK') {
-            alert('Checkin Confirmed');
+            this.scannerPopup.open(ScannerPopupComponent, {data: {message: 'Checkin Confirmed'} });
           } else if (response.status === 'Already Checked In') {
-            alert('Already Checked In');
+            this.scannerPopup.open(ScannerPopupComponent, {data: {message: 'Already Checked In'} });
           } else {
-            alert('Scan error');
+            this.scannerPopup.open(ScannerPopupComponent, {data: {message: 'Checkin Error. Retry Again'} });
           }
         });
     });
@@ -44,7 +46,6 @@ export class CheckinComponent implements OnInit, OnDestroy {
         if (cameras.length > 0 && this.selectedInd !== undefined) {
           this.scanner.start(this.apiResponse[this.selectedInd]);
         } else {
-          console.log('No cameras found.');
           alert('No cameras found.');
         }
       })
