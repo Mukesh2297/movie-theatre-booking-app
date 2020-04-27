@@ -18,7 +18,6 @@ export class BodyComponent implements OnInit {
         return null;
       }
       this.adminAccess = user.role === 'ADMIN';
-      console.log(this.adminAccess)
     });
   }
 
