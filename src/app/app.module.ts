@@ -25,6 +25,7 @@ import { ApiService } from './services/api.service';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { BodyComponent } from './body/body.component';
 import { ScannerPopupComponent } from './scanner-popup/scanner-popup.component';
+import { DateTimePipe } from './Filter/date-time.pipe';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { ScannerPopupComponent } from './scanner-popup/scanner-popup.component';
     CheckinComponent,
     BodyComponent,
     ScannerPopupComponent,
+    DateTimePipe,
   ],
   imports: [
     BrowserModule,
