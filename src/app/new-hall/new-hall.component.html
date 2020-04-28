@@ -1,9 +1,57 @@
 <div class="container">
-  <div class="newHall">
+  <br>
+  <div class="header">
     <h2>ADD NEW HALL</h2>
-    <br />
+  </div>
 
-    <form (ngSubmit)="update(hallForm)" #hallForm="ngForm">
+  <div class="table">
+
+    <div class="table-content">
+      
+    
+      <mat-table [dataSource]="hallInfo" class="mat-elevation-z8">
+
+        <ng-container matColumnDef="s.no">
+          <mat-header-cell *matHeaderCellDef> S.No </mat-header-cell>
+          <mat-cell *matCellDef="let i = index"> {{i+1}} </mat-cell>
+        </ng-container>
+        <!-- Position Column -->
+        <ng-container matColumnDef="name">
+          <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+          <mat-cell *matCellDef="let hall"> {{hall.name}} </mat-cell>
+        </ng-container>
+      
+        <!-- Name Column -->
+        <ng-container matColumnDef="rows">
+          <mat-header-cell *matHeaderCellDef> Rows </mat-header-cell>
+          <mat-cell *matCellDef="let hall"> {{hall.total_rows}} </mat-cell>
+        </ng-container>
+      
+        <!-- Weight Column -->
+        <ng-container matColumnDef="columns">
+          <mat-header-cell *matHeaderCellDef> Columns </mat-header-cell>
+          <mat-cell *matCellDef="let hall"> {{hall.total_columns}} </mat-cell>
+        </ng-container>
+      
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="actions">
+          <mat-header-cell *matHeaderCellDef> Action </mat-header-cell>
+          <mat-cell *matCellDef="let hall">
+            <button type="button" mat-icon-button  (click)="editHall(hall)"><mat-icon color="accent">edit</mat-icon></button>
+          </mat-cell>
+        </ng-container>
+      
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
+  
+  </div>
+  </div>
+
+  
+    
+
+    <!-- <form (ngSubmit)="update(hallForm)" #hallForm="ngForm">
       <mat-form-field appearance="standard">
         <mat-label>Hall Name</mat-label>
         <input matInput type="text" name="name" required ngModel #hallName="ngModel" />
@@ -29,7 +77,5 @@
       </button>
       &nbsp;
       <label>{{ apiResponseMessage }}</label>
-    </form>
-  </div>
+    </form> -->
 </div>
-<br>
