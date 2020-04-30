@@ -23,6 +23,19 @@
     width: 80%;
 }
 
+.header-content
+{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.create-btn
+{
+    padding-right: 35px;
+}
+
+
 mat-form-field
 {
     width: 300px;

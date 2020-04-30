@@ -21,11 +21,25 @@
       </mat-form-field>
       <p *ngIf="!seatRows.valid && seatRows.touched">Please enter row value</p>
       <br />
-      <button mat-raised-button color="primary" type="submit" [disabled]="!hallForm.valid">
-        CREATE
-      </button>
+      <div class="action-btn">
+        <div class="cancel-btn">
+          <mat-dialog-actions>
+            <button mat-icon-button matTooltip="Cancel" matTooltipPosition="left" mat-dialog-close>
+                <mat-icon>clear</mat-icon>
+              </button>
+          </mat-dialog-actions>
+        </div>
+        <div class="apply-btn">
+          <mat-dialog-actions>
+            <button mat-icon-button matTooltip="Apply" matTooltipPosition="right" color="primary" type="submit" [disabled]="!hallForm.valid">
+          <mat-icon>done</mat-icon>
+        </button>
+      </mat-dialog-actions>
+        </div>
+      </div>
+      
       &nbsp;
       <label>{{ apiResponseMessage }}</label>
     </form>
-    <mat-dialog-actions><button mat-button mat-dialog-close>Close</button></mat-dialog-actions>
 </mat-dialog-content>
+

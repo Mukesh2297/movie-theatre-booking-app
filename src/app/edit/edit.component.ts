@@ -1,5 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { HttpClient } from '@angular/common/http';
+import { ApiService } from '../services/api.service';
 
 @Component({
   selector: 'app-edit',
@@ -12,13 +14,22 @@ export class EditComponent implements OnInit {
 
   updateContent;
 
-  constructor( @Inject(MAT_DIALOG_DATA) public data: any) { }
+  constructor( @Inject(MAT_DIALOG_DATA) public data: any, private apiService: ApiService) { }
 
-  ngOnInit(){this.updateContent = this.data;
+  ngOnInit() {this.updateContent = this.data;
   }
 
   update(form) {
-    const newHallDetails = form.value;
+    const formData = form.value;
+
+    const newHallDetails = {id: this.updateContent.hall_id,
+      name: formData.name, total_columns: formData.total_columns, total_rows: formData.total_rows};
+
+    console.log(newHallDetails);
+
+    this.apiService.put('halls', newHallDetails).subscribe(response => console.log(response));
+
+
 
     // this.apiService.post('halls', newHallDetails).subscribe((response) => {
     //   this.apiResponse = response;

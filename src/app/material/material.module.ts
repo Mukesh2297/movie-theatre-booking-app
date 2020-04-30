@@ -11,6 +11,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatTableModule} from '@angular/material/table';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 const Material = [
   MatFormFieldModule,
@@ -25,7 +26,8 @@ const Material = [
   MatSidenavModule,
   MatMenuModule,
   MatIconModule,
-  MatTableModule
+  MatTableModule,
+  MatTooltipModule
 
 ];
 

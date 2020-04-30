@@ -1,12 +1,24 @@
 <div class="container">
   <br>
-  <div class="header">
-    <h2>ADD NEW HALL</h2>
+  <div class="header-content">
+    <div class="header">
+      <h2>HALL</h2>
+    </div>
+    <div class="create">
+      <div class="create-btn" *ngIf="displayHallInfo; else displayHalls ">
+        <button type="button" mat-raised-button (click)="[displayHallInfo = false,createNewHall()]">Create</button>
+      </div>
+      <ng-template #displayHalls>
+        <div class="create-btn">
+          <button type="button" mat-raised-button (click)="showHallInfo()" >Display Halls</button>
+        </div>
+      </ng-template>
+    </div>
   </div>
 
   <div class="table">
 
-    <div class="table-content">
+    <div class="table-content" *ngIf="displayHallInfo; else createForm">
       
     
       <mat-table [dataSource]="hallInfo" class="mat-elevation-z8">
@@ -46,6 +58,15 @@
       </mat-table>
   
   </div>
+
+  <ng-template #createForm>
+
+    <ng-container #createHallComponent>
+
+    </ng-container>
+ 
+  </ng-template>
+
   </div>
 
   

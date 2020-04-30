@@ -63,6 +63,6 @@ import { EditComponent } from './edit/edit.component';
     FlexLayoutModule,
   ],
   providers: [ApiService],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent]
 })
 export class AppModule {}
