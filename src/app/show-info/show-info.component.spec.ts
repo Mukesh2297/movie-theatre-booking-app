@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NewHallComponent } from './new-hall.component';
+import { ShowInfoComponent } from './show-info.component';
 
-describe('NewHallComponent', () => {
-  let component: NewHallComponent;
-  let fixture: ComponentFixture<NewHallComponent>;
+describe('ShowInfoComponent', () => {
+  let component: ShowInfoComponent;
+  let fixture: ComponentFixture<ShowInfoComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ NewHallComponent ]
+      declarations: [ ShowInfoComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(NewHallComponent);
+    fixture = TestBed.createComponent(ShowInfoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

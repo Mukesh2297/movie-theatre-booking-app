@@ -1,0 +1,30 @@
+<div class="container">
+    <br>
+    <div class="header-content">
+        <div class="header">
+            <div class="heading">
+                <h2>Halls</h2>
+            </div>
+        </div>   
+    </div>
+    <div class="create">
+        <div class="action-btn" *ngIf="displayHallInfo; else backtohome">
+            <button mat-stroked-button (click)="createNewHall()">Create</button>
+        </div>
+        <ng-template #backtohome>
+            <div class="action-btn">
+                <button mat-stroked-button (click)="displayHallInfo=true">Back</button>
+            </div>
+        </ng-template>
+    </div>
+
+    <div class="hallInfo" *ngIf="displayHallInfo; else edithall">
+        <app-hall-info (editHallObj)="hallToBeEdited($event)" ></app-hall-info>
+    </div>
+    <ng-template #edithall>
+        <div class="editHall">
+            <app-edit-hall [hallToBeEdited]="editHallObj" [isEdit]="isEdit"
+             (cancel)="cancelFormEdit($event)" (updateHall)="editedResponse($event)"></app-edit-hall>
+        </div>
+    </ng-template>
+</div>

@@ -60,6 +60,14 @@ export class NewShowComponent implements OnInit {
       }
     };
 
+    const datecalculator = () => {
+      if (formattedShowTime.getDate() < 10) {
+        return `0${formattedShowTime.getDate()}`;
+      } else {
+        return formattedShowTime.getDate();
+      }
+    };
+
     const secondsCalculator = () => {
       if (formattedShowTime.getSeconds() < 10) {
         return `0${formattedShowTime.getSeconds()}`;
@@ -86,7 +94,7 @@ export class NewShowComponent implements OnInit {
 
     const year = formattedShowTime.getFullYear();
     const month = monthcalculator();
-    const date = formattedShowTime.getDate();
+    const date = datecalculator();
     const hours = hoursCalculator();
     const minutes = minutesCalculator();
     const seconds = secondsCalculator();

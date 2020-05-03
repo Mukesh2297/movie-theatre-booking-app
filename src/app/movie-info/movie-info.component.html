@@ -1,0 +1,40 @@
+<div class="container">
+  <div class="table">
+
+    <div class="table-content">
+        
+      
+        <mat-table [dataSource]="movieInfo" class="mat-elevation-z8">
+  
+          <ng-container matColumnDef="s.no">
+            <mat-header-cell *matHeaderCellDef> S.No </mat-header-cell>
+            <mat-cell *matCellDef="let i = index"> {{i+1}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+            <mat-cell *matCellDef="let movie"> {{movie.name}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="ticket_price">
+            <mat-header-cell *matHeaderCellDef> Ticket Price </mat-header-cell>
+            <mat-cell *matCellDef="let movie"> {{movie.ticket_price | currency:'INR'}} </mat-cell>
+          </ng-container>
+      
+          <ng-container matColumnDef="actions">
+            <mat-header-cell *matHeaderCellDef> Action </mat-header-cell>
+            <mat-cell *matCellDef="let movie">
+              <button type="button" mat-icon-button (click)="editMovie(movie)"><mat-icon color="accent">edit</mat-icon></button>
+            </mat-cell>
+          </ng-container>
+        
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+
+      </div>
+
+    </div>
+       
+   </div>
+ 
