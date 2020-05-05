@@ -32,6 +32,7 @@ import { MoviesComponent } from './movies/movies.component';
 import { MovieInfoComponent } from './movie-info/movie-info.component';
 import { EditMovieComponent } from './edit-movie/edit-movie.component';
 import { ShowInfoComponent } from './show-info/show-info.component';
+import { ShowsTableComponent } from './show-info/shows-table/shows-table.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import { ShowInfoComponent } from './show-info/show-info.component';
     MoviesComponent,
     MovieInfoComponent,
     EditMovieComponent,
-    ShowInfoComponent
+    ShowInfoComponent,
+    ShowsTableComponent
   ],
   imports: [
     BrowserModule,
