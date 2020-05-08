@@ -32,7 +32,7 @@ import { MoviesComponent } from './movies/movies.component';
 import { MovieInfoComponent } from './movie-info/movie-info.component';
 import { EditMovieComponent } from './edit-movie/edit-movie.component';
 import { ShowInfoComponent } from './show-info/show-info.component';
-import { ShowsTableComponent } from './show-info/shows-table/shows-table.component';
+import { ShowsComponent } from './shows/shows.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +58,7 @@ import { ShowsTableComponent } from './show-info/shows-table/shows-table.compone
     MovieInfoComponent,
     EditMovieComponent,
     ShowInfoComponent,
-    ShowsTableComponent
+    ShowsComponent
   ],
   imports: [
     BrowserModule,

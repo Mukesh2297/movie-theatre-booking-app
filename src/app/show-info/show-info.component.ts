@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { ApiService } from '../services/api.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { AppService } from '../services/app.service';
-import { ThrowStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-show-info',
@@ -10,6 +9,8 @@ import { ThrowStmt } from '@angular/compiler';
   styleUrls: ['./show-info.component.css']
 })
 export class ShowInfoComponent implements OnInit {
+
+  displayedColumns: string[] = ['s.no', 'hallName', 'showTime',  'actions'];
 
   showInfo;
 
@@ -24,6 +25,10 @@ export class ShowInfoComponent implements OnInit {
   daySelected;
 
   dateValue = 0;
+
+  @Output() editObj =  new EventEmitter<object>();
+
+  @Output() isEdit = new EventEmitter<boolean>();
 
   isMovieSelected = false;
 
@@ -55,17 +60,32 @@ export class ShowInfoComponent implements OnInit {
 
   }
 
+  editShow(showObj) {
+
+    console.log(showObj);
+
+    const selectedObj = {movieId: this.selectedMovieId,
+      hall_name: showObj.hall_name,
+      show_time: showObj.show_time,
+      show_id: showObj.show_id };
+
+    this.editObj.emit(selectedObj);
+    this.isEdit.emit(true);
+
+  }
+
 
   getMovieInfo(params) {
     this.apiService.get('movies/showtime', params).subscribe((response: any) => {
-      console.log(response);
-      const apiResponse = response.movies.map(arrItem => arrItem.availability );
-      console.log(this.showInfo);
-      if (apiResponse.length > 0){
-        console.log(this.showInfo);
+      // const apiResponse = response.movies.map(arrItem => arrItem.availability );
+      const apiResponse = response.movies.reduce((curr, obj) => {
+        return [...curr, ...obj.availability];
+      }, []);
+      console.log(apiResponse);
+      if (apiResponse.length > 0) {
         this.showInfo = apiResponse;
         this.showTable = true;
-      } else { this.showTable = false; }
+      } else { this.showInfo = false; }
       // this.showInfo = new MatTableDataSource(response);
       // this.showInfo = this.showInfo.filteredData.movies[0].availability;
     });

@@ -30,6 +30,51 @@ export class AppService {
     }
   }
 
+  transformTimeStamp(value) {
+
+    console.log(value);
+
+    const showTime = new Date(value);
+
+    const date = showTime.getDate();
+
+    const month = showTime.getMonth() + 1;
+
+    const year = showTime.getFullYear();
+
+
+    let hours = showTime.getUTCHours();
+
+    const minutesfn = () => {
+    const showTimeMinutes = showTime.getUTCMinutes();
+
+    if (showTimeMinutes < 10) {
+      return `${0}${showTimeMinutes}`;
+    } else {
+      return showTimeMinutes;
+    }
+
+  };
+
+    const minutes = minutesfn();
+
+    let meridiem;
+
+    if (hours >= 13 && hours <= 23 ) {
+    const convertedHour = hours - 12;
+    hours = convertedHour;
+    meridiem = 'PM';
+  } else {
+    meridiem = 'AM';
+  }
+
+    const bookedShowTime = `${year}, ${month}, ${date}, ${hours}, ${minutes}`;
+
+    console.log(bookedShowTime);
+
+    return bookedShowTime;
+  }
+
   DayPicker() {
     for (let i = 0; i <= this.dateArr.length; i++) {
       const dayValue = this.dateArr[i];

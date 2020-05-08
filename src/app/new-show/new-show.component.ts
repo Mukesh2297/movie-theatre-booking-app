@@ -1,7 +1,8 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ApiService } from '../services/api.service';
 import { NgForm } from '@angular/forms';
+import { AppService } from '../services/app.service';
 
 @Component({
   selector: 'app-new-show',
@@ -9,9 +10,22 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./new-show.component.css'],
 })
 export class NewShowComponent implements OnInit {
+
+  @Input() private editObj;
+
+  @Input() private isEditForm;
+
+  @Output() editCancelled = new EventEmitter<boolean>();
+
   dt1;
 
   movies;
+
+  editMovieId: number;
+
+  editHallId: number;
+
+  editShowTime;
 
   movieId: number;
 
@@ -19,24 +33,43 @@ export class NewShowComponent implements OnInit {
 
   hallId: number;
 
+
+
   apiresponse;
 
   apiResponseMessage: string;
 
   @ViewChild('showForm') private formDirective: NgForm;
 
-  constructor(public http: HttpClient, private apiService: ApiService) {}
+  constructor(public http: HttpClient, private apiService: ApiService, private appService: AppService) {}
 
   ngOnInit(): void {
+
+    console.log(this.isEditForm);
+
     this.apiService.get('movies').subscribe((response) => {
       this.movies = response;
       this.movies = this.movies.movies;
+      if (this.isEditForm === true) {
+        this.editMovieId = this.editObj.movieId;
+      }
     });
 
     this.apiService.get('halls').subscribe((response) => {
       this.halls = response;
       this.halls = this.halls.halls;
+      if (this.isEditForm === true) {
+        const findObj = this.halls.find(obj => obj.name === this.editObj.hall_name);
+        this.editHallId = findObj.hall_id;
+        this.editShowTime = this.editObj.show_time;
+        console.log(this.editHallId);
+      }
     });
+
+  }
+
+  cancel() {
+    this.editCancelled.emit(true);
   }
 
   movieSelected(movieId) {
@@ -103,6 +136,10 @@ export class NewShowComponent implements OnInit {
 
     showTime.show_time = formattedDateTime;
 
+    console.log(showTime);
+
+    if (this.isEditForm === false) {
+
     this.apiService.post('shows', showTime).subscribe((response) => {
       this.apiresponse = response;
       if (this.apiresponse.status === 'OK') {
@@ -121,5 +158,18 @@ export class NewShowComponent implements OnInit {
         }, 1000);
       }
     });
+
+    } else if (this.isEditForm === true) {
+
+      const params = {movie_id: showTime.movie_id,
+        hall_id: showTime.hall_id,
+        show_time: formattedDateTime,
+        show_id: this.editObj.show_id,
+      show_current_status: showTime.show_current_status};
+
+      console.log(params);
+
+      // this.apiService.put('shows', params).subscribe((response) => console.log(response));
+    }
   }
 }
