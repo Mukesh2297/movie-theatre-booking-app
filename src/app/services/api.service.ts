@@ -30,7 +30,19 @@ export class ApiService {
     });
   }
 
-  constructParams(options: AnyObject, method: 'GET' | 'POST' = 'GET') {
+  put(url: string, options?: AnyObject) {
+    const httpParams = this.constructParams(options, 'PUT');
+    return this.http.put(`${this.baseUrl}/${url}`, httpParams, {
+      ...this.baseOptions,
+      headers: new HttpHeaders().set(
+        'Content-Type',
+        'application/x-www-form-urlencoded'
+      ),
+    });
+  }
+
+
+  constructParams(options: AnyObject, method: 'GET' | 'POST' | 'PUT' = 'GET') {
     let httpParams = new HttpParams();
     for (const property in options) {
       if (options.hasOwnProperty(property)) {

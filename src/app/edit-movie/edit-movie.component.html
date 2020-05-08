@@ -1,0 +1,44 @@
+<div class="container">
+      <form (ngSubmit)="update(movieForm)" #movieForm="ngForm">
+        <mat-form-field appearance="standard">
+          <mat-label>Movie Name</mat-label>
+          <input type="text" name="name" required [ngModel]="name" matInput #movieName="ngModel" />
+        </mat-form-field>
+        <p *ngIf="!movieName.valid && movieName.touched">
+          Please enter movie Name
+        </p>
+        <br />
+        <mat-form-field appearance="standard">
+          <mat-label>Ticket Price</mat-label>
+          <input type="number" name="ticket_price" required [ngModel]="ticket_price" matInput #ticketPrice="ngModel" />
+        </mat-form-field>
+        <p *ngIf="!ticketPrice.valid && ticketPrice.touched">
+          Please enter ticket price
+        </p>
+        <br />
+        <div class="action-btn" >
+          <div class="action-btn" *ngIf="isEdit; else create">
+            <div class="cancel-btn">
+              <button mat-stroked-button (click)="formEditCancel()">
+                  Cancel
+                </button>
+          </div>
+          <div class="apply-btn">
+              <button mat-stroked-button color="primary" type="submit" [disabled]="!movieForm.valid">
+                Apply
+          </button>
+          </div>
+          </div>
+          <ng-template #create>
+            <div class="create-btn">
+              <button type="submit" mat-stroked-button color="primary">
+                  Create
+                </button>
+          </div>
+          </ng-template>
+        </div>
+        &nbsp;
+        <label>{{ apiResponseMessage }}</label>
+      </form>
+  </div>
+

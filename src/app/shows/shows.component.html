@@ -1,0 +1,28 @@
+<div class="container">
+    <br>
+    <div class="header-content">
+        <div class="header">
+            <div class="heading">
+                <h2>Shows</h2>
+            </div>
+        </div>   
+    </div>
+    <div class="create">
+        <div class="action-btn" *ngIf="!displayShowInfo; else backtohome">
+            <button mat-stroked-button (click)="createNewShow()">Create</button>
+        </div>
+        <ng-template #backtohome>
+            <div class="action-btn">
+                <button mat-stroked-button (click)="displayShowInfo=false">Back</button>
+            </div>
+        </ng-template>
+    </div>
+    <div class="table" *ngIf="displayShowInfo; else modifyForm">
+        <div class="editShow">
+            <app-new-show [editObj]="editObj" [isEditForm]="isEdit" (editCancelled)="formEditCancelled($event)"></app-new-show>
+        </div>
+    </div>
+    <ng-template #modifyForm>
+            <app-show-info (editObj)="showToBeEdited($event)" (isEdit)="editResponse($event)"></app-show-info>
+    </ng-template>
+</div>

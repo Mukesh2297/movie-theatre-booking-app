@@ -1,11 +1,42 @@
 .container
 {
-    height: 400px;
+    height: 100%;
     width: 100%;
+}
+
+.header
+{
+    width: 100%;
+    text-align: center;
+}
+
+.table
+{
+    width: 100%;
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
+    
 }
+
+.table-content{
+    height: 100%;
+    width: 80%;
+}
+
+.header-content
+{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.create-btn
+{
+    padding-right: 35px;
+}
+
 
 mat-form-field
 {

@@ -7,6 +7,8 @@ export class DateTimePipe implements PipeTransform {
 
   transform(value) {
 
+    console.log(value);
+
     const showTime = new Date(value);
 
     const date = showTime.getDate();

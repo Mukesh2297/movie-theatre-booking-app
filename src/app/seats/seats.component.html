@@ -94,7 +94,7 @@
         <div class="hor" *ngFor="let rowSeat of rows; index as i">
           <div *ngFor="let columnSeat of columns; index as j">
             <button [value]="i * columns.length + (j + 1)" (click)="seatSelected(i, j)"
-              [disabled]="isSeatAvailable(i, j) || markedSeats.length >= 2 " [ngClass]="
+              [disabled]="isSeatAvailable(i, j)" [ngClass]="
               markedSeats.includes(i * columns.length + (j + 1))
                 ? 'seat selectedSeat'
                 : 'seat'
@@ -104,6 +104,10 @@
               <!-- [ngStyle]="{'background-color': markedSeats.includes((i * columns.length) + (j + 1)) ? 'green' : 'white'}"> -->
             </button>
           </div>
+        </div>
+        <div [ngStyle]="{ 'padding-top': '10px' }">
+          Maximum allowed seats to select per transaction is
+          {{ MAX_ALLOWED_SEATS_TO_SELECT }}
         </div>
       </div>
       <br />

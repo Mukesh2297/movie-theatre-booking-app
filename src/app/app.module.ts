@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 import { SeatsComponent } from './seats/seats.component';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
-import { NewHallComponent } from './new-hall/new-hall.component';
 import { NewMovieComponent } from './new-movie/new-movie.component';
 import { NewShowComponent } from './new-show/new-show.component';
 import { AdminComponent } from './admin/admin.component';
@@ -26,13 +25,20 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { BodyComponent } from './body/body.component';
 import { ScannerPopupComponent } from './scanner-popup/scanner-popup.component';
 import { DateTimePipe } from './Filter/date-time.pipe';
+import { EditHallComponent } from './edit-hall/edit-hall.component';
+import { HallInfoComponent } from './hall-info/hall-info.component';
+import { HallActionsComponent } from './hall-actions/hall-actions.component';
+import { MoviesComponent } from './movies/movies.component';
+import { MovieInfoComponent } from './movie-info/movie-info.component';
+import { EditMovieComponent } from './edit-movie/edit-movie.component';
+import { ShowInfoComponent } from './show-info/show-info.component';
+import { ShowsComponent } from './shows/shows.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SeatsComponent,
     LoginComponent,
-    NewHallComponent,
     NewMovieComponent,
     NewShowComponent,
     AdminComponent,
@@ -45,6 +51,14 @@ import { DateTimePipe } from './Filter/date-time.pipe';
     BodyComponent,
     ScannerPopupComponent,
     DateTimePipe,
+    EditHallComponent,
+    HallInfoComponent,
+    HallActionsComponent,
+    MoviesComponent,
+    MovieInfoComponent,
+    EditMovieComponent,
+    ShowInfoComponent,
+    ShowsComponent
   ],
   imports: [
     BrowserModule,
@@ -61,6 +75,6 @@ import { DateTimePipe } from './Filter/date-time.pipe';
     FlexLayoutModule,
   ],
   providers: [ApiService],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent]
 })
 export class AppModule {}

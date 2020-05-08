@@ -1,0 +1,31 @@
+<div class="container">
+    <br>
+    <div class="header-content">
+        <div class="header">
+            <div class="heading">
+                <h2>Movies</h2>
+            </div>
+        </div>   
+    </div>
+    <div class="create">
+        <div class="action-btn" *ngIf="displayMovieInfo; else backtohome">
+            <button mat-stroked-button (click)="createNewMovie()">Create</button>
+        </div>
+        <ng-template #backtohome>
+            <div class="action-btn">
+                <button mat-stroked-button (click)="displayMovieInfo=true">Back</button>
+            </div>
+        </ng-template>
+    </div>
+
+    <div class="movieInfo" *ngIf="displayMovieInfo; else movieForm">
+        <app-movie-info (editMovieObj)="movieToBeEdited($event)"></app-movie-info>
+    </div>
+    <ng-template #movieForm>
+        <div class="editMovie">
+            <app-edit-movie [isEdit]="isEdit" [editMovieObj]="editMovieObj" 
+            (cancel)="cancelFormEdit($event)" (updateMovie)="editedResponse($event)"></app-edit-movie>
+        </div>
+    </ng-template>
+
+</div>

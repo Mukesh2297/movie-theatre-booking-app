@@ -1,0 +1,32 @@
+.container{
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.editShow{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.header-content
+{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.create
+{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.action-btn
+{
+    padding-right: 20px;
+    margin-top: -50px;
+}

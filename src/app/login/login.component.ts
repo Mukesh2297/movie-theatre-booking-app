@@ -103,13 +103,8 @@ export class LoginComponent implements OnInit {
         });
         this.signupform = false;
         this.loginform = true;
-      } else if (response.status === 'Server error') {
-        this.apiRegisterResponse = 'Something went wrong. Please try again';
-      } else if (response.status === 'Unauthorized' && response.captcha) {
-        this.captchaSvg = this.sanitized.bypassSecurityTrustHtml(
-          response.captcha
-        );
-        this.apiRegisterResponse = 'Something went wrong. Please try again';
+      }  else {
+        this.captchaSvg = this.sanitized.bypassSecurityTrustHtml(response.captcha);
       }
     });
   }

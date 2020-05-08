@@ -1,0 +1,61 @@
+<div class="container">
+    <div class="body">
+        <div class="movie-info">
+            <mat-form-field appearance="standard">
+                <mat-label>Select Movie</mat-label>
+                <mat-select (selectionChange)="selectedMovie($event)">
+                  <mat-option *ngFor="let movielist of movies" [value]="movielist.movie_id">
+                    {{ movielist.name | uppercase }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <br>
+              <mat-form-field appearance="standard">
+                <mat-label>Select a day</mat-label>
+                <mat-select [(ngModel)]="dateValue" (selectionChange)="DisplayAvailableShows($event)">
+                  <mat-option [value]="indexVal" *ngFor="let days of dayArr; index as indexVal">
+                    {{ days }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+        </div>
+    </div>
+    <div class="table">
+
+        <div class="table" >
+          <div class="table-content" *ngIf="showInfo; else noData">
+            <mat-table  [dataSource]="showInfo" class="mat-elevation-z8">
+            
+              <ng-container matColumnDef="s.no">
+                <mat-header-cell *matHeaderCellDef> S.No </mat-header-cell>
+                <mat-cell *matCellDef="let i = index"> {{i+1}} </mat-cell>
+              </ng-container>
+          
+              <ng-container matColumnDef="hallName">
+                <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+                <mat-cell *matCellDef="let show"> {{show.hall_name}} </mat-cell>
+              </ng-container>
+          
+              <ng-container matColumnDef="showTime">
+                <mat-header-cell *matHeaderCellDef> Show Time </mat-header-cell>
+                <mat-cell *matCellDef="let show"> {{show.show_time | dateTime}} </mat-cell>
+              </ng-container>
+          
+              <ng-container matColumnDef="actions">
+                <mat-header-cell *matHeaderCellDef> Action </mat-header-cell>
+                <mat-cell *matCellDef="let show">
+                  <button type="button" mat-icon-button (click)="editShow(show)"><mat-icon color="accent">edit</mat-icon></button>
+                </mat-cell>
+              </ng-container>
+            
+              <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+              <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+          </mat-table>
+          </div>
+        </div>
+        <ng-template #noData>
+            <div class="no-movies">
+                <label>No data available for current selection</label>
+            </div>
+          </ng-template>
+</div>

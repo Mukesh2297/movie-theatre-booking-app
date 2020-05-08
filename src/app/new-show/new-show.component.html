@@ -1,12 +1,7 @@
-<div class="container">
-  <div class="newShows">
-    <h2>ADD SHOWS</h2>
-    <br />
-
     <form (ngSubmit)="update(showForm)" #showForm="ngForm">
       <mat-form-field appearance="standard">
         <mat-label>Select a Movie</mat-label>
-        <mat-select (selectionChange)="movieSelected($event)" name="movie_id" ngModel required #movieSelect="ngModel">
+        <mat-select (selectionChange)="movieSelected($event)" name="movie_id" [ngModel]="editMovieId" required #movieSelect="ngModel">
           <mat-option [value]="movieslist.movie_id" *ngFor="let movieslist of movies">
             {{ movieslist.name | uppercase }}
           </mat-option>
@@ -19,7 +14,7 @@
 
       <mat-form-field appearance="standard">
         <mat-label>Select a Hall</mat-label>
-        <mat-select (selectionChange)="hallSelected($event)" name="hall_id" ngModel required #hallSelect="ngModel">
+        <mat-select (selectionChange)="hallSelected($event)" name="hall_id" [ngModel]="editHallId" required #hallSelect="ngModel">
           <mat-option [value]="hallList.hall_id" *ngFor="let hallList of halls">
             {{ hallList.name }}
           </mat-option>
@@ -32,8 +27,8 @@
 
       <mat-form-field appearance="standard">
         <mat-label>Enter a Show Time</mat-label>
-        <input matInput required ngModel name="show_time" [owlDateTime]="dt1" [owlDateTimeTrigger]="dt1"
-          placeholder="Date & Time" #dateTime="ngModel" />
+        <input matInput required [(ngModel)]="editShowTime" name="show_time" [owlDateTime]="dt1" [owlDateTimeTrigger]="dt1"
+         placeholder="Date & Time" #dateTime="ngModel" />
         <owl-date-time #dt1></owl-date-time>
       </mat-form-field>
       <p *ngIf="!dateTime.valid && dateTime.touched">
@@ -41,10 +36,36 @@
       </p>
       <br />
 
-      <button mat-raised-button color="primary" type="submit" [disabled]="!showForm.valid">
-        CREATE</button>&nbsp;
-      <label>{{ apiResponseMessage }}</label>
+      <ng-container *ngIf="isEditForm">
+        <mat-form-field appearance="standard">
+          <mat-label>Show Status</mat-label>
+          <mat-select name="show_current_status" ngModel required #showStatus="ngModel">
+            <mat-option value="ACTIVE">Active</mat-option>
+            <mat-option value="INACTIVE">Inactive</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <p *ngIf="!showStatus.valid && showStatus.touched">
+          Please provide show status
+        </p>
+        <br />
+      </ng-container>
+
+      <div class="action"  *ngIf = "isEditForm; else create">
+        <div class="action-btn">
+          <div class="cancel">
+            <button mat-stroked-button type="button" (click)="cancel()">
+              Cancel</button>
+          </div>
+          <div class="apply">
+            <button mat-stroked-button color="primary" type="submit">
+              Apply</button>
+          </div>
+        </div>
+      </div>
+      <ng-template #create>
+        <button mat-raised-button color="primary" type="submit" [disabled]="!showForm.valid">
+          CREATE</button>&nbsp;
+        <label>{{ apiResponseMessage }}</label>
+      </ng-template>
     </form>
-  </div>
-</div>
-<br>
+    <br>
