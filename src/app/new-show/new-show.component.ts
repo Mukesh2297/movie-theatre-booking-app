@@ -13,7 +13,7 @@ export class NewShowComponent implements OnInit {
 
   @Input() private editObj;
 
-  @Input() private isEditForm;
+  @Input() public isEditForm;
 
   @Output() editCancelled = new EventEmitter<boolean>();
 
